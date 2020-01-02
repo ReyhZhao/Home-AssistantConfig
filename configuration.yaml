@@ -130,11 +130,13 @@ switch:
        0b11000101bcbd4201010f70:
           name: Schakelaar Keuken
        0b11000201bcbd4202010f70:
-          name: Schakelaar Woonkamer
+          name: Schakelaar Eetkamer
        0b11000201d6cb5b0a010f70:
           name: Schakelaar Kantoor
        0b1100260180ea1e0a010f70:
           name: Schakelaar Trapkast
+       0b11001501b34a6a0a010f70:
+          name: Schakelaar Woonkamer
        0b11004f0028d00202010f70:
           name: Kerstboom
 
