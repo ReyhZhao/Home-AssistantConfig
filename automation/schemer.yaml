@@ -1,0 +1,37 @@
+- alias: Trigger Het wordt licht buiten
+  description: ''
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.lux_buiten
+    above: 500
+    
+  condition:
+    condition: state
+    entity_id: input_select.schemer_buiten
+    state: 'Donker'     
+    
+  action:
+    - service: input_select.select_option
+      data_template:      
+        entity_id: input_select.schemer_buiten
+        option: 'Licht' 
+    
+    
+    
+- alias: Trigger Het wordt donker buiten
+  description: ''
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.lux_buiten
+    below: 300
+    
+  condition:
+    condition: state
+    entity_id: input_select.schemer_buiten
+    state: 'Licht'      
+    
+  action:
+    - service: input_select.select_option
+      data_template:      
+        entity_id: input_select.schemer_buiten
+        option: 'Donker'     

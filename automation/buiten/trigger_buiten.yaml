@@ -1,0 +1,33 @@
+- alias: Trigger Buiten Lamp On
+  description: ''
+  
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.achterdeur
+    to: 'on'
+    
+  condition:
+    condition: numeric_state
+    entity_id: sensor.lux_buiten
+    below: 400    
+    
+  action:
+    service: homeassistant.turn_on
+    entity_id: light.buiten
+
+
+######################################################################
+
+
+- alias: Turn off Buiten lamp, x minutes after last movement
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.achterdeur
+      to: 'off'
+      for:
+        minutes: 15
+      
+  action:
+    service: homeassistant.turn_off
+    entity_id: 
+       - light.buiten

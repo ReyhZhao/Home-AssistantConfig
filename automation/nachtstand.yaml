@@ -1,0 +1,17 @@
+- alias: Trigger Gang Lamp On
+  description: ''
+  
+  trigger:
+  - platform: event
+    event_type: ios.action_fired
+    event_data:
+       actionName: 'Nachtstand'
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id: 
+        - group.all_lights
+        - switch.lamp_gang
+#        - light.overloop
+    - service: alarm_control_panel.alarm_arm_night
+      entity_id: alarm_control_panel.ha_alarm    

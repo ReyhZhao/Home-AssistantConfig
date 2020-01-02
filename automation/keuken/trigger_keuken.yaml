@@ -1,0 +1,43 @@
+- alias: Trigger keuken Lamp On
+  description: ''
+  
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_keuken
+    to: 'on'  
+  - platform: state
+    entity_id: switch.schakelaar_keuken   
+    to: 'on'    
+    
+  action:
+    service: homeassistant.turn_on
+    entity_id: 
+       - switch.lamp_keuken
+       - switch.schakelaar_keuken
+
+
+######################################################################
+- alias: Turn off Keuken lamp door schakelaar
+  trigger:
+    - platform: state
+      entity_id: switch.schakelaar_keuken
+      to: 'off'     
+      
+  action:
+    service: homeassistant.turn_off
+    entity_id: light.lamp_keuken
+    
+
+- alias: Turn off keuken lamp, x minutes after last movement
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_keuken
+      to: 'off'
+      for:
+        minutes: 3    
+      
+  action:
+    service: homeassistant.turn_off
+    entity_id: 
+       - switch.lamp_keuken
+       - switch.schakelaar_keuken

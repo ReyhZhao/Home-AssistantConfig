@@ -1,0 +1,38 @@
+- alias: Trigger Kantoor Lamp On
+  description: ''
+  
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_kantoor
+    to: 'on'
+  - platform: state
+    entity_id: switch.schakelaar_kantoor
+    to: 'on'    
+    
+  action:
+    service: homeassistant.turn_on
+    entity_id: 
+       - light.kantoor
+       - switch.schakelaar_kantoor
+
+
+######################################################################
+
+
+- alias: Turn off Kantoor lamp, x minutes after last movement
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_kantoor
+      to: 'off'
+      for:
+        minutes: 5
+
+    - platform: state
+      entity_id: switch.schakelaar_kantoor
+      to: 'off'       
+      
+  action:
+    service: homeassistant.turn_off
+    entity_id: 
+       - light.kantoor
+       - switch.schakelaar_kantoor

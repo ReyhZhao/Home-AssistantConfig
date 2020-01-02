@@ -1,0 +1,120 @@
+- alias: Send notification when alarm triggered
+  trigger:
+  - platform: state
+    entity_id: alarm_control_panel.ha_alarm
+    to: triggered
+  action:
+  - service: notify.mobile_app_reyhzhao
+    data:
+      message: ALARM! The alarm has been triggered
+      data:
+         push:
+            sound:
+               name: default
+               critical: 1
+               volume: 0.7
+               
+               
+
+- alias: Stuur notificatie als deur geopend wordt en alarm aan staat.
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.achterdeur
+    to: 'on'
+    
+  condition:
+     condition: or
+     conditions:
+        - condition: state
+          entity_id: alarm_control_panel.ha_alarm
+          state: armed_home
+        - condition: state
+          entity_id: alarm_control_panel.ha_alarm
+          state: armed_away                
+    
+  action:
+  - service: notify.mobile_app_reyhzhao
+    data:
+      message: ALARM! Achterdeur geopend.
+      data:
+         push:
+            sound:
+               name: US-EN-Morgan-Freeman-Back-Door-Opened.wav
+
+
+
+
+- alias: Stuur notificatie als deur gesloten wordt en alarm aan staat.
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.achterdeur
+    to: 'off'
+    
+  condition:
+     condition: or
+     conditions:
+        - condition: state
+          entity_id: alarm_control_panel.ha_alarm
+          state: armed_home
+        - condition: state
+          entity_id: alarm_control_panel.ha_alarm
+          state: armed_away     
+    
+  action:
+  - service: notify.mobile_app_reyhzhao
+    data:
+      message: ALARM! Achterdeur gesloten.
+      data:
+         push:
+            sound:
+               name: US-EN-Morgan-Freeman-Back-Door-Closed.wav
+               
+               
+               
+               
+- alias: Send notification when alarm is Armed in Home mode
+  trigger:
+  - platform: state
+    entity_id: alarm_control_panel.ha_alarm
+    to: armed_home
+  action:
+  - service: notify.mobile_app_reyhzhao
+    data_template:
+      message: "ALARM! The alarm is armed in Home mode {{ states('sensor.date_time')\
+        \ }}    \n"
+      data:
+         push:
+            sound:
+               name: default
+               
+               
+- alias: Send notification when alarm is Armed in Away mode
+  trigger:
+  - platform: state
+    entity_id: alarm_control_panel.ha_alarm
+    to: armed_away
+  action:
+  - service: notify.mobile_app_reyhzhao
+    data_template:
+      message: "ALARM! The alarm is armed in away mode {{ states('sensor.date_time') }} \n"
+      data:
+         push:
+            sound:
+               name: default               
+
+
+
+- alias: 'Send notification when alarm is Disarmed'
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'disarmed'
+
+  action:
+     service: notify.mobile_app_reyhzhao
+     data:
+        message: "ALARM! The alarm is Disarmed at {{ states('sensor.date_time') }}"        
+        data:
+           push:
+              sound:
+                 name: default               

@@ -1,0 +1,32 @@
+- alias: Trigger Zolder Lamp On
+  description: ''
+  
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.pir_zolder
+    to: 'on' 
+  - platform: state
+    entity_id: binary_sensor.motion_zolder
+    to: 'on'     
+    
+  action:
+    service: homeassistant.turn_on
+    entity_id: 
+       - switch.lamp_zolder
+
+
+######################################################################
+
+
+- alias: Turn off Zolder lamp, x minutes after last movement
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_zolder
+      to: 'off'
+      for:
+        minutes: 5
+
+  action:
+    service: homeassistant.turn_off
+    entity_id: 
+       - switch.lamp_zolder

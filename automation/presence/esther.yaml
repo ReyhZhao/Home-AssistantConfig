@@ -1,0 +1,33 @@
+        
+               
+- alias: Trigger Esther Slaapt
+  description: ''
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.wall_plug_power_telefoon_lader
+    above: 2
+  
+  action:
+    - service: input_select.select_option
+      data_template:      
+         entity_id: input_select.status_esther
+         option: 'Slaapt' 
+         
+         
+         
+- alias: Trigger Eddie/Esther Wakker
+  description: ''
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '+00:00:00'      
+  
+  action:
+    - service: input_select.select_option
+      data_template:      
+         entity_id: input_select.status_esther
+         option: 'Wakker'     
+    - service: input_select.select_option
+      data_template:      
+         entity_id: input_select.status_eddie
+         option: 'Wakker'          

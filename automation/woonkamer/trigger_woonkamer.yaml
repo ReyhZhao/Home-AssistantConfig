@@ -1,0 +1,58 @@
+- alias: Trigger Woonkamer Lamp On
+  description: ''
+  
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.achterdeur, binary_sensor.motion_woonkamer1, binary_sensor.motion_woonkamer2, switch.schakelaar_woonkamer 
+    to: 'on'  
+      
+  condition:
+    condition: state
+    entity_id: input_select.schemer_buiten
+    state: 'Donker'  
+  
+
+  action:
+  - service: homeassistant.turn_on
+    entity_id: 
+       - light.woonkamer
+       - switch.schakelaar_woonkamer
+       
+  - service: timer.start
+    data:
+      entity_id: timer.woonkamer       
+
+
+
+
+######################################################################
+
+- alias: Turn off Woonkamer lamp door schakelaar
+  trigger:
+    - platform: state
+      entity_id: switch.schakelaar_woonkamer
+      to: 'off'     
+      
+  action:
+  - service: homeassistant.turn_off
+    entity_id: light.woonkamer
+    
+  - service: timer.stop
+    data:
+      entity_id: timer.woonkamer  
+
+######################################################################
+
+- alias: Turn off Woonkamer lamp, x minutes after last movement
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.woonkamer     
+      
+  action:
+    service: homeassistant.turn_off
+    entity_id: 
+       - light.woonkamer
+       - switch.schakelaar_woonkamer
+       

@@ -1,0 +1,53 @@
+
+
+- alias: Trigger Eddie Thuis
+  description: ''
+  trigger:
+  - entity_id: person.eddie
+    platform: state
+    to: 'home'
+  
+  action:
+  - service: notify.mobile_app_reyhzhao
+    data_template:
+      message: "Welkom thuis"
+      data:
+         push:
+            sound:
+               name: US-EN-Morgan-Freeman-Welcome-Home.wav
+               
+        
+        
+               
+- alias: Trigger Eddie Slaapt
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.battery_state    
+    to: 'Charging'
+ 
+  condition:
+  - condition: state
+    entity_id: person.eddie
+    state: 'Home'     
+  
+  action:
+    - service: input_select.select_option
+      data_template:      
+         entity_id: input_select.status_eddie
+         option: 'Slaapt' 
+         
+         
+         
+- alias: Trigger Eddie Wakker
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.battery_state    
+    to: 'Not Charging'
+    
+  action:
+    - service: input_select.select_option
+      data_template:      
+         entity_id: input_select.status_eddie
+         option: 'Wakker'          
