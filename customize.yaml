@@ -46,3 +46,5 @@ script.netflix_activity_on:
   icon: mdi:television
 sensor.telefoonlader_eddie_power:
   device_class: power
+person.eddie:
+  entity_picture: /local/eddie.jpg
