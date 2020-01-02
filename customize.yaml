@@ -48,3 +48,5 @@ sensor.telefoonlader_eddie_power:
   device_class: power
 person.eddie:
   entity_picture: /local/eddie.jpg
+person.esther:
+  entity_picture: '"/local/esther.jpg"'
