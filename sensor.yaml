@@ -1,0 +1,122 @@
+#sensor:
+    - platform: mqtt
+      state_topic: espwoonkamer/BME280/Temperature
+      name: "Temperatuur Woonkamer"
+      unit_of_measurement: "°C"
+
+    - platform: mqtt
+      state_topic: espwoonkamer/BME280/Pressure
+      name: "Luchtdruk Woonkamer"
+      unit_of_measurement: "mb"
+
+    - platform: mqtt
+      state_topic: espwoonkamer/BME280/Humidity
+      name: "Vochtigheid Woonkamer"
+      unit_of_measurement: "%"
+
+    - platform: mqtt
+      state_topic: espslaapkamer/BME280/Temperature
+      name: "Temperatuur Slaapkamer"
+      unit_of_measurement: "°C"
+      device_class: temperature
+
+    - platform: mqtt
+      state_topic: espslaapkamer/BME280/Pressure
+      name: "Luchtdruk Slaapkamer"
+      unit_of_measurement: "mb"
+      device_class: pressure
+
+    - platform: mqtt
+      state_topic: espslaapkamer/BME280/Humidity
+      name: "Vochtigheid Slaapkamer"
+      unit_of_measurement: "%" 
+      device_class: humidity
+
+    - platform: mqtt
+      state_topic: espslaapkamer/Lux/Lux
+      name: "Lux Buiten"
+      unit_of_measurement: "Lux" 
+      device_class: illuminance
+
+    - platform: mqtt
+      state_topic: espslaapkamer/Lux/Infrared
+      name: "Infrarood Buiten"
+      unit_of_measurement: "Lux" 
+      device_class: illuminance
+
+    - platform: mqtt
+      state_topic: esptuin/Soil/Analog
+      name: "Bodemvochtigheid"
+      unit_of_measurement: "%"
+      device_class: humidity
+
+    - platform: dsmr
+      host: 192.168.232.110
+      port: 3334
+      dsmr_version: 5
+
+
+    - platform: filter                                                                                                                                                                                        
+      name: "Stroomverbruik laag tarief"                                                                                                                                                                      
+      entity_id: sensor.power_consumption_low                                                                                                                                                                 
+      filters:                                                                                                                                                                                                
+        - filter: throttle                                                                                                                                                                                    
+          window_size: 10                                                                                                                                                                                     
+                                                                                                                                                                                                            
+    - platform: filter                                                                                                                                                                                        
+      name: "Stroomverbruik normaal tarief"                                                                                                                                                                   
+      entity_id: sensor.power_consumption_normal                                                                                                                                                              
+      filters:                                                                                                                                                                                                
+        - filter: throttle                                                                                                                                                                                    
+          window_size: 10   
+
+    - platform: template
+      sensors:
+        spotify_volume:
+          friendly_name: "Spotify Volume"
+          value_template: "{{ states.media_player.spotify.attributes.volume_level }}"
+    - platform: template
+      sensors:
+        spotify_shuffle:
+          friendly_name: "Spotify Shuffle"
+          value_template: "{{ states.media_player.spotify.attributes.shuffle }}"
+          
+    - platform: template
+      sensors:
+        spotify_source:
+          friendly_name: "Spotify Source"
+          value_template: "{{ states.media_player.spotify.attributes.source }}"
+
+    - platform: darksky
+      api_key: a48b993340f50c0028d4a29de06a46f4
+      forecast:
+         - 0
+      hourly_forecast:
+         - 0
+         - 1
+      language: nl
+
+      monitored_conditions:
+         - summary
+         - icon
+         - nearest_storm_distance
+         - alerts
+         - precip_intensity
+         - precip_probability
+
+    - platform: buienradar
+      monitored_conditions:
+        - symbol
+        - humidity
+        - temperature
+        - windspeed
+        - pressure
+        - conditioncode
+        - condition
+        - conditiondetailed
+        - feeltemperature
+        - precipitation
+        - precipitation_forecast_total
+
+
+

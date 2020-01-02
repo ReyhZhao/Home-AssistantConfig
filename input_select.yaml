@@ -1,0 +1,37 @@
+   status_eddie:
+      name: "Status Eddie"
+      icon: mdi:human-male
+      options:
+         - Wakker
+         - Slaapt
+
+   status_esther:
+      name: "Status Esther"
+      icon: mdi:human-female
+      options:
+         - Wakker
+         - Slaapt
+
+   schemer_buiten:
+      name: "Schemer buiten"
+      icon: mdi:weather-sunset
+      options:
+         - Licht
+         - Donker
+
+   spotify_playlist:
+      name: 'Playlist:'
+      icon: mdi:spotify
+      options:
+         - Daily Mix 1
+         - Songs to sing in the car
+         - Q top500 foute uur
+         - Kerst hits
+
+   spotify_source:
+      name: 'Source:'
+      initial: woonkamer
+      icon: mdi:speaker-wireless
+      options:
+        - woonkamer
+        - EDDIE-PC

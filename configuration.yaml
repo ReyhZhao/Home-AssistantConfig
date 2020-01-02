@@ -1,0 +1,203 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+http:
+   use_x_forwarded_for: True          
+   trusted_proxies: 
+      - 10.66.66.101
+   base_url: https://ha.noctis-nexus.nl
+
+logger:
+   default: info
+
+
+influxdb:
+  host: 192.168.232.119
+  database: hass
+
+weather:
+  - platform: buienradar
+    forecast: true
+    name: arnhem
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key 
+    allowed_chat_ids: 
+       - "-1001164576868"
+notify:
+  - name: NOTIFIER_NAME
+    platform: telegram
+    chat_id: "-1001164576868"
+
+mobile_app:
+
+discovery:
+
+ios:        
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+remote:
+  - platform: harmony
+    name: Harmony
+    host: 192.168.200.101
+    activity: TV kijken
+
+
+input_boolean:
+   spotify_shuffle:
+      name: Shuffle
+      icon: mdi:shuffle-variant
+
+
+input_number:
+  spotify_volume:
+    name: Volume
+    icon: mdi:volume-high
+    initial: 100
+    min: 0
+    max: 100
+    step: 1
+
+
+media_player:
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret
+    aliases:
+       6849b46e299a15c25d10988f6055b6a46b98c2ba: 'woonkamer'
+       2e5b30ed71289f3c3cecaa8f0503ce847beb137c: 'EDDIE-PC'
+
+
+  - platform: kodi
+    host: 192.168.232.18
+    port: 8080
+    tcp_port: 9090
+    username: kodi
+    password: kodi
+  - platform: yamaha
+    host: 192.168.200.13
+    source_names:
+            HDMI5: Kodi
+
+zone:
+  - name: Home
+    radius: 500
+    latitude: 52.2416
+    longitude: 6.0014
+  - name: Werk Eddie
+    latitude: 52.2106
+    longitude: 5.9762
+    radius: 400
+
+alarm_control_panel:
+  - platform: manual
+    delay_time: 10
+    pending_time: 10
+    trigger_time: 4
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      pending_time: 0
+      delay_time: 0
+
+rfxtrx:
+  device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1BFB4H-if00-port0
+  debug: True
+
+switch:
+  - platform: wake_on_lan
+    name: Kodi aanzetten
+    host: 192.168.232.18
+    mac_address: F4:4D:30:68:9E:9D
+
+  - platform: wake_on_lan
+    name: TV aanzetten
+    host: 192.168.200.9
+    mac_address: 94:53:30:60:EB:SF
+
+  - platform: rfxtrx
+    automatic_add: true
+    devices:
+       0b11000101bcbd4201010f70:
+          name: Schakelaar Keuken
+       0b11000201bcbd4202010f70:
+          name: Schakelaar Woonkamer
+       0b11000201d6cb5b0a010f70:
+          name: Schakelaar Kantoor
+       0b1100260180ea1e0a010f70:
+          name: Schakelaar Trapkast
+       0b11004f0028d00202010f70:
+          name: Kerstboom
+
+binary_sensor:
+  platform: rfxtrx
+  automatic_add: true
+  devices:
+     0b1100000196772e0a010f70:
+        name: Achterdeur
+        device_class: door
+     0b11000701966e6e0a010f70:
+        name: Voordeur
+        device_class: door
+     0b11000900bfffc60a010f50:
+        name: PIR Zolder
+        device_class: motion
+     0b11000001966e6a0a010f60:
+        name: Raam Badkamer
+        device_class: window
+light:
+  - platform: rfxtrx
+    automatic_add: true  
+    devices:
+       0710012744090170:
+          name: Lamp Trapkast
+
+  - platform: limitlessled
+    bridges:           
+       - host: 192.168.200.200
+         version: 5
+         port: 8899
+         groups:
+         - number: 1           
+           name: Milight 1
+           fade: true            
+         - number: 2
+           name: Milight 2
+           fade: true
+         - number: 3
+           name: Milight 3
+           fade: true
+         - number: 4
+           name: Milight 4
+           fade: true
+
+zwave:
+  usb_path: /dev/ttyUSB12
+  device_config: !include zwave_device_config.yaml
+  network_key: !secret zwave_network_key
+
+
+mqtt:
+    broker: 127.0.0.1
+
+sensor: !include sensor.yaml
+
+
+group: !include groups.yaml
+automation: !include_dir_merge_list automation/
+script: !include scripts.yaml
+scene: !include scenes.yaml
+recorder: !include recorder.yaml
+input_select: !include input_select.yaml
+timer: !include timers.yaml
+homeassistant:
+   customize: !include customize.yaml

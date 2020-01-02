@@ -1,0 +1,66 @@
+Presence: person.eddie, person.esther
+
+Ramen: binary_sensor.raam_badkamer
+Deuren: binary_sensor.achterdeur
+Schakelaars: switch.schakelaar_trapkast, switch.schakelaar_kantoor, switch.schakelaar_keuken, switch.schakelaar_woonkamer
+
+Motion: binary_sensor.pir_zolder
+
+Entertainment: remote.harmony, script.tv_activity_on, media_player.kodi, switch.kodi_aanzetten, switch.tv_aanzetten
+
+Woonkamer: light.woonkamer, sensor.luchtdruk_woonkamer, sensor.temperatuur_woonkamer, sensor.vochtigheid_woonkamer, switch.schakelaar_woonkamer
+
+Slaapkamer: sensor.luchtdruk_slaapkamer, sensor.temperatuur_slaapkamer, sensor.vochtigheid_slaapkamer
+
+Gang: binary_sensor.voordeur
+
+Buiten: light.buiten, sensor.infrarood_buiten, sensor.lux_buiten, weather.huis, sensor.bodemvochtigheid
+
+Kantoor: light.kantoor
+
+Zolder: switch.fibaro_system_fgs222_double_relay_switch_2x1_5kw_switch_2
+
+Alarm: 
+   view: yes
+   entities:
+      - alarm_control_panel.ha_alarm
+      - group.deuren 
+      - group.ramen 
+      - group.motion
+
+Home Test:
+   view: yes
+   entities:        
+      - group.entertainment
+      - group.buiten
+      - group.woonkamer
+      - group.keuken
+      - group.kantoor
+      - group.slaapkamer
+      - zone.home
+      - group.presence
+
+home_spotify_player:
+  name: Spotify Player
+  entities:
+    - media_player.spotify
+  
+home_spotify_controls:
+  name: Spotify Controls
+  control: hidden
+  entities:
+    - input_select.spotify_playlist
+    - input_select.spotify_source
+    - script.spotify_music
+    - input_number.spotify_volume
+    - input_boolean.spotify_shuffle
+
+
+meter_readings:
+  name: Meter readings   
+  entities:
+    - sensor.power_consumption_low
+    - sensor.power_consumption_normal
+    - sensor.power_production_low
+    - sensor.power_production_normal
+    - sensor.gas_consumption

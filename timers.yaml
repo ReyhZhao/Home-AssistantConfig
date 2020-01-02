@@ -1,0 +1,17 @@
+ gang:
+    duration: '00:03:00'    
+
+ woonkamer:
+    duration: '00:30:00'
+    
+ overloop:
+    duration: '00:04:00'
+
+ buiten:
+    duration: '00:15:00'
+    
+ zolder:
+    duration: '00:04:00'    
+        
+ keuken:
+    duration: '00:10:00'    

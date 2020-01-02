@@ -1,0 +1,46 @@
+binary_sensor.motion_gang:
+  device_class: motion
+binary_sensor.motion_trap:
+  device_class: motion
+binary_sensor.motion_woonkamer1:
+  device_class: motion
+binary_sensor.window_logeerkamer:
+  device_class: window
+binary_sensor.smokedetector_woonkamer:
+  device_class: smoke
+script.tv_activity_on:
+  icon: mdi:television
+switch.fibaro_system_fgs211_switch_3kw_switch_5:
+  icon: mdi:lightbulb
+binary_sensor.motion_keuken:
+  device_class: motion
+binary_sensor.motion_overloop:
+  device_class: motion
+switch.lamp_gang:
+  device_class: outlet
+binary_sensor.motion_kantoor:
+  device_class: motion
+person.cor:
+  icon: mdi:dog
+binary_sensor.window_woonkamer:
+  device_class: window
+binary_sensor.window_slaapkamer:
+  device_class: window
+binary_sensor.window_kantoor:
+  device_class: window
+sensor.wall_plug_power_telefoon_lader:
+  device_class: power
+binary_sensor.motion_logeerkamer:
+  device_class: motion
+binary_sensor.motion_slaapkamer:
+  device_class: motion
+binary_sensor.motion_woonkamer2:
+  device_class: motion
+switch.kerstboom:
+  icon: mdi:pine-tree
+binary_sensor.motion_zolder:
+  device_class: motion
+script.kodi_activity_on:
+  icon: mdi:television
+script.netflix_activity_on:
+  icon: mdi:television
