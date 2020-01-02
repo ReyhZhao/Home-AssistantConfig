@@ -44,3 +44,5 @@ script.kodi_activity_on:
   icon: mdi:television
 script.netflix_activity_on:
   icon: mdi:television
+sensor.telefoonlader_eddie_power:
+  device_class: power
