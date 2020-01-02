@@ -37,6 +37,23 @@ notify:
 
 mobile_app:
 
+sabnzbd:
+   api_key: ff9b5197e491adbe71b61a2a4e2d1875
+   host: 192.168.232.50
+   port: 8085
+   sensors:
+     - current_status
+     - speed
+     - queue_size
+     - queue_remaining
+     - disk_size
+     - disk_free
+     - queue_count
+     - day_size
+     - week_size
+     - month_size
+     - total_size   
+
 discovery:
 
 ios:        

@@ -64,3 +64,11 @@ meter_readings:
     - sensor.power_production_low
     - sensor.power_production_normal
     - sensor.gas_consumption
+
+AlleLampen:
+  name: Alle Lampen
+  entities:
+    - group.all_lights
+    - switch.lamp_gang
+    - switch.lamp_zolder
+    - switch.lamp_keuken

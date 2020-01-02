@@ -6,9 +6,11 @@
     to: 'not_home'
   
   action:
-    service: alarm_control_panel.alarm_arm_away
-    entity_id: alarm_control_panel.ha_alarm
-
+    - service: alarm_control_panel.alarm_arm_away
+      entity_id: alarm_control_panel.ha_alarm
+    
+    - service: homeassistant.turn_off
+      entity_id: group.allelampen
 
 
 - alias: Trigger iemand huis
@@ -20,6 +22,9 @@
   action:
     service: alarm_control_panel.alarm_disarm
     entity_id: alarm_control_panel.ha_alarm 
+    
+    
+    
     
   
 - alias: Trigger alarm while armed home
