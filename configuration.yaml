@@ -9,18 +9,15 @@ default_config:
 http:
    use_x_forwarded_for: True          
    trusted_proxies: 
-      - 10.66.66.101
+      - !secret proxy_host
    base_url: https://ha.noctis-nexus.nl
 
 logger:
    default: info
-   logs:
-      homeassistant.components.unifi: debug
-      homeassistant.components.device_tracker.unifi: debug
 
 
 influxdb:
-  host: 192.168.232.119
+  host: !secret influx_host
   database: hass
 
 weather:
@@ -32,17 +29,17 @@ telegram_bot:
   - platform: polling
     api_key: !secret telegram_api_key 
     allowed_chat_ids: 
-       - "-1001164576868"
+       - !secret telegram_chatid
 notify:
   - name: NOTIFIER_NAME
     platform: telegram
-    chat_id: "-1001164576868"
+    chat_id: !secret telegram_chatid
 
 mobile_app:
 
 sabnzbd:
-   api_key: ff9b5197e491adbe71b61a2a4e2d1875
-   host: 192.168.232.50
+   api_key: !secret sabnzbd_api
+   host: !secret sabnzbd_host
    port: 8085
    sensors:
      - current_status
@@ -68,7 +65,7 @@ tts:
 remote:
   - platform: harmony
     name: Harmony
-    host: 192.168.200.101
+    host: !secret harmony_host
     activity: TV kijken
 
 
@@ -90,7 +87,7 @@ input_number:
 
 media_player:
   - platform: braviatv
-    host: 192.168.200.9
+    host: !secret bravia_tv_host
 
   - platform: spotify
     client_id: !secret spotify_client_id
@@ -101,24 +98,26 @@ media_player:
 
 
   - platform: kodi
-    host: 192.168.232.18
+    host: !secret kodi_host
     port: 8080
     tcp_port: 9090
-    username: kodi
-    password: kodi
+    username: !secret kodi_username
+    password: !secret kodi_password
+    
   - platform: yamaha
-    host: 192.168.200.13
+    host: !secret yamaha_host
     source_names:
             HDMI5: Kodi
 
 zone:
   - name: Home
     radius: 500
-    latitude: 52.2416
-    longitude: 6.0014
+    latitude: !secret home_lat
+    longitude: !secret home_lon
+    
   - name: Werk Eddie
-    latitude: 52.2106
-    longitude: 5.9762
+    latitude: !secret work_eddie_lat
+    longitude: !secret work_eddie_lon
     radius: 400
 
 alarm_control_panel:
@@ -139,12 +138,12 @@ rfxtrx:
 switch:
   - platform: wake_on_lan
     name: Kodi aanzetten
-    host: 192.168.232.18
+    host: !secret kodi_host
     mac_address: F4:4D:30:68:9E:9D
 
   - platform: wake_on_lan
     name: TV aanzetten
-    host: 192.168.200.9
+    host: !secret bravia_tv_host
     mac_address: 94:53:30:60:EB:SF
 
   - platform: rfxtrx
