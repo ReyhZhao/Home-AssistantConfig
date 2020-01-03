@@ -14,6 +14,9 @@ http:
 
 logger:
    default: info
+   logs:
+      homeassistant.components.unifi: debug
+      homeassistant.components.device_tracker.unifi: debug
 
 
 influxdb:
