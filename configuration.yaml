@@ -14,9 +14,11 @@ default_config:
 #   base_url: example.duckdns.org:8123
 
 http:
-   use_x_forwarded_for: True          
+   use_x_forwarded_for: true      
+   
    trusted_proxies: 
       - !secret proxy_host
+      
    base_url: https://ha.noctis-nexus.nl
 
    
@@ -93,6 +95,11 @@ input_number:
 
 media_player:
   - platform: braviatv
+    host: !secret bravia_tv_host
+    
+    
+  - platform: androidtv
+    name: Android TV Woonkamer
     host: !secret bravia_tv_host
 
   - platform: spotify
