@@ -1,4 +1,11 @@
 
+homeassistant:
+   customize: !include customize.yaml
+   latitude: !secret homeassistant_latitude
+   longitude: !secret homeassistant_longitude
+   elevation: !secret homeassistant_elevation   
+   time_zone: Europe/Amsterdam
+
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
@@ -12,9 +19,8 @@ http:
       - !secret proxy_host
    base_url: https://ha.noctis-nexus.nl
 
-logger:
-   default: info
-
+   
+logger: !include logger.yaml
 
 influxdb:
   host: !secret influx_host
@@ -223,5 +229,4 @@ scene: !include scenes.yaml
 recorder: !include recorder.yaml
 input_select: !include input_select.yaml
 timer: !include timers.yaml
-homeassistant:
-   customize: !include customize.yaml
+
