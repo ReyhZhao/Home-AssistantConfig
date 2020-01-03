@@ -50,3 +50,5 @@ person.eddie:
   entity_picture: /local/eddie.jpg
 person.esther:
   entity_picture: '"/local/esther.jpg"'
+device_tracker.oneplus_6:
+  mac: c0:ee:fb:1c:07:1b
