@@ -1,15 +1,13 @@
-scene:
-    - name: Woonkamer normaal
-      entities:
-         light.woonkamer:
-            state: on
-            transition: 2
-            brightness_pct: 90
+  - name: Woonkamer normaal
+    entities:
+      light.woonkamer:
+         state: on           
+         transition: 2
+         brightness_pct: 100
 
-
-    - name: Woonkamer dim
-      entities:
-         light.woonkamer:
-            state: on
-            transition: 2
-            brightness_pct: 55   
+  - name: Woonkamer dim
+    entities:
+      light.woonkamer:
+         state: on
+         transition: 2
+         brightness_pct: 25
