@@ -80,7 +80,7 @@ remote:
 camera:
   - platform: generic
     still_image_url: http://192.168.232.106/snap.jpeg
-    stream_source: rtsp://192.168.232.106:554/s0
+    stream_source: rtsp://ubnt:ubnt@192.168.232.106:554/s0
     username: ubnt
     password: ubnt
 
