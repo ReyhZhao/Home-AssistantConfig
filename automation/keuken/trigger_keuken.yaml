@@ -25,7 +25,7 @@
       
   action:
     service: homeassistant.turn_off
-    entity_id: light.lamp_keuken
+    entity_id: switch.lamp_keuken
     
 
 - alias: Turn off keuken lamp, x minutes after last movement
