@@ -132,7 +132,10 @@
     to: 'on'   
   - platform: state  
     entity_id: binary_sensor.motion_gang
-    to: 'on'      
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.motion_gang_2
+    to: 'on'
   - platform: state  
     entity_id: binary_sensor.motion_trap
     to: 'on'     
