@@ -3,7 +3,7 @@
   
   trigger:
   - platform: state
-    entity_id: binary_sensor.voordeur, binary_sensor.motion_gang, binary_sensor.motion_trap, binary_sensor.motion_gang_2
+    entity_id: binary_sensor.voordeur, binary_sensor.motion_gang, binary_sensor.motion_trap
     to: 'on'  
 
   action:
