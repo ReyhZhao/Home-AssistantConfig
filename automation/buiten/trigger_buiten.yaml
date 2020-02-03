@@ -5,15 +5,23 @@
   - platform: state
     entity_id: binary_sensor.achterdeur
     to: 'on'
+
+  - platform: state
+    entity_id: person.eddie, person.esther
+    to: 'home'
     
   condition:
-    condition: numeric_state
-    entity_id: sensor.lux_buiten
-    below: 400    
+    condition: state
+    entity_id: input_select.schemer_buiten
+    state: Donker
     
   action:
-    service: homeassistant.turn_on
-    entity_id: light.buiten
+    - service: homeassistant.turn_on
+      entity_id: light.buiten
+
+    - service: timer.start
+      data:
+        entity_id: timer.buiten
 
 
 ######################################################################
@@ -21,13 +29,11 @@
 
 - alias: Turn off Buiten lamp, x minutes after last movement
   trigger:
-    - platform: state
-      entity_id: binary_sensor.achterdeur
-      to: 'off'
-      for:
-        minutes: 15
-      
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.buiten
+
   action:
     service: homeassistant.turn_off
-    entity_id: 
-       - light.buiten
+    entity_id: light.buiten

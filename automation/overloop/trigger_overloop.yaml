@@ -15,20 +15,22 @@
        conditions:
         - condition: state
           entity_id: input_select.status_eddie
-          state: 'Wakker' 
+          state: Wakker
         - condition: state
           entity_id: input_select.status_esther
-          state: 'Wakker'     
+          state: Wakker
     
   action:
   - service: homeassistant.turn_on
     entity_id: light.overloop
     data:
        brightness: 254
-       
+
+  - service: timer.cancel
+    entity_id: timer.overloop
   - service: timer.start
     data:
-      entity_id: timer.overloop       
+      entity_id: timer.overloop
         
 #####################################################################################
         
@@ -49,10 +51,10 @@
        conditions:
         - condition: state
           entity_id: input_select.status_eddie
-          state: 'Slaapt' 
+          state: Slaapt
         - condition: state
           entity_id: input_select.status_esther
-          state: 'Slaapt'      
+          state: Slaapt
     
   action:
   - service: homeassistant.turn_on
