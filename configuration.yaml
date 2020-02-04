@@ -236,6 +236,12 @@ mqtt:
 
 sensor: !include sensor.yaml
 
+panel_custom:
+  - name: zwavegraph2
+    sidebar_title: Z-Wave Graph
+    sidebar_icon: mdi:access-point-network
+    url_path: zwave
+
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automation/
