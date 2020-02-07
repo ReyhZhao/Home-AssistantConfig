@@ -24,9 +24,9 @@ http:
    
 logger: !include logger.yaml
 
-influxdb:
-  host: !secret influx_host
-  database: hass
+#influxdb:
+#  host: !secret influx_host
+#  database: hass
 
 weather:
   - platform: buienradar
