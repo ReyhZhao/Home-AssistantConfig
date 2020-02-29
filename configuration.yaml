@@ -5,6 +5,7 @@ homeassistant:
    longitude: !secret homeassistant_longitude
    elevation: !secret homeassistant_elevation   
    time_zone: Europe/Amsterdam
+   packages: !include_dir_named packages
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
@@ -29,9 +30,19 @@ logger: !include logger.yaml
 #  database: hass
 
 weather:
+  - platform: smartweather
+    api_key: !secret darksky
+
+
   - platform: buienradar
     forecast: true
     name: arnhem
+    latitude: !secret homeassistant_latitude
+    longitude: !secret homeassistant_longitude
+
+smartweather:
+    station_id: 4967
+    api_key: 20c70eae-e62f-4d3b-b3a4-8586e90f3ac8
 
 telegram_bot:
   - platform: polling
@@ -77,13 +88,18 @@ remote:
     activity: TV kijken
     
     
-camera:
-  - platform: generic
-    still_image_url: http://192.168.232.106/snap.jpeg
-    stream_source: rtsp://ubnt:ubnt@192.168.232.106:554/s0
-    username: ubnt
-    password: ubnt
+#camera:
+#  - platform: generic
+#    still_image_url: http://192.168.232.106/snap.jpeg
+#    stream_source: rtsp://ubnt:ubnt@192.168.232.106:554/s0
+#    username: ubnt
+#    password: ubnt
 
+camera:
+  - platform: uvc
+    nvr: 192.168.232.119
+    key: !secret unifi_key
+    password: !secret unifi_camera
 
 input_boolean:
    spotify_shuffle:
@@ -110,12 +126,12 @@ media_player:
     name: Android TV Woonkamer
     host: !secret bravia_tv_host
 
-  - platform: spotify
-    client_id: !secret spotify_client_id
-    client_secret: !secret spotify_client_secret
-    aliases:
-       6849b46e299a15c25d10988f6055b6a46b98c2ba: 'woonkamer'
-       2e5b30ed71289f3c3cecaa8f0503ce847beb137c: 'EDDIE-PC'
+#  - platform: spotify
+#    client_id: !secret spotify_client_id
+#    client_secret: !secret spotify_client_secret
+#    aliases:
+#       6849b46e299a15c25d10988f6055b6a46b98c2ba: 'woonkamer'
+#       2e5b30ed71289f3c3cecaa8f0503ce847beb137c: 'EDDIE-PC'
 
 
   - platform: kodi
@@ -157,15 +173,24 @@ rfxtrx:
   debug: True
 
 switch:
+  - platform: mqtt
+    name: sprinklers-tuin
+    state_topic: esptuin/Relay02/RL02
+    command_topic: esptuin/gpio/2
+    payload_on: 0
+    payload_off: 1
+    optimistic: false
+    retain: true
+
   - platform: wake_on_lan
     name: Kodi aanzetten
     host: !secret kodi_host
-    mac_address: F4:4D:30:68:9E:9D
+    mac: F4:4D:30:68:9E:9D
 
   - platform: wake_on_lan
     name: TV aanzetten
     host: !secret bravia_tv_host
-    mac_address: 94:53:30:60:EB:SF
+    mac: 94:53:30:60:EB:SF
 
   - platform: rfxtrx
     automatic_add: true
@@ -183,22 +208,35 @@ switch:
        0b11004f0028d00202010f70:
           name: Kerstboom
 
+netatmo:
+  client_id: !secret netatmo_client
+  client_secret: !secret netatmo_secret
+
 binary_sensor:
-  platform: rfxtrx
-  automatic_add: true
-  devices:
-     0b1100000196772e0a010f70:
-        name: Achterdeur
-        device_class: door
-     0b11000701966e6e0a010f70:
-        name: Voordeur
-        device_class: door
-     0b11000900bfffc60a010f50:
-        name: PIR Zolder
-        device_class: motion
-     0b11000001966e6a0a010f60:
-        name: Raam Badkamer
-        device_class: window
+  - platform: smartweather
+    monitored_conditions: 
+      - raining
+      - freezing
+      - lightning
+  - platform: uptimerobot
+    api_key: !secret uptimerobot
+
+
+  - platform: rfxtrx
+    automatic_add: true
+    devices:
+       0b1100000196772e0a010f70:
+          name: Achterdeur
+          device_class: door
+       0b11000701966e6e0a010f70:
+          name: Voordeur
+          device_class: door
+       0b11000900bfffc60a010f50:
+          name: PIR Zolder
+          device_class: motion
+       0b11000001966e6a0a010f60:
+          name: Raam Badkamer
+          device_class: window
 light:
   - platform: rfxtrx
     automatic_add: true  
@@ -250,4 +288,3 @@ scene: !include scenes.yaml
 recorder: !include recorder.yaml
 input_select: !include input_select.yaml
 timer: !include timers.yaml
-

@@ -10,6 +10,10 @@
 !automation/
 !automation/*
 
+!packages
+!packages/
+!packages/*
+
 # Ignore folders.
 .storage
 .cloud

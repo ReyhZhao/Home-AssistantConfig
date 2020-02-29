@@ -156,4 +156,21 @@
     
   action:
     service: alarm_control_panel.alarm_trigger
-    entity_id: alarm_control_panel.ha_alarm    
+    entity_id: alarm_control_panel.ha_alarm
+
+
+- alias: ARM Alarm at 22:00 if someone's home
+  trigger:
+    platform: time
+    at: "22:00:00"
+  condition:
+  - condition: state
+    entity_id: group.presence
+    state: home
+  - condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: disarmed
+
+  action:
+    - service: alarm_control_panel.alarm_arm_home
+      entity_id: alarm_control_panel.ha_alarm    

@@ -54,3 +54,5 @@ device_tracker.oneplus_6:
   mac: c0:ee:fb:1c:07:1b
 binary_sensor.motion_gang_2:
   device_class: motion
+binary_sensor.netatmo_thuis_motion:
+  device_class: motion
