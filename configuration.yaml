@@ -206,8 +206,6 @@ switch:
           name: Schakelaar Trapkast
        0b11001501b34a6a0a010f70:
           name: Schakelaar Woonkamer
-       0b11004f0028d00202010f70:
-          name: Kerstboom
 
 netatmo:
   client_id: !secret netatmo_client
@@ -221,7 +219,6 @@ binary_sensor:
       - lightning
   - platform: uptimerobot
     api_key: !secret uptimerobot
-
 
   - platform: rfxtrx
     automatic_add: true
