@@ -27,3 +27,7 @@ logs:
   requests.packages.urllib3.connectionpool: critical
   urllib3.connectionpool: error
   root: warn
+  custom_components.smartweather: debug
+  custom_components.smartweather.sensor: debug
+  custom_components.smartweather.binary_sensor: debug
+  custom_components.smartweather.weather_sensor: debug
