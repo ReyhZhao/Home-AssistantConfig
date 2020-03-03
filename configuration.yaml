@@ -30,8 +30,8 @@ logger: !include logger.yaml
 #  database: hass
 
 weather:
-#  - platform: smartweather
-#    api_key: !secret darksky
+  - platform: smartweather
+    api_key: !secret darksky
 
 
   - platform: buienradar
@@ -40,9 +40,9 @@ weather:
     latitude: !secret homeassistant_latitude
     longitude: !secret homeassistant_longitude
 
-#smartweather:
-#    station_id: 4967
-#    api_key: 20c70eae-e62f-4d3b-b3a4-8586e90f3ac8
+smartweather:
+    station_id: 4967
+    api_key: 20c70eae-e62f-4d3b-b3a4-8586e90f3ac8
 
 telegram_bot:
   - platform: polling
@@ -212,11 +212,11 @@ netatmo:
   client_secret: !secret netatmo_secret
 
 binary_sensor:
-#  - platform: smartweather
-#    monitored_conditions: 
-#      - raining
-#      - freezing
-#      - lightning
+  - platform: smartweather
+    monitored_conditions: 
+      - raining
+      - freezing
+      - lightning
 
   - platform: uptimerobot
     api_key: !secret uptimerobot
