@@ -177,8 +177,8 @@ switch:
     name: zone1_valve
     state_topic: esptuin/Relay02/RL02
     command_topic: esptuin/gpio/14
-    payload_on: 0
-    payload_off: 1
+    payload_on: 1
+    payload_off: 0
     optimistic: false
     retain: true
     icon: mdi:valve
