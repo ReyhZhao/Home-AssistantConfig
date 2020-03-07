@@ -1,8 +1,7 @@
-  purge_interval: 1
-  purge_keep_days: 3
+  purge_interval: 7
+  purge_keep_days: 7
   exclude:
     domains:
-      - automation
       - weblink
       - updater
       - group
