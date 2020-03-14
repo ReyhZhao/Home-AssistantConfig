@@ -15,6 +15,16 @@
       unit_of_measurement: "%"
 
     - platform: mqtt
+      state_topic: espwoonkamer/CCS811/TVOC
+      name: "TVOC Woonkamer"
+      unit_of_measurement: "ppm"
+
+    - platform: mqtt
+      state_topic: espwoonkamer/CCS811/CO2
+      name: "CO2 Woonkamer"
+      unit_of_measurement: "ppm"
+
+    - platform: mqtt
       state_topic: espslaapkamer/BME280/Temperature
       name: "Temperatuur Slaapkamer"
       unit_of_measurement: "°C"
