@@ -25,6 +25,16 @@
       unit_of_measurement: "ppm"
 
     - platform: mqtt
+      state_topic: espslaapkamer/CCS811/TVOC
+      name: "TVOC Slaapkamer"
+      unit_of_measurement: "ppm"
+
+    - platform: mqtt
+      state_topic: espslaapkamer/CCS811/CO2
+      name: "CO2 Slaapkamer"
+      unit_of_measurement: "ppm"
+
+    - platform: mqtt
       state_topic: espslaapkamer/BME280/Temperature
       name: "Temperatuur Slaapkamer"
       unit_of_measurement: "°C"
