@@ -1,6 +1,10 @@
 Presence: person.eddie, person.esther
 
-Ramen: binary_sensor.raam_badkamer
+Ramen:
+  entities:
+    - binary_sensor.raam_badkamer
+    - binary_sensor.window_kantoor
+      
 Deuren: binary_sensor.achterdeur
 Schakelaars: switch.schakelaar_trapkast, switch.schakelaar_kantoor, switch.schakelaar_keuken, switch.schakelaar_woonkamer
 

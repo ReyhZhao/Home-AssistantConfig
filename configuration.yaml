@@ -48,11 +48,25 @@ telegram_bot:
   - platform: polling
     api_key: !secret telegram_api_key 
     allowed_chat_ids: 
-       - !secret telegram_chatid
+       - !secret telegram_groupid
+       - !secret telegram_eddie
+
 notify:
-  - name: NOTIFIER_NAME
+  - name: telegram_group
     platform: telegram
-    chat_id: !secret telegram_chatid
+    chat_id: !secret telegram_groupid
+
+  - name: telegram_eddie
+    platform: telegram
+    chat_id: !secret telegram_eddie
+
+  - platform: group
+    name: all_contacts
+    services:
+      - service: mobile_app_reyhzhao
+      - service: telegram_eddie
+      - service: mobile_app_esther_s_oneplus_a6003
+
 
 mobile_app:
 
@@ -159,8 +173,10 @@ zone:
 
 alarm_control_panel:
   - platform: manual
-    delay_time: 10
-    pending_time: 10
+    #delay_time: 10
+    delay_time: 0
+    #pending_time: 10
+    pending_time: 0
     trigger_time: 4
     disarmed:
       trigger_time: 0

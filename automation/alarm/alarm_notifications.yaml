@@ -95,10 +95,11 @@
     entity_id: alarm_control_panel.ha_alarm
     to: armed_away
   action:
-  - service: notify.mobile_app_reyhzhao
+  - service: notify.ALL_CONTACTS
     data_template:
       message: >-
         "ALARM! The alarm is armed in away mode {{ states('sensor.date_time') }} \n"
+
         {%- for entity in states.group.ramen.attributes.entity_id -%}
           {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
             {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
@@ -108,26 +109,6 @@
          push:
             sound:
                name: default
-
-
-- alias: Send notification when alarm is Armed in Away mode
-  trigger:
-  - platform: state
-    entity_id: alarm_control_panel.ha_alarm
-    to: armed_away
-  action:
-    - service: notify.mobile_app_reyhzhao
-      data_template:
-        message: >-
-          {%- for entity in states.group.windows.attributes.entity_id -%}
-            {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
-              {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
-            {%- endif %}
-          {%- endfor -%}
-        title: "Window still open: "
-        data:
-          priority: 1
-
 
 
 - alias: 'Send notification when alarm is Disarmed'
