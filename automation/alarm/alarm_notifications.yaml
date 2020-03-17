@@ -1,3 +1,5 @@
+
+# Notify when alarm triggerd
 - alias: Send notification when alarm triggered
   trigger:
   - platform: state
@@ -15,7 +17,7 @@
                volume: 0.7
                
                
-
+# Notify on door open
 - alias: Stuur notificatie als deur geopend wordt en alarm aan staat.
   trigger:
   - platform: state
@@ -41,9 +43,7 @@
             sound:
                name: US-EN-Morgan-Freeman-Back-Door-Opened.wav
 
-
-
-
+# Notify door close
 - alias: Stuur notificatie als deur gesloten wordt en alarm aan staat.
   trigger:
   - platform: state
@@ -71,7 +71,9 @@
                
                
                
-               
+
+
+
 - alias: Send notification when alarm is Armed in Home mode
   trigger:
   - platform: state
@@ -80,8 +82,7 @@
   action:
   - service: notify.mobile_app_reyhzhao
     data_template:
-      message: "ALARM! The alarm is armed in Home mode {{ states('sensor.date_time')\
-        \ }}    \n"
+      message: "ALARM! The alarm is armed in Home mode {{ states('sensor.date_time') }} \n"
       data:
          push:
             sound:
@@ -96,11 +97,36 @@
   action:
   - service: notify.mobile_app_reyhzhao
     data_template:
-      message: "ALARM! The alarm is armed in away mode {{ states('sensor.date_time') }} \n"
+      message: >-
+        "ALARM! The alarm is armed in away mode {{ states('sensor.date_time') }} \n"
+        {%- for entity in states.group.ramen.attributes.entity_id -%}
+          {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+            {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+          {%- endif %}
+        {%- endfor -%}
       data:
          push:
             sound:
-               name: default               
+               name: default
+
+
+- alias: Send notification when alarm is Armed in Away mode
+  trigger:
+  - platform: state
+    entity_id: alarm_control_panel.ha_alarm
+    to: armed_away
+  action:
+    - service: notify.mobile_app_reyhzhao
+      data_template:
+        message: >-
+          {%- for entity in states.group.windows.attributes.entity_id -%}
+            {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+              {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+            {%- endif %}
+          {%- endfor -%}
+        title: "Window still open: "
+        data:
+          priority: 1
 
 
 
@@ -117,4 +143,6 @@
         data:
            push:
               sound:
-                 name: default               
+                 name: default
+
+
