@@ -4,8 +4,16 @@ Ramen:
   entities:
     - binary_sensor.raam_badkamer
     - binary_sensor.window_kantoor
-      
-Deuren: binary_sensor.achterdeur
+    - binary_sensor.window_logeerkamer
+    - binary_sensor.window_slaapkamer
+    - binary_sensor.window_woonkamer
+  
+
+Deuren:
+  entities:
+    - binary_sensor.achterdeur
+    - binary_sensor.voordeur
+
 Schakelaars: switch.schakelaar_trapkast, switch.schakelaar_kantoor, switch.schakelaar_keuken, switch.schakelaar_woonkamer
 
 Motion: binary_sensor.pir_zolder

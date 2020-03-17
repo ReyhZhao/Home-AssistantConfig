@@ -97,14 +97,24 @@
   action:
   - service: notify.ALL_CONTACTS
     data_template:
+      # Alarm ingeschakeld in away mode om: {{ now().strftime('%H:%M %A %d %B %Y') }}
       message: >-
-        "ALARM! The alarm is armed in away mode {{ states('sensor.date_time') }} \n"
+        Alarm ingeschakeld in away mode om {{ now().strftime('%H:%M') }}
+
+        Open ramen of deuren:
 
         {%- for entity in states.group.ramen.attributes.entity_id -%}
           {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
             {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
           {%- endif %}
         {%- endfor -%}
+
+        {%- for entity in states.group.deuren.attributes.entity_id -%}
+          {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+            {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+          {%- endif %}
+        {%- endfor -%}
+
       data:
          push:
             sound:
@@ -120,7 +130,7 @@
   action:
      service: notify.mobile_app_reyhzhao
      data:
-        message: "ALARM! The alarm is Disarmed at {{ states('sensor.date_time') }}"        
+        message: "Alarm uitgeschakeld om: {{ now().strftime('%H:%M') }}"
         data:
            push:
               sound:
