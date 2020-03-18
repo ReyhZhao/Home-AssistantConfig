@@ -32,10 +32,6 @@ automation:
         - input_boolean.cycle1_manual_run
         - input_boolean.cycle2_manual_run    
         - switch.zone1_valve
-        - switch.zone2_valve
-        - switch.zone3_valve
-        - switch.zone4_valve
-        - switch.zone5_valve
 
 
   #==================================================================
@@ -53,12 +49,6 @@ automation:
       to: 'on'
 
     action:
-    - service: homeassistant.turn_off
-      entity_id:
-        - switch.zone2_valve
-        - switch.zone3_valve
-        - switch.zone4_valve
-        - switch.zone5_valve
 
     - wait_template: "{{ is_state('switch.zone1_valve', 'off') }}"
       timeout: '00:30:15'
@@ -67,94 +57,4 @@ automation:
       entity_id: switch.zone1_valve
 
 
-  #=== Valve 2 ON
-  - alias: Irrigation Failsafe - Valve 2 On
-    trigger:
-    - platform: state
-      entity_id:
-      - switch.zone2_valve
-      to: 'on'
-
-    action:
-    - service: homeassistant.turn_off
-      entity_id:
-        - switch.zone1_valve
-        - switch.zone3_valve
-        - switch.zone4_valve
-        - switch.zone5_valve
-
-    - wait_template: "{{ is_state('switch.zone2_valve', 'off') }}"
-      timeout: '00:30:15'
-
-    - service: homeassistant.turn_off
-      entity_id: switch.zone2_valve
-
-
-  #=== Valve 3 ON
-  - alias: Irrigation Failsafe - Valve 3 On
-    trigger:
-    - platform: state
-      entity_id:
-      - switch.zone3_valve
-      to: 'on'
-
-    action:
-    - service: homeassistant.turn_off
-      entity_id:
-        - switch.zone1_valve
-        - switch.zone2_valve
-        - switch.zone4_valve
-        - switch.zone5_valve
-
-    - wait_template: "{{ is_state('switch.zone3_valve', 'off') }}"
-      timeout: '00:30:15'
-
-    - service: homeassistant.turn_off
-      entity_id: switch.zone3_valve
-
-
-  #=== Valve 4 ON
-  - alias: Irrigation Failsafe - Valve 4 On
-    trigger:
-    - platform: state
-      entity_id:
-      - switch.zone4_valve
-      to: 'on'
-
-    action:
-    - service: homeassistant.turn_off
-      entity_id:
-        - switch.zone1_valve
-        - switch.zone2_valve
-        - switch.zone3_valve
-        - switch.zone5_valve
-
-    - wait_template: "{{ is_state('switch.zone4_valve', 'off') }}"
-      timeout: '00:30:15'
-
-    - service: homeassistant.turn_off
-      entity_id: switch.zone4_valve
-
-
-  #=== Valve 5 ON
-  - alias: Irrigation Failsafe - Valve 5 On
-    trigger:
-    - platform: state
-      entity_id:
-      - switch.zone5_valve
-      to: 'on'
-
-    action:
-    - service: homeassistant.turn_off
-      entity_id:
-        - switch.zone1_valve
-        - switch.zone2_valve
-        - switch.zone3_valve
-        - switch.zone4_valve
-
-    - wait_template: "{{ is_state('switch.zone5_valve', 'off') }}"
-      timeout: '00:59:15'
-
-    - service: homeassistant.turn_off
-      entity_id: switch.zone5_valve
 
