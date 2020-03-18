@@ -23,8 +23,17 @@
     service: alarm_control_panel.alarm_disarm
     entity_id: alarm_control_panel.ha_alarm 
     
-    
-    
+- alias: Trigger depart if door open
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.achterdeur, binary_sensor.voordeur
+      to: 'on'
+  action:
+    service: 'mqtt.publish'
+    data: 
+      topic: monitor/scan/depart
+
+      
     
   
 - alias: Trigger alarm while armed home
