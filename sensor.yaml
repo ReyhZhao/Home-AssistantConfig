@@ -71,6 +71,12 @@
       device_class: humidity
 
 
+    - platform: mqtt
+      state_topic: 'monitor/beneden/iphone_eddie'
+      value_template: '{{ value_json.confidence }}'
+      unit_of_measurement: '%'
+      name: 'Beneden'
+
     - platform: dsmr_reader            
 
     - platform: smartweather
