@@ -202,7 +202,7 @@ switch:
   - platform: mqtt
     name: Buitenverlichting
     state_topic: espbuitenverlichting/Relay01/RL01    
-    command_topic: espbuitenverlichting/gpio/12
+    command_topic: espbuitenverlichting/gpio/14
     payload_on: 1
     payload_off: 0
     optimistic: false
