@@ -33,7 +33,6 @@ Kantoor: light.kantoor
 Zolder: switch.fibaro_system_fgs222_double_relay_switch_2x1_5kw_switch_2
 
 Alarm: 
-   view: yes
    entities:
       - alarm_control_panel.ha_alarm
       - group.deuren 
@@ -41,7 +40,6 @@ Alarm:
       - group.motion
 
 Home Test:
-   view: yes
    entities:        
       - group.entertainment
       - group.buiten
@@ -59,7 +57,6 @@ home_spotify_player:
   
 home_spotify_controls:
   name: Spotify Controls
-  control: hidden
   entities:
     - input_select.spotify_playlist
     - input_select.spotify_source
