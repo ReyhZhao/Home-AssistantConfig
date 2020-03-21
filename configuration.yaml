@@ -258,6 +258,8 @@ light:
     devices:
        0710012744090170:
           name: Lamp Trapkast
+       0b1100230028d00204010f70:
+          name: Verlichting Buiten
 
   - platform: limitlessled
     bridges:           
