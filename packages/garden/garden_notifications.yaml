@@ -3,9 +3,9 @@
 #=== Input Booleans
 #===================
 input_boolean:
-  telegram_holiday_irrigation_steve:
+  telegram_holiday_irrigation_eddie:
 
-  telegram_holiday_irrigation_sarah:
+  telegram_holiday_irrigation_esther:
 
 
 #================
@@ -31,10 +31,10 @@ automation:
       - condition: or
         conditions:
           - condition: state
-            entity_id: input_boolean.telegram_holiday_irrigation_steve
+            entity_id: input_boolean.telegram_holiday_irrigation_eddie
             state: 'on'
           - condition: state
-            entity_id: input_boolean.telegram_holiday_irrigation_sarah
+            entity_id: input_boolean.telegram_holiday_irrigation_esther
             state: 'on'         
 
     action:
@@ -71,13 +71,13 @@ script:
       - service: script.notify
         data_template:
           tell: >
-            {% if is_state('input_boolean.telegram_holiday_irrigation_steve', 'on') and
-                  is_state('input_boolean.telegram_holiday_irrigation_sarah', 'on') %}
-              steve_and_sarah
-            {% elif is_state('input_boolean.telegram_holiday_irrigation_sarah', 'on') %}
-              sarah
+            {% if is_state('input_boolean.telegram_holiday_irrigation_eddie', 'on') and
+                  is_state('input_boolean.telegram_holiday_irrigation_esther', 'on') %}
+              eddie_and_esther
+            {% elif is_state('input_boolean.telegram_holiday_irrigation_esther', 'on') %}
+              esther
             {% else %}
-              steve
+              eddie
             {% endif %}
           message: >
             {% set cycle_map = {
@@ -120,13 +120,13 @@ script:
       - service: script.notify
         data_template:
           tell: >
-            {% if is_state('input_boolean.telegram_holiday_irrigation_steve', 'on') and
-                  is_state('input_boolean.telegram_holiday_irrigation_sarah', 'on') %}
-              steve_and_sarah
-            {% elif is_state('input_boolean.telegram_holiday_irrigation_sarah', 'on') %}
-              sarah
+            {% if is_state('input_boolean.telegram_holiday_irrigation_eddie', 'on') and
+                  is_state('input_boolean.telegram_holiday_irrigation_esther', 'on') %}
+              eddie_and_esther
+            {% elif is_state('input_boolean.telegram_holiday_irrigation_esther', 'on') %}
+              esther
             {% else %}
-              steve
+              eddie
             {% endif %}
           message: >
             {% set cycle_map = {
