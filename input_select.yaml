@@ -19,6 +19,13 @@
          - Licht
          - Donker
 
+   holiday:
+      name: "Vakantie Schema"
+      icon: mdi:vacation
+      options:
+         - On
+         - Off
+
    spotify_playlist:
       name: 'Playlist:'
       icon: mdi:spotify
