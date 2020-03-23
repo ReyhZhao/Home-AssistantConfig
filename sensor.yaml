@@ -89,7 +89,6 @@
     - platform: filter
       name: "filterd bodemvochtigheid"
       entity_id: sensor.bodemvochtigheid
-      unit_of_measurement: "%"
       filters:
         - filter: outlier
           window_size: 4

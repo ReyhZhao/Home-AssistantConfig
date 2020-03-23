@@ -12,7 +12,6 @@ input_boolean:
 #=== Automations
 #================
 automation:
-
   #===================================================
   #=== Notify about irrigation events when on holiday
   #===================================================
@@ -25,8 +24,8 @@ automation:
 
     condition:
       - condition: state
-        entity_id: binary_sensor.holiday_mode
-        state: 'on'
+        entity_id: input_select.holiday
+        state: 'On'
     
       - condition: or
         conditions:
@@ -65,20 +64,8 @@ script:
   #===============================
   notify_irrigation_start:    
     sequence:
-      - wait_template: >
-          {{ is_state('script.notify', 'off') }}
-
-      - service: script.notify
+      - service: notify.ALL_CONTACTS
         data_template:
-          tell: >
-            {% if is_state('input_boolean.telegram_holiday_irrigation_eddie', 'on') and
-                  is_state('input_boolean.telegram_holiday_irrigation_esther', 'on') %}
-              eddie_and_esther
-            {% elif is_state('input_boolean.telegram_holiday_irrigation_esther', 'on') %}
-              esther
-            {% else %}
-              eddie
-            {% endif %}
           message: >
             {% set cycle_map = {
               '1': 'morning',
@@ -114,20 +101,9 @@ script:
   #=============================
   notify_irrigation_end:    
     sequence:
-      - wait_template: >
-          {{ is_state('script.notify', 'off') }}
 
-      - service: script.notify
+      - service: notify.ALL_CONTACTS
         data_template:
-          tell: >
-            {% if is_state('input_boolean.telegram_holiday_irrigation_eddie', 'on') and
-                  is_state('input_boolean.telegram_holiday_irrigation_esther', 'on') %}
-              eddie_and_esther
-            {% elif is_state('input_boolean.telegram_holiday_irrigation_esther', 'on') %}
-              esther
-            {% else %}
-              eddie
-            {% endif %}
           message: >
             {% set cycle_map = {
               '1': 'morning',
