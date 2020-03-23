@@ -57,6 +57,10 @@
       name: "Lux Buiten"
       unit_of_measurement: "Lux" 
       device_class: illuminance
+      value_template: >-
+        {%- if value_json|float >= 0 and value_json|float <= 5000 -%}
+        {{ value_json }}
+        {%- endif -%}
 
     - platform: mqtt
       state_topic: espslaapkamer/Lux/Infrared
