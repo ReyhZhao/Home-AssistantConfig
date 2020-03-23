@@ -57,10 +57,21 @@
       name: "Lux Buiten"
       unit_of_measurement: "Lux" 
       device_class: illuminance
-      value_template: >-
-        {%- if value_json|float >= 0 and value_json|float <= 5000 -%}
-        {{ value_json }}
-        {%- endif -%}
+#      value_template: >-
+#        {%- if value_json|float >= 0 and value_json|float <= 5000 -%}
+#        {{ value_json }}
+#        {%- endif -%}
+
+    - platform: filter
+      name: "filtered lux_buiten"
+      entity_id: sensor.lux_buiten
+      filters:
+        - filter: outlier
+          window_size: 4
+          radius: 4.0
+        - filter: lowpass
+          time_constant: 10
+          precision: 2
 
     - platform: mqtt
       state_topic: espslaapkamer/Lux/Infrared
@@ -73,6 +84,19 @@
       name: "Bodemvochtigheid"
       unit_of_measurement: "%"
       device_class: humidity
+
+
+    - platform: filter
+      name: "filterd bodemvochtigheid"
+      entity_id: sensor.bodemvochtigheid
+      unit_of_measurement: "%"
+      filters:
+        - filter: outlier
+          window_size: 4
+          radius: 4.0
+        - filter: lowpass
+          time_constant: 10
+          precision: 2
 
 
     - platform: mqtt
