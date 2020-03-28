@@ -17,7 +17,9 @@
     
   action:
     - service: homeassistant.turn_on
-      entity_id: light.buiten
+      entity_id:
+        - light.buiten
+        - switch.bf31c151c7d7ac0d24qahx
 
     - service: timer.start
       data:
@@ -26,6 +28,29 @@
 
 ######################################################################
 
+- alias: Trigger iemand huis - Buiten verlichting
+  description: 'Buitenverlichting aan als iemand thuis komt.'
+  trigger:
+  - entity_id: group.presence
+    platform: state
+    to: 'home'
+
+  condition:
+    condition: state
+    entity_id: input_select.schemer_buiten
+    state: Donker
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id:
+        - light.buiten
+        - switch.bf31c151c7d7ac0d24qahx
+
+    - service: timer.start
+      data:
+        entity_id: timer.buiten
+
+######################################################################
 
 - alias: Turn off Buiten lamp, x minutes after last movement
   trigger:
@@ -36,4 +61,6 @@
 
   action:
     service: homeassistant.turn_off
-    entity_id: light.buiten
+    entity_id:
+      - light.buiten
+      - switch.bf31c151c7d7ac0d24qahx
