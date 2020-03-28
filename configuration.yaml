@@ -130,6 +130,11 @@ input_number:
     max: 100
     step: 1
 
+tuya:    
+  username: !secret tuya_username
+  password: !secret tuya_password
+  country_code: 1
+  platform: smart_life
 
 media_player:
   - platform: braviatv
@@ -189,6 +194,7 @@ rfxtrx:
   debug: True
 
 switch:
+
   - platform: mqtt
     name: zone1_valve
     state_topic: esptuin/Relay02/RL02
