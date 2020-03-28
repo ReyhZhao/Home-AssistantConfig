@@ -31,3 +31,4 @@ logs:
   custom_components.smartweather.sensor: debug
   custom_components.smartweather.binary_sensor: debug
   custom_components.smartweather.weather_sensor: debug
+  homeassistant.components.tuya: debug
