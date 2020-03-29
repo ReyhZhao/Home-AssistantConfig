@@ -22,7 +22,8 @@
   action:
     service: alarm_control_panel.alarm_disarm
     entity_id: alarm_control_panel.ha_alarm 
-    
+
+
 - alias: Trigger depart if door open
   trigger:
     - platform: state
@@ -33,7 +34,40 @@
     data: 
       topic: monitor/scan/depart
 
-      
+
+
+
+############################
+
+- alias: Schakel alarm uit als de eerste wakker wordt
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_trap
+    to: 'on'
+
+  condition:
+  - condition: time
+    after: '6:00:00'
+    before: '10:00:00'
+
+  - condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: armed_night
+
+  action:
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.ha_alarm
+
+    - service: notify.mobile_app_reyhzhao
+      data_template:
+        message: "Goeie morgen."
+        data:
+           push:
+              sound:
+                 name: default
+
+##############################
+
     
   
 - alias: Trigger alarm while armed home
