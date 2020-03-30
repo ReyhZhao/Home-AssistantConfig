@@ -20,9 +20,16 @@
       unit_of_measurement: "ppm"
 
     - platform: mqtt
+      state_topic: espbuitenluchtkwaliteit/Dust/pm10
+      name: "pm10"
+      unit_of_measurement: "ug/m3"
+
+
+    - platform: mqtt
       state_topic: espwoonkamer/CCS811/CO2
       name: "CO2 Woonkamer"
       unit_of_measurement: "ppm"
+
 
     - platform: mqtt
       state_topic: espslaapkamer/CCS811/TVOC
