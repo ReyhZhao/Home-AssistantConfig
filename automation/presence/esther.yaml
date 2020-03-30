@@ -6,28 +6,71 @@
     platform: numeric_state
     entity_id: sensor.wall_plug_power_telefoon_lader
     above: 2
+
+  condition:
+  - condition: state
+    entity_id: person.esther
+    state: 'Home'
   
   action:
     - service: input_select.select_option
       data_template:      
          entity_id: input_select.status_esther
-         option: 'Slaapt' 
+         option: 'Slaapt'
+
+    - service: notify.mobile_app_esther_s_oneplus_a6003
+      data_template:
+        message: "Slaap lekker Esther."
+        data:
+           push:
+              sound:
+                 name: default
          
-         
-         
-- alias: Trigger Eddie/Esther Wakker
+###############################################################
+
+- alias: Trigger Esther Wakker
   description: ''
   trigger:
-    platform: sun
-    event: sunrise
-    offset: '+00:00:00'      
-  
+    platform: numeric_state
+    entity_id: sensor.wall_plug_power_telefoon_lader
+    below: 2
+
+  condition:
+  - condition: time
+    after: '7:00:00'
+    before: '17:00:00'
+
   action:
     - service: input_select.select_option
-      data_template:      
+      data_template:
          entity_id: input_select.status_esther
-         option: 'Wakker'     
-    - service: input_select.select_option
-      data_template:      
-         entity_id: input_select.status_eddie
-         option: 'Wakker'          
+         option: 'Wakker'
+
+    - service: notify.mobile_app_esther_s_oneplus_a6003
+      data_template:
+        message: "Goeie morgen Esther."
+        data:
+           push:
+              sound:
+                 name: default
+
+
+
+###############################################################
+         
+#- alias: Trigger Eddie/Esther Wakker
+#  description: ''
+#  trigger:
+#    platform: sun
+#    event: sunrise
+#    offset: '+00:00:00'
+#
+#  action:
+#    - service: input_select.select_option
+#      data_template:
+#         entity_id: input_select.status_esther
+#         option: 'Wakker'
+#    - service: input_select.select_option
+#      data_template:
+#         entity_id: input_select.status_eddie
+#         option: 'Wakker'
