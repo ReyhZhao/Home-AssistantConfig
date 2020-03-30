@@ -206,6 +206,15 @@ switch:
     icon: mdi:valve
 
   - platform: mqtt
+    name: Dust Sensor sleep
+    state_topic: espbuitenluchtkwaliteit/Sleep/State
+    command_topic: espbuitenluchtkwaliteit/gpio/16
+    payload_on: 1
+    payload_off: 0
+    optimistic: false
+    retain: true    
+
+  - platform: mqtt
     name: Buitenverlichting
     state_topic: espbuitenverlichting/Relay01/RL01    
     command_topic: espbuitenverlichting/gpio/14
