@@ -46,13 +46,31 @@
     to: 'on'
 
   condition:
-  - condition: time
-    after: '6:00:00'
-    before: '10:00:00'
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: armed_night
 
-  - condition: state
-    entity_id: alarm_control_panel.ha_alarm
-    state: armed_night
+      - condition: or
+        conditions:
+        # Maandag schema
+        - condition: time
+          after: '5:00:00'
+          before: '8:30:00'
+          weekday:
+            - mon
+        # Rest van de week schema
+        - condition: time
+          after: '7:00:00'
+          before: '10:00:00'
+          weekday:
+            - tue
+            - wed
+            - thu
+            - fri
+            - sat
+            - sun
 
   action:
     - service: alarm_control_panel.alarm_disarm

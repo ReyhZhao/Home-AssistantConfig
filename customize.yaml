@@ -60,3 +60,5 @@ sensor.smartweather_rain_today:
   friendly_name: smartweather_rain_today_3
 sensor.smartweather_rain_yesterday:
   friendly_name: smartweather_rain_yesterday_3
+sensor.filtered_lux_buiten:
+  icon: mdi:weather-sunny
