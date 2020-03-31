@@ -120,6 +120,11 @@ input_boolean:
       name: Shuffle
       icon: mdi:shuffle-variant
 
+   nachtstand:
+     name: Nachtstand
+     initial: off
+     icon: mdi:weather-night
+
 
 input_number:
   spotify_volume:

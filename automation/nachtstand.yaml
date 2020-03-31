@@ -1,17 +1,91 @@
-- alias: Trigger Gang Lamp On
-  description: ''
-  
+
+
+- alias: Trigger iemand gaat slapen
+  description: 'Trigger als iemand gaat slapen, check of nachtstand aan moet.'
+
+
   trigger:
-  - platform: event
-    event_type: ios.action_fired
-    event_data:
-       actionName: 'Nachtstand'
+    platform: state
+    entity_id:
+      - input_select.status_eddie
+      - input_select.status_esther
+
+
+
+  condition:
+    condition: or
+    conditions:
+
+      # Iedereen thuis en iedereen slaapt
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: person.eddie
+          state: 'home'
+        - condition: state
+          entity_id: person.esther
+          state: 'home'
+        - condition: state
+          entity_id: input_select.status_eddie
+          state: 'Slaapt'
+        - condition: state
+          entity_id: input_select.status_esther
+          state: 'Slaapt'
+
+
+      # Alleen Eddie thuis en Eddie slaapt
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: person.eddie
+          state: 'home'
+        - condition: state
+          entity_id: person.esther
+          state: 'not_home'
+
+        - condition: state
+          entity_id: input_select.status_eddie
+          state: 'Slaapt'
+
+
+      # Alleen Esther thuis en Esther slaapt
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: person.eddie
+          state: 'not_home'
+        - condition: state
+          entity_id: person.esther
+          state: 'home'
+
+        - condition: state
+          entity_id: input_select.status_eddie
+          state: 'Slaapt'
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id:
+        - input_boolean.nachtstand
+
+
+
+- alias: Nachtstand ingeschakeld
+  description: ''
+
+  trigger:
+    platform: state
+    entity_id: input_boolean.nachtstand
+    to: 'on'
 
   action:
     - service: homeassistant.turn_off
-      entity_id: 
+      entity_id:
         - group.all_lights
         - switch.lamp_gang
-#        - light.overloop
+        - light.overloop
+
     - service: alarm_control_panel.alarm_arm_night
-      entity_id: alarm_control_panel.ha_alarm    
+      entity_id: alarm_control_panel.ha_alarm
+
+
+
