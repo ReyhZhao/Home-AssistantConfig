@@ -3,7 +3,11 @@
   
   trigger:
   - platform: state
-    entity_id: binary_sensor.achterdeur, binary_sensor.motion_woonkamer1, binary_sensor.motion_woonkamer2, switch.schakelaar_woonkamer 
+    entity_id: 
+      - binary_sensor.achterdeur
+      - binary_sensor.motion_woonkamer1 
+      - binary_sensor.motion_woonkamer2 
+      - switch.schakelaar_woonkamer 
     to: 'on'  
       
   condition:
