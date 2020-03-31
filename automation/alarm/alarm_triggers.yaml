@@ -35,8 +35,6 @@
       topic: monitor/scan/depart
 
 
-
-
 ############################
 
 - alias: Schakel alarm uit als de eerste wakker wordt
@@ -48,9 +46,15 @@
   condition:
     condition: and
     conditions:
+      # Doe dit alleen als het alarm in de nachtstand staat, andere instellingen kunnen een reden hebben.
       - condition: state
         entity_id: alarm_control_panel.ha_alarm
         state: armed_night
+
+      # Schakel alarm enkel uit als iemand van boven komt.
+      - condition: state
+        entity_id: binary_sensor.motion_overloop
+        state: 'on'
 
       - condition: or
         conditions:
@@ -75,6 +79,10 @@
   action:
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm
+
+    - service: homeassistant.turn_off
+      entity_id:
+        - input_boolean.nachtstand
 
     - service: notify.mobile_app_reyhzhao
       data_template:
