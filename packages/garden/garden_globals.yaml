@@ -150,7 +150,7 @@ input_number:
   # The temperature above or below which the duration is adjusted
   temperature_baseline:
     name: Temperature baseline
-    min: 20
+    min: 18
     max: 30
     icon: mdi:thermometer
     unit_of_measurement: '°C'
