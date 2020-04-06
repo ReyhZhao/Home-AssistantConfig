@@ -438,11 +438,11 @@ script:
             {% endif %}
             {{ n != 0 }}
           
-      #=== Call the script to set the sonoff PULSETIME
-      - service: script.set_sonoff_pulsetime
-        data_template:
-          cycle: '{{ cycle }}'
-          zone: '{{ zone }}'
+#      #=== Call the script to set the sonoff PULSETIME
+#      - service: script.set_sonoff_pulsetime
+#        data_template:
+#          cycle: '{{ cycle }}'
+#          zone: '{{ zone }}'
 
       #=== Wait 5 seconds for good measure to ensure previous zone is completly finished
       - delay: "00:00:05"
@@ -529,26 +529,26 @@ script:
   #=== Note: From the Tasmota wiki, for a Pulsetime greater than 11 seconds
   #===       it should be set to 100 + (minutes * 60)
   #========================================================================
-  set_sonoff_pulsetime:
-    sequence:
-      - service: mqtt.publish
-        data_template:
-          topic: >
-            {% if zone in ['1', '2', '3', '4'] %}
-              {% set sonoff = 'sonoff4ch01' %}
-            {% elif zone == '5' %}
-              {% set sonoff = 'sonoff06' %}
-              {% set zone = zone | int - 4 %}
-            {% endif %}
-  
-            {{ sonoff }}/cmnd/pulsetime{{ zone | string}}
-          payload: >
-            {% set duration = states('input_number.cycle' + cycle + '_zone' + zone + '_duration')  | float %}
-            {% set adj_duration = states('input_number.adjusted_cycle' + cycle + '_zone' + zone + '_duration')  | float %}
-            {% if is_state('input_boolean.cycle' + cycle + '_use_weather_adjustment', 'on') %}
-              {% set payload = 100 + (adj_duration * 60) + 30 %}
-            {% else %}
-              {% set payload = 100 + (duration * 60) + 30 %}
-            {% endif %}
-            {{ payload | int }}
+#  set_sonoff_pulsetime:
+#    sequence:
+#      - service: mqtt.publish
+#        data_template:
+#          topic: >
+#            {% if zone in ['1', '2', '3', '4'] %}
+#              {% set sonoff = 'sonoff4ch01' %}
+#            {% elif zone == '5' %}
+#              {% set sonoff = 'sonoff06' %}
+#              {% set zone = zone | int - 4 %}
+#            {% endif %}
+#
+#            {{ sonoff }}/cmnd/pulsetime{{ zone | string}}
+#          payload: >
+#            {% set duration = states('input_number.cycle' + cycle + '_zone' + zone + '_duration')  | float %}
+#            {% set adj_duration = states('input_number.adjusted_cycle' + cycle + '_zone' + zone + '_duration')  | float %}
+#            {% if is_state('input_boolean.cycle' + cycle + '_use_weather_adjustment', 'on') %}
+#              {% set payload = 100 + (adj_duration * 60) + 30 %}
+#            {% else %}
+#              {% set payload = 100 + (duration * 60) + 30 %}
+#            {% endif %}
+#            {{ payload | int }}
 

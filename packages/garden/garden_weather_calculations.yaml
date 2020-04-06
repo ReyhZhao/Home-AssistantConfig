@@ -262,23 +262,23 @@ script:
             {% set multiplier = states('input_number.temp_2days_multiplyer') | float %}
             {{ duration * multiplier }}
 
-      #=== Then adjust for rainfall
-      - service: input_number.set_value
-        data_template:
-          entity_id: input_number.adjusted_cycle{{ cycle }}_zone{{ zone }}_duration
-          value: >
-            {% set adj_duration = states('input_number.adjusted_cycle' + cycle + '_zone' + zone + '_duration') | float %}
-            {% set multiplier = states('input_number.rain_3days_multiplier') | float %}
-            {{ adj_duration * multiplier }}
-
-      #=== Make sure new duration is not less than zero
-      - service: input_number.set_value
-        data_template:
-          entity_id: input_number.adjusted_cycle{{ cycle }}_zone{{ zone }}_duration
-          value: >
-            {% if states('input_number.adjusted_cycle' + cycle + '_zone' + zone + '_duration') | float < 0 %}
-              0
-            {% else %}
-              {{ states('input_number.adjusted_cycle' + cycle + '_zone' + zone + '_duration') }}
-            {% endif %}
+#      #=== Then adjust for rainfall
+#      - service: input_number.set_value
+#        data_template:
+#          entity_id: input_number.adjusted_cycle{{ cycle }}_zone{{ zone }}_duration
+#          value: >
+#            {% set adj_duration = states('input_number.adjusted_cycle' + cycle + '_zone' + zone + '_duration') | float %}
+#            {% set multiplier = states('input_number.rain_3days_multiplier') | float %}
+#            {{ adj_duration * multiplier }}
+#
+#      #=== Make sure new duration is not less than zero
+#      - service: input_number.set_value
+#        data_template:
+#          entity_id: input_number.adjusted_cycle{{ cycle }}_zone{{ zone }}_duration
+#          value: >
+#            {% if states('input_number.adjusted_cycle' + cycle + '_zone' + zone + '_duration') | float < 0 %}
+#              0
+#            {% else %}
+#              {{ states('input_number.adjusted_cycle' + cycle + '_zone' + zone + '_duration') }}
+#            {% endif %}
 

@@ -204,6 +204,7 @@ sensor:
     scan_interval: 86400
 
 
+    ## Template sensors:
   - platform: template
     sensors:
       #=== Weather information sensors
