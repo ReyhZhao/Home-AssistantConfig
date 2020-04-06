@@ -229,31 +229,6 @@ script:
           cycle: '1'
           zone: '1'
       - wait_template: "{{ is_state('script.calculate_adjusted_zone_durations', 'off') }}"
-      
-#      - service: script.calculate_adjusted_zone_durations
-#        data:
-#          cycle: '1'
-#          zone: '2'
-#      - wait_template: "{{ is_state('script.calculate_adjusted_zone_durations', 'off') }}"
-#
-#      - service: script.calculate_adjusted_zone_durations
-#        data:
-#          cycle: '1'
-#          zone: '3'
-#      - wait_template: "{{ is_state('script.calculate_adjusted_zone_durations', 'off') }}"
-#
-#      - service: script.calculate_adjusted_zone_durations
-#        data:
-#          cycle: '1'
-#          zone: '4'
-#      - wait_template: "{{ is_state('script.calculate_adjusted_zone_durations', 'off') }}"
-#
-#      - service: script.calculate_adjusted_zone_durations
-#        data:
-#          cycle: '1'
-#          zone: '5'
-#      - wait_template: "{{ is_state('script.calculate_adjusted_zone_durations', 'off') }}"
-#
 
   #=========================================
   #=== Adjust duration for zones in cycle 2
@@ -266,29 +241,7 @@ script:
           zone: '1'
       - wait_template: "{{ is_state('script.calculate_adjusted_zone_durations', 'off') }}"
 
-#      - service: script.calculate_adjusted_zone_durations
-#        data:
-#          cycle: '2'
-#          zone: '2'
-#      - wait_template: "{{ is_state('script.calculate_adjusted_zone_durations', 'off') }}"
-#
-#      - service: script.calculate_adjusted_zone_durations
-#        data:
-#          cycle: '2'
-#          zone: '3'
-#      - wait_template: "{{ is_state('script.calculate_adjusted_zone_durations', 'off') }}"
-#
-#      - service: script.calculate_adjusted_zone_durations
-#        data:
-#          cycle: '2'
-#          zone: '4'
-#      - wait_template: "{{ is_state('script.calculate_adjusted_zone_durations', 'off') }}"
-#
-#      - service: script.calculate_adjusted_zone_durations
-#        data:
-#          cycle: '2'
-#          zone: '5'
-#      - wait_template: "{{ is_state('script.calculate_adjusted_zone_durations', 'off') }}"
+
 
 
   #========================================================
