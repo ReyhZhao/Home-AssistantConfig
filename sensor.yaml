@@ -200,6 +200,8 @@
          - alerts
          - precip_intensity
          - precip_probability
+         - temperature_high 
+         - temperature_low 
 
     - platform: buienradar
       monitored_conditions:
@@ -214,6 +216,8 @@
         - feeltemperature
         - precipitation
         - precipitation_forecast_total
+#        - temperature_high
+#        - temperature_low
 
 
 

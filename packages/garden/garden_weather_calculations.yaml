@@ -262,10 +262,6 @@ script:
             {% set multiplier = states('input_number.temp_2days_multiplyer') | float %}
             {{ duration * multiplier }}
 
-#            {% set high_temp = states('input_number.temp_high_2days') | float %}
-#            {% set baseline = states('input_number.temperature_baseline') | float %}
-#            {{ (((high_temp - baseline) / baseline) + 1) * duration }}
-
       #=== Then adjust for rainfall
       - service: input_number.set_value
         data_template:
@@ -286,6 +282,3 @@ script:
               {{ states('input_number.adjusted_cycle' + cycle + '_zone' + zone + '_duration') }}
             {% endif %}
 
-#===            This elif was removed when zone 5 was allowed to go to 59 minutes
-#===            {% elif states('input_number.adjusted_cycle' + cycle + '_zone' + zone + '_duration') | float > 30 %}
-#===              30

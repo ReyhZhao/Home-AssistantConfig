@@ -30,6 +30,10 @@ logger: !include logger.yaml
 #  database: hass
 
 weather:
+  - platform: darksky
+    api_key: !secret darksky
+
+
   - platform: smartweather
     api_key: !secret darksky
 
