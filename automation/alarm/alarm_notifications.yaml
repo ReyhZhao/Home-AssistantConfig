@@ -1,4 +1,23 @@
 
+
+# Notify when brand alarm
+- alias: Send notification when alarm triggered
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.smokedetector_woonkamer
+    to: 'on'
+
+  action:
+  - service: notify.ALL_CONTACTS
+    data:
+      message: Brand ALARM! Rook gedetecteerd!!!!
+      data:
+         push:
+            sound:
+               name: default
+               critical: 1
+               volume: 1.0
+
 # Notify when alarm triggerd
 - alias: Send notification when alarm triggered
   trigger:
@@ -16,7 +35,9 @@
                critical: 1
                volume: 0.7
                
-               
+
+
+
 # Notify on door open
 - alias: Stuur notificatie als deur geopend wordt en alarm aan staat.
   trigger:
@@ -68,9 +89,6 @@
          push:
             sound:
                name: US-EN-Morgan-Freeman-Back-Door-Closed.wav
-               
-               
-               
 
 
 
