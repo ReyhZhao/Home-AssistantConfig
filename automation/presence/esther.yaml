@@ -33,11 +33,11 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.wall_plug_power_telefoon_lader
-    below: 2
+    below: 1
 
   condition:
   - condition: time
-    after: '7:00:00'
+    after: '5:00:00'
     before: '17:00:00'
 
   action:
