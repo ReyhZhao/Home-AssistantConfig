@@ -185,12 +185,38 @@
           value_template: "{{ states.media_player.spotify.attributes.source }}"
 
     - platform: darksky
-      api_key: a48b993340f50c0028d4a29de06a46f4
+      api_key: !secret darksky_api_key
+      name: dark_sky_forecast
+      units: auto
+      scan_interval:
+        minutes: 720
+      forecast:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      monitored_conditions:
+        - icon
+        - summary
+        - temperature_high
+        - temperature_low
+        - precip_intensity_max
+        - precip_probability
+
+    - platform: darksky
+      api_key: !secret darksky_api_key
       forecast:
          - 0
       hourly_forecast:
          - 0
          - 1
+         - 2
+         - 3
+         - 4
+         - 5
+         - 6
       language: nl
 
       monitored_conditions:

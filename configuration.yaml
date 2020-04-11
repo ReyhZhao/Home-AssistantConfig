@@ -31,11 +31,11 @@ logger: !include logger.yaml
 
 weather:
   - platform: darksky
-    api_key: !secret darksky
+    api_key: !secret darksky_api_key
 
 
   - platform: smartweather
-    api_key: !secret darksky
+    api_key: !secret darksky_api_key
 
 
   - platform: buienradar
