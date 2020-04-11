@@ -186,22 +186,44 @@ sensor:
    #================================
    #=== SmartWeather Rain yesterday
    #================================
+
+   # Backup!!!!
+
+#  - platform: rest
+#    resource: http://swd.weatherflow.com/swd/rest/observations/station/4967?api_key=20c70eae-e62f-4d3b-b3a4-8586e90f3ac8
+#    name: smartweather_rain_yesterday
+#    value_template: >
+#       {% if not value_json is defined %}
+#          no json returned
+#       {% elif 'obs' not in value_json %}
+#          obs not defined
+#       {% elif value_json.obs | length < 1 %}
+#          no data in obs
+#       {% elif 'precip_accum_local_yesterday' not in value_json.obs[0] %}
+#          no brightness returned
+#       {% else %}
+#         {{ value_json.obs[0].precip_accum_local_yesterday  | round(1) }}
+#       {% endif %}
+#    scan_interval: 86400
+
   - platform: rest
     resource: http://swd.weatherflow.com/swd/rest/observations/station/4967?api_key=20c70eae-e62f-4d3b-b3a4-8586e90f3ac8
     name: smartweather_rain_yesterday
     value_template: >
        {% if not value_json is defined %}
-          no json returned
+          states.sensor.state.state
        {% elif 'obs' not in value_json %}
-          obs not defined
+          states.sensor.state.state
        {% elif value_json.obs | length < 1 %}
-          no data in obs
+          states.sensor.state.state
        {% elif 'precip_accum_local_yesterday' not in value_json.obs[0] %}
-          no brightness returned
+          states.sensor.state.state
        {% else %}
          {{ value_json.obs[0].precip_accum_local_yesterday  | round(1) }}
        {% endif %}
     scan_interval: 86400
+
+
 
 
     ## Template sensors:
