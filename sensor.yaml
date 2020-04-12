@@ -151,10 +151,19 @@
 
     - platform: sonarr_upcoming_media
       api_key: !secret sonarr_api
-      host: 192.168.232.119
-      port: 8989
+      host: sonarr.noctis-nexus.nl
+      port: 443
       days: 2
       ssl: true
+      max: 10
+
+    - platform: radarr_upcoming_media
+      api_key: !secret radarr_api
+      host: radarr.noctis-nexus.nl
+      port: 443
+      days: 120
+      ssl: true
+      theaters: false
       max: 10
 
     - platform: dsmr_reader            
