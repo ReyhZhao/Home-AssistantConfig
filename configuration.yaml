@@ -48,6 +48,10 @@ smartweather:
     station_id: 4967
     api_key: 20c70eae-e62f-4d3b-b3a4-8586e90f3ac8
 
+octoprint:
+    host: 192.168.232.115
+    api_key: !secret octoprint_api
+
 telegram_bot:
   - platform: polling
     api_key: !secret telegram_api_key 
