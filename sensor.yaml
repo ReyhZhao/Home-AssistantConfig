@@ -139,6 +139,16 @@
       unit_of_measurement: '%'
       name: 'Beneden'
 
+
+
+    - platform: sonarr
+      api_key: 4fdcba9dee7146c6b7333d4495aa4fab
+      host: 192.168.232.119
+      port: 8989
+      monitored_conditions:
+        - upcoming
+      days: 2
+
     - platform: dsmr_reader            
 
     - platform: smartweather
