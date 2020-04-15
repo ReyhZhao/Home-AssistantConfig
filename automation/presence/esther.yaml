@@ -6,6 +6,7 @@
     platform: numeric_state
     entity_id: sensor.wall_plug_power_telefoon_lader
     above: 2
+    for: '00:01:00'
 
   condition:
   - condition: state
@@ -34,11 +35,16 @@
     platform: numeric_state
     entity_id: sensor.wall_plug_power_telefoon_lader
     below: 1
+    for: '00:01:00'
 
   condition:
   - condition: time
     after: '5:00:00'
     before: '17:00:00'
+
+  - condition: state
+    entity_id: input_select.status_esther
+    state: 'Slaapt'
 
   action:
     - service: input_select.select_option
