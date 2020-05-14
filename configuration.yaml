@@ -292,6 +292,15 @@ binary_sensor:
        0b11000001966e6a0a010f60:
           name: Raam Badkamer
           device_class: window
+
+       0b11002f014ee78a0b010f60:
+          name: Schakelaar Nachtkastje L
+          #device_class: 
+
+       0b110035014ee78a0c010f60:
+          name: Schakelaar Nachtkastje R
+          #device_class:
+
 light:
   - platform: rfxtrx
     automatic_add: true  

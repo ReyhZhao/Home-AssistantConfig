@@ -11,7 +11,6 @@
       - input_select.status_esther
 
 
-
   condition:
     condition: or
     conditions:
@@ -66,6 +65,25 @@
     - service: homeassistant.turn_on
       entity_id:
         - input_boolean.nachtstand
+
+
+
+
+- alias: Trigger iemand wordt wakker
+  description: 'Trigger als iemand wakker wordt, check of nachtstand uit moet.'
+
+  trigger:
+    platform: state
+    entity_id:
+      - input_select.status_eddie
+      - input_select.status_esther
+    to: 'Wakker'
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id:
+        - input_boolean.nachtstand
+
 
 
 

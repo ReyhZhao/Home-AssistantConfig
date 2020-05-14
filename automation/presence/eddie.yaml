@@ -17,19 +17,13 @@
                name: US-EN-Morgan-Freeman-Welcome-Home.wav
                
 
-               
 - alias: Trigger Eddie Slaapt
   description: ''
   trigger:
   - platform: state
-    entity_id: sensor.battery_state    
-    to: 'Charging'
- 
-  condition:
-  - condition: state
-    entity_id: person.eddie
-    state: 'Home'     
-  
+    entity_id: binary_sensor.schakelaar_nachtkastje_r
+    to: 'on'
+
   action:
     - service: input_select.select_option
       data_template:      
@@ -42,8 +36,8 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: sensor.battery_state    
-    to: 'Not Charging'
+    entity_id: binary_sensor.schakelaar_nachtkastje_r
+    to: 'off'
     
   action:
     - service: input_select.select_option
