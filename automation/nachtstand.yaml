@@ -101,6 +101,7 @@
         - group.all_lights
         - switch.lamp_gang
         - light.overloop
+        - automation.trigger_woonkamer_lamp_on
 
     - service: alarm_control_panel.alarm_arm_night
       entity_id: alarm_control_panel.ha_alarm

@@ -83,6 +83,10 @@
     - service: homeassistant.turn_off
       entity_id:
         - input_boolean.nachtstand
+        
+    - service: homeassistant.turn_on
+      entity_id:
+        - automation.trigger_woonkamer_lamp_on
 
     - service: notify.mobile_app_reyhzhao
       data_template:
