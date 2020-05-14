@@ -3,24 +3,22 @@
 - alias: Trigger Esther Slaapt
   description: ''
   trigger:
-    platform: numeric_state
-    entity_id: sensor.wall_plug_power_telefoon_lader
-    above: 1.2
+    #platform: numeric_state
+    #entity_id: sensor.wall_plug_power_telefoon_lader
+    #above: 1.2
     #for: '00:01:00'
 
-  condition:
-  - condition: state
-    entity_id: person.esther
-    state: 'Home'
+    platform: template
+    value_template: "{% if states.sensor.wall_plug_power_telefoon_lader.state | float > 1 %} true {% endif %}"
 
-#  - condition: time
-#    after: '17:00:00'
-#    before: '5:00:00'
+  condition:
+  - condition: time
+    after: '16:00:00'
+    before: '5:00:00'
 
   - condition: state
     entity_id: input_select.status_esther
     state: 'Wakker'
-
 
   action:
     - service: input_select.select_option
@@ -28,13 +26,13 @@
          entity_id: input_select.status_esther
          option: 'Slaapt'
 
-#    - service: notify.mobile_app_esther_s_oneplus_a6003
-#      data_template:
-#        message: "Slaap lekker Esther."
-#        data:
-#           push:
-#              sound:
-#                 name: default
+    - service: notify.mobile_app_esther_s_oneplus_a6003
+      data_template:
+        message: "Slaap lekker Esther."
+        data:
+           push:
+              sound:
+                 name: default
          
 ###############################################################
 
@@ -44,12 +42,11 @@
     platform: numeric_state
     entity_id: sensor.wall_plug_power_telefoon_lader
     below: 1
-    #for: '00:01:00'
 
   condition:
-  #- condition: time
-  #  after: '5:00:00'
-  #  before: '12:00:00'
+  - condition: time
+    after: '5:00:00'
+    before: '12:00:00'
 
   - condition: state
     entity_id: input_select.status_esther
@@ -61,18 +58,21 @@
          entity_id: input_select.status_esther
          option: 'Wakker'
 
-#    - service: notify.mobile_app_esther_s_oneplus_a6003
-#      data_template:
-#        message: "Goeie morgen Esther."
-#        data:
-#           push:
-#              sound:
-#                 name: default
+    - service: notify.mobile_app_esther_s_oneplus_a6003
+      data_template:
+        message: "Goeie morgen Esther."
+        data:
+           push:
+              sound:
+                 name: default
 
 
 
 ###############################################################
-         
+
+
+
+
 #- alias: Trigger Eddie/Esther Wakker
 #  description: ''
 #  trigger:
