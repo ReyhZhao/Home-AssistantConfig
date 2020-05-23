@@ -7,7 +7,7 @@
   #    entity_id: 'device_tracker.zack_phone'
   #    state: 'not_home'
   action:
-    - service: notify.mobile_app_reyhzhao
+    - service: notify.ALL_CONTACTS
       data:
         title: "Movement detected!"
         message: "Movement detected in the Backyard!"
