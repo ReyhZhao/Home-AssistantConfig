@@ -156,6 +156,11 @@ input_number:
 #  country_code: 1
 #  platform: smart_life
 
+
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
+
 media_player:
   - platform: braviatv
     host: !secret bravia_tv_host
@@ -164,14 +169,6 @@ media_player:
   - platform: androidtv
     name: Android TV Woonkamer
     host: !secret bravia_tv_host
-
-#  - platform: spotify
-#    client_id: !secret spotify_client_id
-#    client_secret: !secret spotify_client_secret
-#    aliases:
-#       6849b46e299a15c25d10988f6055b6a46b98c2ba: 'woonkamer'
-#       2e5b30ed71289f3c3cecaa8f0503ce847beb137c: 'EDDIE-PC'
-
 
   - platform: kodi
     host: !secret kodi_host
