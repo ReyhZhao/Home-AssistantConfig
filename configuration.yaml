@@ -6,6 +6,8 @@ homeassistant:
    elevation: !secret homeassistant_elevation   
    time_zone: Europe/Amsterdam
    packages: !include_dir_named packages
+   external_url: https://ha.noctis-nexus.nl
+   internal_url: http://192.168.232.109:8123
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
@@ -23,7 +25,7 @@ http:
    trusted_proxies: 
       - !secret proxy_host
       
-   base_url: https://ha.noctis-nexus.nl
+
 
    
 logger: !include logger.yaml
@@ -146,11 +148,11 @@ input_number:
     max: 100
     step: 1
 
-tuya:    
-  username: !secret tuya_username
-  password: !secret tuya_password
-  country_code: 1
-  platform: smart_life
+#tuya:    
+#  username: !secret tuya_username
+#  password: !secret tuya_password
+#  country_code: 1
+#  platform: smart_life
 
 media_player:
   - platform: braviatv

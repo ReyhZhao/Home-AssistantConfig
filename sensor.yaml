@@ -192,7 +192,6 @@
       - precip_minutes_local_yesterday
       - humidity
       - pressure
-      - uv
       - solar_radiation
       - illuminance
       - lightning_count
