@@ -212,6 +212,12 @@
           friendly_name: "Spotify Source"
           value_template: "{{ states.media_player.spotify.attributes.source }}"
 
+    - platform: template
+      sensors:
+        harmony_woonkamer:
+          value_template: '{{ state_attr("remote.harmony", "current_activity") }}'
+          friendly_name: 'Harmony Woonkamer'       
+
     - platform: darksky
       api_key: !secret darksky_api_key
       name: dark_sky_forecast
@@ -272,6 +278,8 @@
         - precipitation_forecast_total
 #        - temperature_high
 #        - temperature_low
+
+
 
 
 
