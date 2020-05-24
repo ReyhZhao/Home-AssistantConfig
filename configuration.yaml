@@ -56,6 +56,8 @@ smartweather:
 octoprint:
     host: 192.168.232.115
     api_key: !secret octoprint_api
+    bed: true
+    number_of_tools: 1
 
 telegram_bot:
   - platform: polling
