@@ -25,7 +25,16 @@
     entity_id: alarm_control_panel.ha_alarm
     to: triggered
   action:
-  - service: notify.mobile_app_reyhzhao
+
+  - service: telegram_bot.send_message
+    data_template:
+      inline_keyboard:
+      - Disarm:/button_alarm_uitschakelen
+      message: ALARM! The alarm has been triggered
+      target: 243259223
+      title: '*ALARM!!!*'
+
+  - service: notify.ALL_CONTACTS
     data:
       message: ALARM! The alarm has been triggered
       data:
@@ -36,6 +45,23 @@
                volume: 0.7
                
 
+- alias: Disarm alarm na bevestiging via Telegram
+  initial_state: 'on'
+
+  trigger:
+  - event_data:
+      data: /button_alarm_uitschakelen
+    event_type: telegram_callback
+    platform: event
+
+  action:
+  - service: notify.telegram_eddie
+    data:
+      message: Alarm wordt uitgeschakeld.
+      title: '*DISARM*'
+
+  - service: alarm_control_panel.alarm_disarm
+    entity_id: alarm_control_panel.ha_alarm
 
 
 # Notify on door open
@@ -91,7 +117,7 @@
                name: US-EN-Morgan-Freeman-Back-Door-Closed.wav
 
 
-
+# Send notification when alarm is Armed in Home mode
 - alias: Send notification when alarm is Armed in Home mode
   trigger:
   - platform: state
@@ -106,7 +132,8 @@
             sound:
                name: default
                
-               
+
+# Send notification when alarm is Armed in Away mode
 - alias: Send notification when alarm is Armed in Away mode
   trigger:
   - platform: state
@@ -139,6 +166,7 @@
                name: default
 
 
+# Send notification when alarm is Disarmed
 - alias: 'Send notification when alarm is Disarmed'
   trigger:
     - platform: state
