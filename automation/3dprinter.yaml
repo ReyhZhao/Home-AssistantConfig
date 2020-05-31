@@ -1,0 +1,37 @@
+- alias: Ender 10s Pro uit na printen vragen via Telegram
+  initial_state: 'on'
+
+  trigger:
+  - entity_id: binary_sensor.octoprint_printing
+    from: 'on'
+    platform: state
+    to: 'off'
+
+  action:
+  - data_template:
+      inline_keyboard:
+      - Uitschakelen:/button_uitschakelen
+      message: De printopdracht is afgerond, Creality CR10s Pro uitschakelen?
+      target: 243259223
+      title: '*Creality CR10s Pro uitschakelen?*'
+    service: telegram_bot.send_message
+
+
+
+- alias: Ender 10s Pro uitschakelen na bevestiging via Telegram
+  initial_state: 'on'
+
+  trigger:
+  - event_data:
+      data: /button_uitschakelen
+    event_type: telegram_callback
+    platform: event
+    
+  action:
+  - data:
+      message: Ender 10s Pro wordt uitgeschakeld.
+      title: '*Ender 10s Pro uitgeschakeld*'
+    service: notify.telegram_eddie
+  - data:
+      entity_id: switch.ender_3_pro
+    service: switch.turn_off
