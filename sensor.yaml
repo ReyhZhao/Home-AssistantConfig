@@ -148,8 +148,6 @@
       api_key: !secret sonarr_api
       host: 192.168.232.119
       port: 8989
-      monitored_conditions:
-        - upcoming
       days: 2
 
     - platform: sonarr_upcoming_media
