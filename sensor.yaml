@@ -20,6 +20,11 @@
       unit_of_measurement: "ppm"
 
 ################################################################
+    - platform: mqtt
+      state_topic: espbuitenluchtkwaliteit/Accu/Voltage
+      name: "Weerstation Accu"
+      unit_of_measurement: "V"
+
 
     - platform: mqtt
       state_topic: espbuitenluchtkwaliteit/Dust/pm10
