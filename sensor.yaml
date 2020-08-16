@@ -21,7 +21,7 @@
 
 ################################################################
     - platform: mqtt
-      state_topic: espweerstation/Accu/Voltage
+      state_topic: espweerstation/Accu/V
       name: "Weerstation Accu"
       unit_of_measurement: "V"
 
