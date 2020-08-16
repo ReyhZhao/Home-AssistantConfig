@@ -1,0 +1,21 @@
+- id: '1597588973825'
+  alias: Accu weerstation
+  description: ''
+  trigger:
+  - above: '4.2'
+    entity_id: sensor.weerstation_accu_spanning
+    for: '1'
+    platform: numeric_state
+  - below: '3'
+    entity_id: sensor.weerstation_accu_spanning
+    for: '1'
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      data:
+        push:
+          sound:
+            name: default
+      message: Accu spanning weerstation buiten grenzen
+    service: notify.telegram_eddie
