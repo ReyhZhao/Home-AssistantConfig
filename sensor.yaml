@@ -21,9 +21,24 @@
 
 ################################################################
     - platform: mqtt
-      state_topic: espweerstation/Accu/V
-      name: "Weerstation Accu"
+      state_topic: espweerstation/Accu/Voltage
+      name: "Weerstation Accu Spanning"
       unit_of_measurement: "V"
+
+    - platform: mqtt
+      state_topic: espweerstation/BME280/Temperature
+      name: "Weerstation Temperatuur"
+      unit_of_measurement: "C"      
+
+    - platform: mqtt
+      state_topic: espweerstation/BME280/Humidity 
+      name: "Weerstation Humidity "
+      unit_of_measurement: "%"      
+      
+    - platform: mqtt
+      state_topic: espweerstation/BME280/Pressure 
+      name: "Weerstation Pressure"
+      unit_of_measurement: "mb"            
 
 
     - platform: mqtt
