@@ -224,8 +224,8 @@ switch:
 
   - platform: mqtt
     name: Dust Sensor sleep
-    state_topic: espbuitenluchtkwaliteit/Sleep/State
-    command_topic: espbuitenluchtkwaliteit/gpio/14
+    state_topic: espweerstation/Sleep/State
+    command_topic: espweerstation/gpio/14
     payload_on: 1
     payload_off: 0
     optimistic: false

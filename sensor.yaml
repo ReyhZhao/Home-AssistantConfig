@@ -21,23 +21,23 @@
 
 ################################################################
     - platform: mqtt
-      state_topic: espbuitenluchtkwaliteit/Accu/Voltage
+      state_topic: espweerstation/Accu/Voltage
       name: "Weerstation Accu"
       unit_of_measurement: "V"
 
 
     - platform: mqtt
-      state_topic: espbuitenluchtkwaliteit/Dust/pm10
+      state_topic: espweerstation/Dust/pm10
       name: "pm10"
       unit_of_measurement: "ug/m3"
 
     - platform: mqtt
-      state_topic: espbuitenluchtkwaliteit/Dust/pm1.0
+      state_topic: espweerstation/Dust/pm1.0
       name: "pm1.0"
       unit_of_measurement: "ug/m3"
 
     - platform: mqtt
-      state_topic: espbuitenluchtkwaliteit/Dust/pm2.5
+      state_topic: espweerstation/Dust/pm2.5
       name: "pm2.5"
       unit_of_measurement: "ug/m3"      
 
