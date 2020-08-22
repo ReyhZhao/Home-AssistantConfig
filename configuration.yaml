@@ -209,12 +209,28 @@ alarm_control_panel:
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1BFB4H-if00-port0
   debug: True
+  automatic_add: true
   devices:
     # Schakelaar Nachtkastje L
     0b11002f014ee78a0b010f60:
 
     # Schakelaar Nachtkastje R
     0b110035014ee78a0c010f60:
+
+    # Raam Badkamer
+    0b11000001966e6a0a010f60:
+
+    # PIR Zolder        
+    0b11000900bfffc60a010f50:
+
+    # Voordeur
+    0b11000701966e6e0a010f70:
+
+    # Achterdeur
+    0b1100000196772e0a010f70:
+    
+
+    
 
 switch:
 
