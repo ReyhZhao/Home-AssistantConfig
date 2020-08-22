@@ -115,7 +115,7 @@
   trigger:
     platform: state
     entity_id: input_boolean.nachtstand
-    to: 'on'
+    to: 'off'
 
   action:
     - service: homeassistant.turn_on
