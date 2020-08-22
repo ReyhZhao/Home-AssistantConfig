@@ -250,19 +250,6 @@ switch:
     host: !secret bravia_tv_host
     mac: 94:53:30:60:EB:SF
 
-  - platform: rfxtrx
-    automatic_add: true
-    devices:
-       0b11000101bcbd4201010f70:
-          name: Schakelaar Keuken
-       0b11000201bcbd4202010f70:
-          name: Schakelaar Eetkamer
-       0b11000201d6cb5b0a010f70:
-          name: Schakelaar Kantoor
-       0b1100260180ea1e0a010f70:
-          name: Schakelaar Trapkast
-       0b11001501b34a6a0a010f70:
-          name: Schakelaar Woonkamer
 
 netatmo:
   client_id: !secret netatmo_client
@@ -278,38 +265,8 @@ binary_sensor:
   - platform: uptimerobot
     api_key: !secret uptimerobot
 
-  - platform: rfxtrx
-    automatic_add: true
-    devices:
-       0b1100000196772e0a010f70:
-          name: Achterdeur
-          device_class: door
-       0b11000701966e6e0a010f70:
-          name: Voordeur
-          device_class: door
-       0b11000900bfffc60a010f50:
-          name: PIR Zolder
-          device_class: motion
-       0b11000001966e6a0a010f60:
-          name: Raam Badkamer
-          device_class: window
-
-       0b11002f014ee78a0b010f60:
-          name: Schakelaar Nachtkastje L
-          #device_class: 
-
-       0b110035014ee78a0c010f60:
-          name: Schakelaar Nachtkastje R
-          #device_class:
 
 light:
-  - platform: rfxtrx
-    automatic_add: true  
-    devices:
-       0710012744090170:
-          name: Lamp Trapkast
-       0b1100230028d00204010f70:
-          name: Verlichting Buiten
 
   - platform: limitlessled
     bridges:           
