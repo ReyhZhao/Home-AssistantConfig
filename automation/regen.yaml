@@ -1,15 +1,42 @@
-automation:
-   - alias: 'Rainy Day'
-     trigger:
-        - platform: state
-          entity_id: sensor.precip_intensity
-          to: 'rain'
-     condition:
-       - condition: state
-         entity_id: group.presence
-         state: 'home'
-        
-     action:
-        - service: notify.mobile_app_reyhzhao
-          data:
-             message: Het gaat zo regenen.    
+
+######################################################################
+
+# Het begint te regenen
+ - alias: 'Het begint te regenen'
+   trigger:
+      - platform: state
+        entity_id: binary_sensor.smartweather_raining
+        to: 'on'
+
+
+   condition:
+     - condition: state
+       entity_id: group.presence
+       state: 'home'
+
+   action:
+      - service: notify.ALL_CONTACTS
+        data:
+           message: >-
+             Het begint te regenen.
+
+             {% if states.group.ramen.state == 'on' %}
+             let op er staan nog ramen open!
+
+             {%- for entity in states.group.ramen.attributes.entity_id -%}
+               {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+                 {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+               {%- endif %}
+             {%- endfor -%}
+             {% endif %}
+
+             {% if states.group.deuren.state == 'on' %}
+             let op er staan nog deuren open!
+
+             {%- for entity in states.group.deuren.attributes.entity_id -%}
+               {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+                 {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+               {%- endif %}
+             {%- endfor -%}
+             {% endif %}
+

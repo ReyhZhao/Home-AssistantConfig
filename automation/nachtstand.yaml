@@ -144,5 +144,3 @@
       data_template:
          entity_id: input_select.status_eddie
          option: 'Wakker'
-
-
