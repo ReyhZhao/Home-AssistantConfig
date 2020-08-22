@@ -62,3 +62,19 @@ sensor.smartweather_rain_yesterday:
   friendly_name: smartweather_rain_yesterday_3
 sensor.filtered_lux_buiten:
   icon: mdi:weather-sunny
+binary_sensor.voordeur:
+  device_class: door
+binary_sensor.achterdeur:
+  device_class: door
+binary_sensor.raam_badkamer:
+  device_class: window
+switch.schakelaar_kantoor:
+  device_class: switch
+switch.schakelaar_eetkamer:
+  device_class: switch
+switch.schakelaar_keuken:
+  device_class: switch
+switch.schakelaar_woonkamer:
+  device_class: switch
+binary_sensor.pir_zolder:
+  device_class: motion

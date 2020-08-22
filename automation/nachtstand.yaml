@@ -1,15 +1,14 @@
+######################################################################
 
-
+# Trigger iemand gaat slapen
 - alias: Trigger iemand gaat slapen
   description: 'Trigger als iemand gaat slapen, check of nachtstand aan moet.'
-
 
   trigger:
     platform: state
     entity_id:
       - input_select.status_eddie
       - input_select.status_esther
-
 
   condition:
     condition: or
@@ -66,9 +65,9 @@
       entity_id:
         - input_boolean.nachtstand
 
+######################################################################
 
-
-
+# Trigger iemand wordt wakker
 - alias: Trigger iemand wordt wakker
   description: 'Trigger als iemand wakker wordt, check of nachtstand uit moet.'
 
@@ -85,8 +84,9 @@
         - input_boolean.nachtstand
 
 
+######################################################################
 
-
+# Nachtstand ingeschakeld
 - alias: Nachtstand ingeschakeld
   description: ''
 
@@ -101,11 +101,32 @@
         - group.all_lights
         - switch.lamp_gang
         - light.overloop
-        - automation.trigger_woonkamer_lamp_on
+        - automation.trigger_woonkamer_lamp_motion
 
     - service: alarm_control_panel.alarm_arm_night
       entity_id: alarm_control_panel.ha_alarm
 
+######################################################################
+
+# Nachtstand uitgeschakeld
+- alias: Nachtstand ingeschakeld
+  description: ''
+
+  trigger:
+    platform: state
+    entity_id: input_boolean.nachtstand
+    to: 'on'
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id:
+        - automation.trigger_woonkamer_lamp_motion
+
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.ha_alarm
+
+
+######################################################################
 
 # Reset slaap states smiddags.
 - alias: Reset nachtstand overdag.
@@ -114,7 +135,6 @@
   trigger:
     platform: time
     at: "12:00:00"
-
 
   action:
     - service: homeassistant.turn_off

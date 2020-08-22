@@ -1,4 +1,4 @@
-- alias: Trigger Woonkamer Lamp On
+- alias: Trigger Woonkamer Lamp motion
   description: ''
   
   trigger:
@@ -6,8 +6,7 @@
     entity_id: 
       - binary_sensor.achterdeur
       - binary_sensor.motion_woonkamer1 
-      - binary_sensor.motion_woonkamer2 
-      - switch.schakelaar_woonkamer 
+      - binary_sensor.motion_woonkamer2
     to: 'on'  
       
   condition:
@@ -27,6 +26,27 @@
       entity_id: timer.woonkamer       
 
 
+######################################################################
+
+- alias: Trigger Woonkamer Lamp schakelaar
+  description: ''
+
+  trigger:
+  - platform: state
+    entity_id:
+      - switch.schakelaar_woonkamer
+    to: 'on'
+
+
+  action:
+  - service: homeassistant.turn_on
+    entity_id:
+       - light.woonkamer
+       - switch.schakelaar_woonkamer
+
+  - service: timer.start
+    data:
+      entity_id: timer.woonkamer
 
 
 ######################################################################
