@@ -209,6 +209,12 @@ alarm_control_panel:
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1BFB4H-if00-port0
   debug: True
+  devices:
+    # Schakelaar Nachtkastje L
+    0b11002f014ee78a0b010f60:
+
+    # Schakelaar Nachtkastje R
+    0b110035014ee78a0c010f60:
 
 switch:
 
