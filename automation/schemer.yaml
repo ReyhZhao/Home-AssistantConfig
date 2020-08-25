@@ -3,7 +3,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.lux_buiten
-    above: 500
+    above: 900
     
   condition:
     condition: state
@@ -23,7 +23,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.lux_buiten
-    below: 300
+    below: 700
     
   condition:
     condition: state
