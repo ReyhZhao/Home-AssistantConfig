@@ -206,6 +206,7 @@ alarm_control_panel:
       arming_time: 0
       delay_time: 0
 
+
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1BFB4H-if00-port0
   debug: True
