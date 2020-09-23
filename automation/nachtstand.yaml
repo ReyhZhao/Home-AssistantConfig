@@ -109,8 +109,8 @@
 ######################################################################
 
 # Nachtstand uitgeschakeld
-- alias: Nachtstand ingeschakeld
-  description: ''
+- alias: Nachtstand uitgeschakeld
+  description: 'Nachtstand uitgeschakeld'
 
   trigger:
     platform: state
@@ -130,17 +130,17 @@
 
 # Reset slaap states smiddags.
 - alias: Reset nachtstand overdag.
-  description: ''
+  description: 'Reset nachtstand overdag.'
 
   trigger:
     platform: time
-    at: "12:00:00"
+    at: "19:38:00"
 
   action:
     - service: homeassistant.turn_off
       entity_id: binary_sensor.schakelaar_nachtkastje_r
 
-    - service: input_select.select_option
-      data_template:
-         entity_id: input_select.status_eddie
-         option: 'Wakker'
+#    - service: input_select.select_option
+#      data_template:
+#         entity_id: input_select.status_eddie
+#         option: 'Wakker'
