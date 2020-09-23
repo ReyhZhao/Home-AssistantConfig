@@ -88,8 +88,8 @@ mobile_app:
         
 sabnzbd:
    api_key: !secret sabnzbd_api
-#   host: !secret sabnzbd_host
-#   port: 8085
+   host: !secret sabnzbd_host
+   port: 8090
 #   sensors:
 #     - current_status
 #     - speed
