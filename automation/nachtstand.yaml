@@ -134,13 +134,13 @@
 
   trigger:
     platform: time
-    at: "19:38:00"
+    at: "19:52:00"
 
   action:
     - service: homeassistant.turn_off
-      entity_id: binary_sensor.schakelaar_nachtkastje_r
+      entity_id: switch.schakelaar_nachtstand
 
-#    - service: input_select.select_option
-#      data_template:
-#         entity_id: input_select.status_eddie
-#         option: 'Wakker'
+    - service: input_select.select_option
+      data_template:
+         entity_id: input_select.status_eddie
+         option: 'Wakker'

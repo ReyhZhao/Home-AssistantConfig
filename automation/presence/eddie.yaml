@@ -21,7 +21,7 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.schakelaar_nachtkastje_r
+    entity_id: switch.schakelaar_nachtstand
     to: 'on'
 
   action:
@@ -36,7 +36,7 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.schakelaar_nachtkastje_r
+    entity_id: switch.schakelaar_nachtstand
     to: 'off'
     
   action:

@@ -85,22 +85,23 @@ notify:
 
 mobile_app:
 
+        
 sabnzbd:
    api_key: !secret sabnzbd_api
-   host: !secret sabnzbd_host
-   port: 8085
-   sensors:
-     - current_status
-     - speed
-     - queue_size
-     - queue_remaining
-     - disk_size
-     - disk_free
-     - queue_count
-     - day_size
-     - week_size
-     - month_size
-     - total_size   
+#   host: !secret sabnzbd_host
+#   port: 8085
+#   sensors:
+#     - current_status
+#     - speed
+#     - queue_size
+#     - queue_remaining
+#     - disk_size
+#     - disk_free
+#     - queue_count
+#     - day_size
+#     - week_size
+#     - month_size
+#     - total_size   
 
 discovery:
 
