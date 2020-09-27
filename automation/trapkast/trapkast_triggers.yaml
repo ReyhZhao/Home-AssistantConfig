@@ -1,5 +1,4 @@
-- id: '1574679834518'
-  alias: Trigger Trapkast on
+- alias: Trigger Trapkast on
   description: ''
   trigger:
   - entity_id: switch.schakelaar_trapkast
@@ -7,14 +6,11 @@
     to: 'on'
   condition: []
   action:
-  - device_id: 193cf3df0f5c4b4dac98c96560032e9e
-    domain: light
-    entity_id: light.lamp_trapkast
-    type: turn_on
+  - service: homeassistant.turn_on
+    entity_id: switch.lamp_trapkast_n
 
 
-- id: '1574679860498'
-  alias: Trigger Trapkast off
+- alias: Trigger Trapkast off
   description: ''
   trigger:
   - entity_id: switch.schakelaar_trapkast
@@ -22,7 +18,5 @@
     to: 'off'
   condition: []
   action:
-  - device_id: 193cf3df0f5c4b4dac98c96560032e9e
-    domain: light
-    entity_id: light.lamp_trapkast
-    type: turn_off
+  - service: homeassistant.turn_off
+    entity_id: switch.lamp_trapkast_n
