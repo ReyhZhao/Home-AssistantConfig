@@ -292,6 +292,17 @@ binary_sensor:
   - platform: uptimerobot
     api_key: !secret uptimerobot
 
+  - platform: template
+    sensors:
+      person_eddie_url:
+        value_template: "{{ state_attr('person.eddie', 'latitude') and state_attr('person.eddie', 'longitude') }}"
+        attribute_templates:
+          url: >
+            {% set lat = state_attr('person.eddie', 'latitude') %}
+            {% set lon = state_attr('person.eddie', 'longitude') %}
+            {% set zoom = 3 %}
+            https://embed.waze.com/nl/iframe?zoom={{ zoom }}&lat={{ lat }}&lon={{ lon }}&pin=1&desc=1
+
 
 light:
 
