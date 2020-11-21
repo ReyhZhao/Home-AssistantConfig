@@ -17,9 +17,20 @@
 
   action:
   - service: homeassistant.turn_on
-    entity_id: 
-       - light.woonkamer
+    entity_id:
        - switch.schakelaar_woonkamer
+
+  - service: homeassistant.turn_on
+    data_template:
+      entity_id: light.woonkamer
+      brightness: >
+        {% if now().strftime('%H')| int >= 21 %}
+        60
+        {% elif now().strftime('%H')| int < 7 %}
+        50
+        {% elif now().strftime('%H')| int >= 7 %}
+        100
+        {% endif %}
        
   - service: timer.start
     data:
@@ -37,12 +48,22 @@
       - switch.schakelaar_woonkamer
     to: 'on'
 
-
   action:
   - service: homeassistant.turn_on
     entity_id:
-       - light.woonkamer
        - switch.schakelaar_woonkamer
+
+  - service: homeassistant.turn_on
+    data_template:
+      entity_id: light.woonkamer
+      brightness: >
+        {% if now().strftime('%H')| int >= 21 %}
+        60
+        {% elif now().strftime('%H')| int < 7 %}
+        50
+        {% elif now().strftime('%H')| int >= 7 %}
+        100
+        {% endif %}
 
   - service: timer.start
     data:
