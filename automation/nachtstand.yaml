@@ -134,8 +134,7 @@
 
   trigger:
     platform: time
-    at: "19:52:00"
-
+    at: '08:00:00'
   action:
     - service: homeassistant.turn_off
       entity_id: switch.schakelaar_nachtstand
