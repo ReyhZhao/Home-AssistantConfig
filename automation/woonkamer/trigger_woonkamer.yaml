@@ -57,12 +57,16 @@
     data_template:
       entity_id: light.woonkamer
       brightness: >
-        {% if now().strftime('%H')| int >= 21 %}
-        60
-        {% elif now().strftime('%H')| int < 7 %}
-        50
-        {% elif now().strftime('%H')| int >= 7 %}
+        {% if states.media_player.android_tv_woonkamer == 'playing' %}
+        25
+        {% elif states.media_player.kodi == 'playing' %}
+        25
+        {% elif now().strftime('%H')| int >= 21 %}
         100
+        {% elif now().strftime('%H')| int < 7 %}
+        100
+        {% elif now().strftime('%H')| int >= 7 %}
+        255
         {% endif %}
 
   - service: timer.start
