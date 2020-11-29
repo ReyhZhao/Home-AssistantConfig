@@ -35,3 +35,7 @@
       data_template:      
         entity_id: input_select.schemer_buiten
         option: 'Donker'     
+
+    - service: homeassistant.turn_on
+      entity_id:
+        - switch.kerstverlichting_buiten

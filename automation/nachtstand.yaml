@@ -102,6 +102,7 @@
         - switch.lamp_gang
         - light.overloop
         - automation.trigger_woonkamer_lamp_motion
+        - switch.kerstverlichting_buiten
 
     - service: alarm_control_panel.alarm_arm_night
       entity_id: alarm_control_panel.ha_alarm
@@ -142,4 +143,9 @@
     - service: input_select.select_option
       data_template:
          entity_id: input_select.status_eddie
+         option: 'Wakker'
+
+    - service: input_select.select_option
+      data_template:
+         entity_id: input_select.status_esther
          option: 'Wakker'

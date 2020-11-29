@@ -78,3 +78,5 @@ switch.schakelaar_woonkamer:
   device_class: switch
 binary_sensor.pir_zolder:
   device_class: motion
+switch.bfdb40374c86b6f25ey6gx:
+  icon: mdi:pine-tree
