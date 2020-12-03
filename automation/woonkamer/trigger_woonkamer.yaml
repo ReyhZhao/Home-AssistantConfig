@@ -25,11 +25,11 @@
       entity_id: light.woonkamer
       brightness: >
         {% if now().strftime('%H')| int >= 21 %}
-        60
+        120
         {% elif now().strftime('%H')| int < 7 %}
         50
         {% elif now().strftime('%H')| int >= 7 %}
-        100
+        255
         {% endif %}
        
   - service: timer.start
