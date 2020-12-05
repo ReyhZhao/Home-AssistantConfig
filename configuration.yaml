@@ -6,8 +6,8 @@ homeassistant:
    elevation: !secret homeassistant_elevation   
    time_zone: Europe/Amsterdam
    packages: !include_dir_named packages
-   external_url: https://ha.noctis-nexus.nl
-   internal_url: http://192.168.232.109:8123
+   external_url: !secret external_url
+   internal_url: !secret internal_url
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
@@ -25,9 +25,7 @@ http:
    trusted_proxies: 
       - !secret proxy_host
       
-
-
-   
+  
 logger: !include logger.yaml
 
 influxdb:
@@ -50,11 +48,11 @@ weather:
     longitude: !secret homeassistant_longitude
 
 smartweather:
-    station_id: 4967
-    api_key: 20c70eae-e62f-4d3b-b3a4-8586e90f3ac8
+    station_id: !secret smartweather_station
+    api_key: !secret smartweather_api
 
 octoprint:
-    host: 192.168.232.115
+    host: !secret octoprint_host
     api_key: !secret octoprint_api
     bed: true
     number_of_tools: 1
@@ -118,16 +116,9 @@ remote:
     activity: TV kijken
     
     
-#camera:
-#  - platform: generic
-#    still_image_url: http://192.168.232.106/snap.jpeg
-#    stream_source: rtsp://ubnt:ubnt@192.168.232.106:554/s0
-#    username: ubnt
-#    password: ubnt
-
 camera:
   - platform: uvc
-    nvr: 192.168.232.119
+    nvr: !secret unifi_nvr
     key: !secret unifi_key
     password: !secret unifi_camera
 
@@ -308,7 +299,7 @@ light:
 
   - platform: limitlessled
     bridges:           
-       - host: 192.168.200.200
+       - host: !secret limitless_host
          version: 5
          port: 8899
          groups:
