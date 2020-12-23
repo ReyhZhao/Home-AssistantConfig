@@ -37,8 +37,8 @@ weather:
     api_key: !secret darksky_api_key
 
 
-  - platform: smartweather
-    api_key: !secret darksky_api_key
+#- platform: smartweather
+#    api_key: !secret darksky_api_key
 
 
   - platform: buienradar
@@ -274,11 +274,6 @@ netatmo:
   client_secret: !secret netatmo_secret
 
 binary_sensor:
-  - platform: smartweather
-    monitored_conditions: 
-      - raining
-      - freezing
-      - lightning
 
   - platform: uptimerobot
     api_key: !secret uptimerobot
