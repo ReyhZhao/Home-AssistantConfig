@@ -226,7 +226,23 @@ rfxtrx:
     0b0710012744090170020f70:
     
 
-    
+volkswagencarnet:
+    username: !secret carnet_username
+    password: !secret carnet_password
+    spin: !secret carnet_spin
+    scandinavian_miles: false
+    scan_interval:
+        minutes: 2
+    name:
+        wvw1234567812356: 'Golf 8'
+    resources: # Optional
+        - position
+        - distance
+        - service_inspection
+        - oil_inspection
+        - door_locked
+        - trunk_locked
+        - request_in_progress
 
 switch:
 
