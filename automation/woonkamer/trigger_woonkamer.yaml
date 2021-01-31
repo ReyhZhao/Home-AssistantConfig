@@ -5,8 +5,8 @@
   - platform: state
     entity_id: 
       - binary_sensor.achterdeur
-      - binary_sensor.motion_woonkamer1 
-      - binary_sensor.motion_woonkamer2
+      #- binary_sensor.motion_woonkamer1 
+      #- binary_sensor.motion_woonkamer2
     to: 'on'  
       
   condition:
