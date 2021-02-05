@@ -26,12 +26,11 @@
     data:
        brightness: 254
 
-#  - service: timer.cancel
-#    entity_id: timer.overloop
+  - service: timer.cancel
+    entity_id: timer.overloop
 
   - service: timer.start
     entity_id: timer.overloop
-    duration: 00:03:55
         
 #####################################################################################
         
