@@ -3,7 +3,12 @@
   
   trigger:
   - platform: state
-    entity_id: binary_sensor.voordeur, binary_sensor.motion_gang, binary_sensor.motion_trap
+    entity_id:
+      - binary_sensor.voordeur
+      - binary_sensor.motion_gang
+      - binary_sensor.motion_trap
+      - binary_sensor.motion_gang_2
+
     to: 'on'  
 
   action:
@@ -11,8 +16,7 @@
     entity_id: switch.lamp_gang
 
   - service: timer.start
-    data:
-      entity_id: timer.gang
+    entity_id: timer.gang
 
 
 ######################################################################
@@ -21,6 +25,7 @@
 - alias: Turn off gang lamp, x minutes after last movement
   trigger:
     platform: event
+
     event_type: timer.finished
     event_data:
       entity_id: timer.gang
