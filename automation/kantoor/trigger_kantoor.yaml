@@ -14,6 +14,7 @@
     entity_id: 
        - light.kantoor
        - switch.schakelaar_kantoor
+       - switch.kantoor_sfeerverlichting
 
 
 ######################################################################
@@ -36,3 +37,4 @@
     entity_id: 
        - light.kantoor
        - switch.schakelaar_kantoor
+       - switch.kantoor_sfeerverlichting
