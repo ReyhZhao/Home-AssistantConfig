@@ -176,7 +176,7 @@ media_player:
 
 zone:
   - name: Home
-    radius: 500
+    radius: 200
     latitude: !secret home_lat
     longitude: !secret home_lon
     
