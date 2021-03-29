@@ -162,6 +162,21 @@
       unit_of_measurement: "Lux"
       device_class: illuminance
 
+    - platform: mqtt
+      state_topic: espkantoor/Dust/pm10
+      name: "pm10"
+      unit_of_measurement: "ug/m3"
+
+    - platform: mqtt
+      state_topic: espkantoor/Dust/pm1.0
+      name: "pm1.0"
+      unit_of_measurement: "ug/m3"
+
+    - platform: mqtt
+      state_topic: espkantoor/Dust/pm2.5
+      name: "pm2.5"
+      unit_of_measurement: "ug/m3"
+
 ###############################################################
 
     - platform: mqtt
