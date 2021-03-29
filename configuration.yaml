@@ -301,12 +301,14 @@ switch:
 
   - platform: mqtt
     name: Kantoor Dust Sensor sleep
-    state_topic: espkantoor/Sleep/State
-    command_topic: espkantoor/gpio/14
+    state_topic: espkantoor/DustSensor/State
+    command_topic: espkantoor/gpioo/14/
     payload_on: 1
     payload_off: 0
     optimistic: false
-    retain: true
+    retain: false
+
+    #####################
 
   - platform: mqtt
     name: Buitenverlichting
