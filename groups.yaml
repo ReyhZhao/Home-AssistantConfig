@@ -81,3 +81,13 @@ AlleLampen:
     - switch.lamp_gang
     - switch.lamp_zolder
     - switch.lamp_keuken
+
+
+simulation_lights:
+   name: simulation_lights
+   entities:
+     - switch.lamp_gang
+     - switch.lamp_keuken
+     - light.woonkamer
+     - light.overloop_2
+     - light.kantoor

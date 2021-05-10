@@ -132,6 +132,11 @@ input_boolean:
      initial: off
      icon: mdi:weather-night
 
+input_text:
+   light_to_switch:
+     name: Lights to switch
+     initial: off
+
 
 input_number:
   spotify_volume:
