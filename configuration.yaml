@@ -47,9 +47,9 @@ weather:
     latitude: !secret homeassistant_latitude
     longitude: !secret homeassistant_longitude
 
-smartweather:
-    station_id: !secret smartweather_station
-    api_key: !secret smartweather_api
+#smartweather:
+#    station_id: !secret smartweather_station
+#    api_key: !secret smartweather_api
 
 octoprint:
     host: !secret octoprint_host
