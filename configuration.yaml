@@ -13,7 +13,7 @@ homeassistant:
 default_config:
 
 frontend:
-  javascript_version: latest
+  #javascript_version: latest
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 # http:
@@ -206,7 +206,7 @@ alarm_control_panel:
 
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1BFB4H-if00-port0
-  debug: True
+  #debug: True
   automatic_add: true
   devices:
     # Schakelaar Nachtkastje L

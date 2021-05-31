@@ -40,7 +40,7 @@
 - id: 'Turning off all toggled lights'
   alias: Turn off all lights
   initial_state: True
-  hide_entity: False
+  #hide_entity: False
 
   trigger:
     - platform: time
