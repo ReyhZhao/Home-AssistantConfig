@@ -110,10 +110,10 @@ tts:
   - platform: google_translate
 
 remote:
-  - platform: harmony
-    name: Harmony
-    host: !secret harmony_host
-    activity: TV kijken
+#  - platform: harmony
+#    name: Harmony
+#    host: !secret harmony_host
+#    activity: TV kijken
     
     
 camera:
