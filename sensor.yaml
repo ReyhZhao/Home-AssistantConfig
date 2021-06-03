@@ -306,4 +306,7 @@
 
 
 
-
+### Sensor to combine rainfall numbers ####
+    - platform: integration
+      name: "Total Rainfall"
+      source: sensor.accuweather_precipitation
