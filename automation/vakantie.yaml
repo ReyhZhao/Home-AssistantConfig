@@ -4,7 +4,7 @@
 - id: 'Automatic light toggle'
   alias: Random Away Lights
   initial_state: True
-  hide_entity: False
+  #hide_entity: False
 
   trigger:
     - platform: time_pattern
