@@ -289,6 +289,14 @@ netatmo:
   client_id: !secret netatmo_client
   client_secret: !secret netatmo_secret
 
+plant:
+  areca:
+    sensors:
+      moisture: sensor.xiaomi_hhccjcy01_moisture
+      temperature: sensor.xiaomi_hhccjcy01_temperature
+      conductivity: sensor.xiaomi_hhccjcy01_soil_conductivity
+      brightness: sensor.xiaomi_hhccjcy01_illuminance
+
 binary_sensor:
 
   - platform: uptimerobot
