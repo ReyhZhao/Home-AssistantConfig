@@ -132,50 +132,50 @@
 
 ###############################################################
 
-    - platform: mqtt
-      state_topic: espkantoor/BME280/Temperature
-      name: "Temperatuur Kantoor"
-      unit_of_measurement: "°C"
-      device_class: temperature
+#    - platform: mqtt
+#      state_topic: espkantoor/BME280/Temperature
+#      name: "Temperatuur Kantoor"
+#      unit_of_measurement: "°C"
+#      device_class: temperature
 
-    - platform: mqtt
-      state_topic: espkantoor/BME280/Pressure
-      name: "Luchtdruk Kantoor"
-      unit_of_measurement: "mb"
-      device_class: pressure
+#    - platform: mqtt
+#      state_topic: espkantoor/BME280/Pressure
+#      name: "Luchtdruk Kantoor"
+#      unit_of_measurement: "mb"
+#      device_class: pressure
 
-    - platform: mqtt
-      state_topic: espkantoor/BME280/Humidity
-      name: "Vochtigheid Kantoor"
-      unit_of_measurement: "%"
-      device_class: humidity
+#    - platform: mqtt
+#      state_topic: espkantoor/BME280/Humidity
+#      name: "Vochtigheid Kantoor"
+#      unit_of_measurement: "%"
+#      device_class: humidity
 
-    - platform: mqtt
-      state_topic: espkantoor/Lux/Lux
-      name: "Lux Kantoor"
-      unit_of_measurement: "Lux"
-      device_class: illuminance
+#    - platform: mqtt
+#      state_topic: espkantoor/Lux/Lux
+#      name: "Lux Kantoor"
+#      unit_of_measurement: "Lux"
+#      device_class: illuminance
 
-    - platform: mqtt
-      state_topic: espkantoor/Lux/Infrared
-      name: "Infrarood Kantoor"
-      unit_of_measurement: "Lux"
-      device_class: illuminance
+#    - platform: mqtt
+#      state_topic: espkantoor/Lux/Infrared
+#      name: "Infrarood Kantoor"
+#      unit_of_measurement: "Lux"
+#      device_class: illuminance
 
-    - platform: mqtt
-      state_topic: espkantoor/Dust/pm10
-      name: "Kantoor pm10"
-      unit_of_measurement: "ug/m3"
+#    - platform: mqtt
+#      state_topic: espkantoor/Dust/pm10
+#      name: "Kantoor pm10"
+#      unit_of_measurement: "ug/m3"
 
-    - platform: mqtt
-      state_topic: espkantoor/Dust/pm1.0
-      name: "Kantoor pm1.0"
-      unit_of_measurement: "ug/m3"
+#    - platform: mqtt
+#      state_topic: espkantoor/Dust/pm1.0
+#      name: "Kantoor pm1.0"
+#      unit_of_measurement: "ug/m3"
 
-    - platform: mqtt
-      state_topic: espkantoor/Dust/pm2.5
-      name: "Kantoor pm2.5"
-      unit_of_measurement: "ug/m3"
+#    - platform: mqtt
+#      state_topic: espkantoor/Dust/pm2.5
+#      name: "Kantoor pm2.5"
+#      unit_of_measurement: "ug/m3"
 
 ###############################################################
 
