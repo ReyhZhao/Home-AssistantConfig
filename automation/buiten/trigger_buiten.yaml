@@ -64,3 +64,22 @@
     entity_id:
       - light.buiten
       - switch.bf31c151c7d7ac0d24qahx
+
+#################################################################
+
+- alias: Trigger donker buiten en iemand in tuin
+  description: ''
+  trigger:
+    - platform: state
+      entity_id: switch.schemer_buiten
+      to: 'Donker'
+
+  condition:
+    condition: state
+    entity_id: binary_sensor.achterdeur
+    state: 'on'
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id:
+        - light.tuin
