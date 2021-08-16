@@ -19,6 +19,13 @@
 #      name: "TVOC Woonkamer"
 #      unit_of_measurement: "ppm"
 
+
+#   - platform: mqtt
+#      state_topic: espwoonkamer/CCS811/CO2
+#      name: "CO2 Woonkamer"
+#      unit_of_measurement: "ppm"
+
+
 ################################################################
     - platform: mqtt
       state_topic: espweerstation/Accu/Voltage
@@ -71,64 +78,61 @@
 
 ###############################################################
 
-#   - platform: mqtt
-#      state_topic: espwoonkamer/CCS811/CO2
-#      name: "CO2 Woonkamer"
-#      unit_of_measurement: "ppm"
 
-    - platform: mqtt
-      state_topic: espslaapkamer/CCS811/TVOC
-      name: "TVOC Slaapkamer"
-      unit_of_measurement: "ppm"
 
-    - platform: mqtt
-      state_topic: espslaapkamer/CCS811/CO2
-      name: "CO2 Slaapkamer"
-      unit_of_measurement: "ppm"
+    # - platform: mqtt
+      # state_topic: espslaapkamer/CCS811/TVOC
+      # name: "TVOC Slaapkamer"
+      # unit_of_measurement: "ppm"
 
-    - platform: mqtt
-      state_topic: espslaapkamer/BME280/Temperature
-      name: "Temperatuur Slaapkamer"
-      unit_of_measurement: "°C"
-      device_class: temperature
+    # - platform: mqtt
+      # state_topic: espslaapkamer/CCS811/CO2
+      # name: "CO2 Slaapkamer"
+      # unit_of_measurement: "ppm"
 
-    - platform: mqtt
-      state_topic: espslaapkamer/BME280/Pressure
-      name: "Luchtdruk Slaapkamer"
-      unit_of_measurement: "mb"
-      device_class: pressure
+    # - platform: mqtt
+      # state_topic: espslaapkamer/BME280/Temperature
+      # name: "Temperatuur Slaapkamer"
+      # unit_of_measurement: "°C"
+      # device_class: temperature
 
-    - platform: mqtt
-      state_topic: espslaapkamer/BME280/Humidity
-      name: "Vochtigheid Slaapkamer"
-      unit_of_measurement: "%" 
-      device_class: humidity
+    # - platform: mqtt
+      # state_topic: espslaapkamer/BME280/Pressure
+      # name: "Luchtdruk Slaapkamer"
+      # unit_of_measurement: "mb"
+      # device_class: pressure
 
-    - platform: mqtt
-      state_topic: espslaapkamer/Lux/Lux
-      name: "Lux Buiten"
-      unit_of_measurement: "Lux" 
-      device_class: illuminance
+    # - platform: mqtt
+      # state_topic: espslaapkamer/BME280/Humidity
+      # name: "Vochtigheid Slaapkamer"
+      # unit_of_measurement: "%" 
+      # device_class: humidity
 
-    - platform: filter
-      name: "filtered lux_buiten"
-      entity_id: sensor.lux_buiten
-      filters:
-        - filter: outlier
-          window_size: 4
-          radius: 4.0
-        - filter: lowpass
-          time_constant: 10
-          precision: 2
-        - filter: time_simple_moving_average
-          window_size: "00:05"
-          precision: 2        
+    # - platform: mqtt
+      # state_topic: espslaapkamer/Lux/Lux
+      # name: "Lux Buiten"
+      # unit_of_measurement: "Lux" 
+      # device_class: illuminance
 
-    - platform: mqtt
-      state_topic: espslaapkamer/Lux/Infrared
-      name: "Infrarood Buiten"
-      unit_of_measurement: "Lux" 
-      device_class: illuminance
+    # - platform: filter
+      # name: "filtered lux_buiten"
+      # entity_id: sensor.lux_buiten
+      # filters:
+        # - filter: outlier
+          # window_size: 4
+          # radius: 4.0
+        # - filter: lowpass
+          # time_constant: 10
+          # precision: 2
+        # - filter: time_simple_moving_average
+          # window_size: "00:05"
+          # precision: 2        
+
+    # - platform: mqtt
+      # state_topic: espslaapkamer/Lux/Infrared
+      # name: "Infrarood Buiten"
+      # unit_of_measurement: "Lux" 
+      # device_class: illuminance
 
 ###############################################################
 
