@@ -234,6 +234,7 @@ rfxtrx:
 
 switch:
 
+
   - platform: mqtt
     name: zone1_valve
     state_topic: esptuin/Relay02/RL02
@@ -283,6 +284,12 @@ switch:
     name: TV aanzetten
     host: !secret bravia_tv_host
     mac: 94:53:30:60:EB:SF
+
+  - platform: wake_on_lan
+    name: Werk Laptop
+    host: !secret werklaptop
+    broadcast_address: 192.168.190.255
+    mac: 84:a9:3e:42:d4:72
 
 
 netatmo:
