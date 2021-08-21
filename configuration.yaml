@@ -297,6 +297,9 @@ plant:
       conductivity: sensor.xiaomi_hhccjcy01_soil_conductivity
       brightness: sensor.xiaomi_hhccjcy01_illuminance
 
+wake_on_lan:
+
+
 binary_sensor:
 
   - platform: uptimerobot
