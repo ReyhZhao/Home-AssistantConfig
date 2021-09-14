@@ -1,17 +1,49 @@
+
+######################################################################
+
 - alias: Trigger Kantoor Lamp On
   description: ''
-  
+
   trigger:
   - platform: state
     entity_id: binary_sensor.motion_kantoor
     to: 'on'
+
   - platform: state
     entity_id: switch.schakelaar_kantoor
-    to: 'on'    
-    
+    to: 'on'
+
+  condition:
+    condition: state
+    entity_id: input_select.schemer_kantoor
+    state: 'Donker'
+
   action:
     service: homeassistant.turn_on
-    entity_id: 
+    entity_id:
+       - light.kantoor
+       - switch.schakelaar_kantoor
+       - switch.kantoor_sfeerverlichting
+
+
+######################################################################
+
+
+- alias: Trigger Kantoor Lamp On als het donker wordt
+  description: ''
+
+  trigger:
+    - platform: state
+      entity_id: switch.schemer_kantoor
+      to: 'Donker'
+
+  condition:
+    condition: template
+    value_template: "{{ states.binary_sensor.motion_kantoor.attributes['No motion since']|int  < 180  }}"
+
+  action:
+    service: homeassistant.turn_on
+    entity_id:
        - light.kantoor
        - switch.schakelaar_kantoor
        - switch.kantoor_sfeerverlichting

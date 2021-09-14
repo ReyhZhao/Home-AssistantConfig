@@ -1,3 +1,5 @@
+
+## Schemer logica voor het gehele huis "buiten"
 - alias: Trigger Het wordt licht buiten
   description: ''
   trigger:
@@ -39,3 +41,52 @@
     - service: homeassistant.turn_on
       entity_id:
         - switch.kerstverlichting_buiten
+
+    - service: homeassistant.turn_on
+      entity_id:
+        - switch.kerstverlichting_buiten
+
+## Schemer logica voor het kantoor.
+##
+## Licht
+- alias: Trigger Het wordt licht in het kantoor
+  description: ''
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.lux_kantoor
+    above: 15
+
+  condition:
+    condition: state
+    entity_id: input_select.schemer_kantoor
+    state: 'Donker'
+
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.schemer_kantoor
+        option: 'Licht'
+
+## Donker
+
+- alias: Trigger Het wordt donker in het kantoor
+  description: ''
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.lux_kantoor
+    below: 5
+
+  condition:
+    condition: state
+    entity_id: input_select.schemer_kantoor
+    state: 'Licht'
+
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.schemer_kantoor
+        option: 'Donker'
+
+
+
+
