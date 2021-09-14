@@ -19,6 +19,13 @@
          - Licht
          - Donker
 
+   schemer_kantoor:
+      name: "Schemer kantoor"
+      icon: mdi:weather-sunset
+      options:
+         - Licht
+         - Donker
+
    holiday:
       name: "Vakantie Schema"
       icon: mdi:vacation
