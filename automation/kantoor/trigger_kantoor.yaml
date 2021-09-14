@@ -39,7 +39,7 @@
 
   condition:
     condition: template
-    value_template: "{{ states.binary_sensor.motion_kantoor.attributes['No motion since']|int  < 180  }}"
+    value_template: "{{ ((as_timestamp(now()) - as_timestamp(states.binary_sensor.motion_kantoor.last_changed))) | round(0) < 180 }}"
 
   action:
     service: homeassistant.turn_on
