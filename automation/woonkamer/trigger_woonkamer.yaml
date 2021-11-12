@@ -108,4 +108,16 @@
     entity_id: 
        - light.woonkamer
        - switch.schakelaar_woonkamer
-       
+      
+
+#############
+
+- alias: Sync woonkamer schakelaar met lamp.
+  trigger:
+    - platform: state
+      entity_id: light.woonkamer
+      to: 'off'
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id: switch.schakelaar_woonkamer 
