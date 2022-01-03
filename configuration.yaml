@@ -348,11 +348,11 @@ light:
            name: Milight 4
            fade: true
 
-zwave:
-  usb_path: /dev/ttyUSB12
-  device_config: !include zwave_device_config.yaml
-  network_key: !secret zwave_network_key
-  autoheal: true
+#zwave:
+#  usb_path: /dev/ttyUSB12
+#  device_config: !include zwave_device_config.yaml
+#  network_key: !secret zwave_network_key
+#  autoheal: true
 
 
 mqtt:
