@@ -18,6 +18,8 @@
                critical: 1
                volume: 1.0
 
+######################################################################
+-
 # Notify when alarm triggerd
 - alias: Send notification when alarm triggered
   trigger:
@@ -44,7 +46,8 @@
                critical: 1
                volume: 0.7
                
-
+######################################################################
+-
 - alias: Disarm alarm na bevestiging via Telegram
   initial_state: 'on'
 
@@ -63,6 +66,7 @@
   - service: alarm_control_panel.alarm_disarm
     entity_id: alarm_control_panel.ha_alarm
 
+######################################################################
 
 # Notify on door open
 - alias: Stuur notificatie als deur geopend wordt en alarm aan staat.
@@ -90,6 +94,8 @@
             sound:
                name: US-EN-Morgan-Freeman-Back-Door-Opened.wav
 
+######################################################################
+
 # Notify door close
 - alias: Stuur notificatie als deur gesloten wordt en alarm aan staat.
   trigger:
@@ -116,6 +122,8 @@
             sound:
                name: US-EN-Morgan-Freeman-Back-Door-Closed.wav
 
+######################################################################
+
 
 # Send notification when alarm is Armed in Home mode
 - alias: Send notification when alarm is Armed in Home mode
@@ -131,7 +139,8 @@
          push:
             sound:
                name: default
-               
+
+######################################################################
 
 # Send notification when alarm is Armed in Away mode
 - alias: Send notification when alarm is Armed in Away mode
@@ -144,21 +153,27 @@
     data_template:
       # Alarm ingeschakeld in away mode om: {{ now().strftime('%H:%M %A %d %B %Y') }}
       message: >-
-        Alarm ingeschakeld in away mode om {{ now().strftime('%H:%M') }}
+        Alarm ingeschakeld in "away mode" om:
+        {{ now().strftime('%H:%M') }}
 
-        Open ramen of deuren:
+        {% if is_state('group.ramen', 'on') %}
+        Open ramen:
+          {%- for entity in states.group.ramen.attributes.entity_id -%}
+            {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+              - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+            {%- endif %}
+          {%- endfor -%}
+        {% endif %}
 
-        {%- for entity in states.group.ramen.attributes.entity_id -%}
-          {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
-            {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
-          {%- endif %}
-        {%- endfor -%}
+        {% if is_state('group.deuren', 'on') %}
+        Open deuren:
 
         {%- for entity in states.group.deuren.attributes.entity_id -%}
           {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
-            {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+            - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
           {%- endif %}
         {%- endfor -%}
+        {% endif %}
 
       data:
          push:
@@ -166,6 +181,8 @@
                name: default
 
 
+######################################################################
+-
 # Send notification when alarm is Disarmed
 - alias: 'Send notification when alarm is Disarmed'
   trigger:
@@ -174,12 +191,14 @@
       to: 'disarmed'
 
   action:
-     service: notify.mobile_app_reyhzhao
-     data:
+  - service: notify.ALL_CONTACTS
+    data_template:
+
+      message: >-
         message: "Alarm uitgeschakeld om: {{ now().strftime('%H:%M') }}"
-        data:
-           push:
-              sound:
-                 name: default
+      data:
+         push:
+            sound:
+               name: default
 
 
