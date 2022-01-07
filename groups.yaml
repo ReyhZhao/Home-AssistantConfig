@@ -7,7 +7,8 @@ Ramen:
     - binary_sensor.window_logeerkamer
     - binary_sensor.window_slaapkamer
     - binary_sensor.window_woonkamer
-  
+    - binary_sensor.window_zolder
+
 
 Deuren:
   entities:
