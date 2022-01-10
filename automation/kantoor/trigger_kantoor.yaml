@@ -54,11 +54,11 @@
 
 - alias: Turn off Kantoor lamp, x minutes after last movement
   trigger:
-    - platform: state
-      entity_id: binary_sensor.motion_kantoor
-      to: 'off'
-      for:
-        minutes: 5
+    #- platform: state
+    #  entity_id: binary_sensor.motion_kantoor
+    #  to: 'off'
+    #  for:
+    #    minutes: 5
 
     - platform: state
       entity_id: switch.schakelaar_kantoor
