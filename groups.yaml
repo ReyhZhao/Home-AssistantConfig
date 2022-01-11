@@ -17,7 +17,18 @@ Deuren:
 
 Schakelaars: switch.schakelaar_trapkast, switch.schakelaar_kantoor, switch.schakelaar_keuken, switch.schakelaar_woonkamer
 
-Motion: binary_sensor.pir_zolder
+Motion:
+  entities:
+    - binary_sensor.pir_zolder
+    - binary_sensor.motion_gang
+    - binary_sensor.motion_keuken
+    - binary_sensor.motion_logeerkamer
+    - binary_sensor.motion_overloop
+    - binary_sensor.motion_slaapkamer
+    - binary_sensor.motion_trap
+    - binary_sensor.motion_woonkamer1
+    - binary_sensor.motion_kantoor
+    - binary_sensor.motion_zolder
 
 Entertainment: remote.harmony, script.tv_activity_on, media_player.kodi, switch.kodi_aanzetten, switch.tv_aanzetten
 

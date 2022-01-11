@@ -1,7 +1,7 @@
 
 
 # Notify when brand alarm
-- alias: Send notification when alarm triggered
+- alias: Send notification when brand alarm triggered
   trigger:
   - platform: state
     entity_id: binary_sensor.smokedetector_woonkamer
@@ -26,19 +26,53 @@
   - platform: state
     entity_id: alarm_control_panel.ha_alarm
     to: triggered
-  action:
 
-  - service: telegram_bot.send_message
-    data_template:
-      inline_keyboard:
-      - Disarm:/button_alarm_uitschakelen
-      message: ALARM! The alarm has been triggered
-      target: 243259223
-      title: '*ALARM!!!*'
+
+  action:
+#  - service: telegram_bot.send_message
+#    data_template:
+#      inline_keyboard:
+#      - Disarm:/button_alarm_uitschakelen
+#      message: ALARM! The alarm has been triggered
+#      target: 243259223
+#      title: '*ALARM!!!*'
 
   - service: notify.ALL_CONTACTS
     data:
       message: ALARM! The alarm has been triggered
+
+    data_template:
+      # Alarm ingeschakeld in away mode om: {{ now().strftime('%H:%M %A %d %B %Y') }}
+      message: >-
+        ALARM! The alarm has been triggered
+
+        {% if is_state('group.motion', 'on') %}
+        Zones met beweging:
+          {%- for entity in states.group.motion.attributes.entity_id -%}
+            {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+              - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+            {%- endif %}
+          {%- endfor -%}
+        {% endif %}
+
+        {% if is_state('group.ramen', 'on') %}
+        Open ramen:
+          {%- for entity in states.group.ramen.attributes.entity_id -%}
+            {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+              - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+            {%- endif %}
+          {%- endfor -%}
+        {% endif %}
+
+        {% if is_state('group.deuren', 'on') %}
+        Open deuren:
+
+        {%- for entity in states.group.deuren.attributes.entity_id -%}
+          {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+            - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+          {%- endif %}
+        {%- endfor -%}
+        {% endif %}
       data:
          push:
             sound:
@@ -130,6 +164,7 @@
   trigger:
   - platform: state
     entity_id: alarm_control_panel.ha_alarm
+    from: disarmed
     to: armed_home
   action:
   - service: notify.mobile_app_reyhzhao
@@ -147,6 +182,7 @@
   trigger:
   - platform: state
     entity_id: alarm_control_panel.ha_alarm
+    from: disarmed
     to: armed_away
   action:
   - service: notify.ALL_CONTACTS
@@ -195,10 +231,11 @@
     data_template:
 
       message: >-
-        message: "Alarm uitgeschakeld om: {{ now().strftime('%H:%M') }}"
+        Alarm uitgeschakeld om: {{ now().strftime('%H:%M') }}
       data:
          push:
             sound:
                name: default
+
 
 
