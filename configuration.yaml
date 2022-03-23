@@ -167,12 +167,12 @@ media_player:
     name: Android TV Woonkamer
     host: !secret bravia_tv_host
 
-  - platform: kodi
-    host: !secret kodi_host
-    port: 8080
-    tcp_port: 9090
-    username: !secret kodi_username
-    password: !secret kodi_password
+    #  - platform: kodi
+    #host: !secret kodi_host
+    #port: 8080
+    #tcp_port: 9090
+    #username: !secret kodi_username
+    #password: !secret kodi_password
     
   - platform: yamaha
     host: !secret yamaha_host
