@@ -29,13 +29,6 @@
 
 
   action:
-#  - service: telegram_bot.send_message
-#    data_template:
-#      inline_keyboard:
-#      - Disarm:/button_alarm_uitschakelen
-#      message: ALARM! The alarm has been triggered
-#      target: 243259223
-#      title: '*ALARM!!!*'
 
   - service: notify.ALL_CONTACTS
     data:
@@ -80,25 +73,6 @@
                critical: 1
                volume: 0.7
                
-######################################################################
--
-- alias: Disarm alarm na bevestiging via Telegram
-  initial_state: 'on'
-
-  trigger:
-  - event_data:
-      data: /button_alarm_uitschakelen
-    event_type: telegram_callback
-    platform: event
-
-  action:
-  - service: notify.telegram_eddie
-    data:
-      message: Alarm wordt uitgeschakeld.
-      title: '*DISARM*'
-
-  - service: alarm_control_panel.alarm_disarm
-    entity_id: alarm_control_panel.ha_alarm
 
 ######################################################################
 
@@ -185,7 +159,7 @@
     from: disarmed
     to: armed_away
   action:
-  - service: notify.ALL_CONTACTS
+  - service: notify.matrix_notify
     data_template:
       # Alarm ingeschakeld in away mode om: {{ now().strftime('%H:%M %A %d %B %Y') }}
       message: >-
@@ -211,11 +185,6 @@
         {%- endfor -%}
         {% endif %}
 
-      data:
-         push:
-            sound:
-               name: default
-
 
 ######################################################################
 -
@@ -232,10 +201,10 @@
 
       message: >-
         Alarm uitgeschakeld om: {{ now().strftime('%H:%M') }}
-      data:
-         push:
-            sound:
-               name: default
+#      data:
+#         push:
+#            sound:
+#               name: default
 
 
 

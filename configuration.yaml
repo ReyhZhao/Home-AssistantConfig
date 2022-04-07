@@ -64,6 +64,8 @@ matrix:
   rooms:
     - !secret matrix_room
 
+
+
 telegram_bot:
   - platform: polling
     api_key: !secret telegram_api_key 
@@ -72,6 +74,10 @@ telegram_bot:
        - !secret telegram_eddie
 
 notify:
+  - name: matrix_notify
+    platform: matrix
+    default_room: !secret matrix_room
+
   - name: telegram_group
     platform: telegram
     chat_id: !secret telegram_groupid
