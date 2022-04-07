@@ -57,6 +57,13 @@ weather:
 #    bed: true
 #    number_of_tools: 1
 
+matrix:
+  homeserver: !secret matrix_server
+  username: !secret matrix_username
+  password: !secret matrix_password
+  rooms:
+    - !secret matrix_room
+
 telegram_bot:
   - platform: polling
     api_key: !secret telegram_api_key 
