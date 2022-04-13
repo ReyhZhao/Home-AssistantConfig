@@ -339,8 +339,8 @@ wake_on_lan:
 
 binary_sensor:
 
-  - platform: uptimerobot
-    api_key: !secret uptimerobot
+#  - platform: uptimerobot
+#    api_key: !secret uptimerobot
 
   - platform: template
     sensors:
@@ -383,7 +383,7 @@ light:
 
 
 mqtt:
-    broker: 127.0.0.1
+    #broker: 127.0.0.1
 
 sensor: !include sensor.yaml
 
