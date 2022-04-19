@@ -393,6 +393,7 @@ panel_custom:
     sidebar_icon: mdi:access-point-network
     url_path: zwave
 
+python_script:
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automation/
