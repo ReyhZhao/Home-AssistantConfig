@@ -395,6 +395,11 @@ panel_custom:
 
 python_script:
 
+shell_command:
+  disable_recording: /home/homeassistant/.homeassistant/toggle_motion_recording.py disable
+  enable_recording: /home/homeassistant/.homeassistant/toggle_motion_recording.py enable
+
+
 group: !include groups.yaml
 automation: !include_dir_merge_list automation/
 script: !include scripts.yaml
