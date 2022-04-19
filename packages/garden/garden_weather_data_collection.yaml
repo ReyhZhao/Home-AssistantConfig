@@ -336,18 +336,18 @@ automation:
             {{ (ns.count - 1) }}
 
       #=== Update yesterdays rainfall
-      - service: homeassistant.update_entity
-        entity_id: sensor.smartweather_rain_yesterday
+      #- service: homeassistant.update_entity
+      #  entity_id: sensor.smartweather_rain_yesterday
 
       #=== Cycle the rainfall figures
-      - service: script.garden_rainfall_data
-        data_template:
-          loop_count: >
-            {% set ns = namespace(count = 0) %}
-            {% for item in states if item.entity_id.startswith('input_number.rain_minus') %}
-              {% set ns.count = loop.index %}
-            {% endfor %}
-            {{ (ns.count - 1) }}
+      #      - service: script.garden_rainfall_data
+      #  data_template:
+      #    loop_count: >
+      #      {% set ns = namespace(count = 0) %}
+      #      {% for item in states if item.entity_id.startswith('input_number.rain_minus') %}
+      #        {% set ns.count = loop.index %}
+      #      {% endfor %}
+      #      {{ (ns.count - 1) }}
 
 
 #=============

@@ -117,12 +117,7 @@ script:
         data_template:
           entity_id: input_number.temp_minus0  
           value: >
-            {% if states('input_number.temp_minus0') | float(0) < 
-                  states('sensor.dark_sky_forecast_daytime_high_temperature_0d') | float(0) %}
-              {{ states('sensor.dark_sky_forecast_daytime_high_temperature_0d') }}
-            {% else %}
-              {{ states('input_number.temp_minus0') }}
-            {% endif %}
+            {{ states('sensor.dark_sky_forecast_daytime_high_temperature_0d') }}
 
       #=== Calculate average high temp for today and yesterday
       - service: input_number.set_value
