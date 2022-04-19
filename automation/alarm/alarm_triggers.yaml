@@ -12,6 +12,9 @@
     - service: homeassistant.turn_off
       entity_id: group.allelampen
 
+    - service: shell_command.enable_recording
+
+
 
 - alias: Trigger iemand huis
   description: 'Disarm alarm als er iemand thuis komt.'
@@ -20,8 +23,12 @@
     platform: state
     to: 'home'  
   action:
-    service: alarm_control_panel.alarm_disarm
-    entity_id: alarm_control_panel.ha_alarm 
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.ha_alarm 
+
+    - service: shell_command.disable_recording
+
+
 
 
 - alias: Trigger depart if door open
@@ -87,6 +94,9 @@
     - service: homeassistant.turn_on
       entity_id:
         - automation.trigger_woonkamer_lamp_on
+
+
+    - service: shell_command.disable_recording
 
     - service: notify.mobile_app_reyhzhao
       data_template:
@@ -232,6 +242,20 @@
     entity_id: alarm_control_panel.ha_alarm
 
 
+- alias: Disable camera recording at 08:00 if someone's home
+  trigger:
+    platform: time
+    at: "08:00:00"
+  condition:
+  - condition: state
+    entity_id: group.presence
+    state: home
+
+  action:
+    - service: shell_command.disable_recording    
+
+
+
 - alias: ARM Alarm at 22:00 if someone's home
   trigger:
     platform: time
@@ -247,3 +271,6 @@
   action:
     - service: alarm_control_panel.alarm_arm_home
       entity_id: alarm_control_panel.ha_alarm    
+
+    - service: shell_command.enable_recording
+
