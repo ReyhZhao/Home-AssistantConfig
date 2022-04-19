@@ -117,8 +117,8 @@ script:
         data_template:
           entity_id: input_number.temp_minus0  
           value: >
-            {% if states('input_number.temp_minus0') | float < 
-                  states('sensor.dark_sky_forecast_daytime_high_temperature_0d') | float %}
+            {% if states('input_number.temp_minus0') | float(0) < 
+                  states('sensor.dark_sky_forecast_daytime_high_temperature_0d') | float(0) %}
               {{ states('sensor.dark_sky_forecast_daytime_high_temperature_0d') }}
             {% else %}
               {{ states('input_number.temp_minus0') }}
@@ -129,19 +129,19 @@ script:
         data_template:
           entity_id: input_number.temp_high_2days
           value: >
-            {{ ((states('input_number.temp_minus0') | float + 
-                 states('input_number.temp_minus1') | float) / 2 ) | round(1)  }}
+            {{ ((states('input_number.temp_minus0') | float(0) + 
+                 states('input_number.temp_minus1') | float(0)) / 2 ) | round(1)  }}
     
       #=== Calculate the average high temp for today, yesterday and previous 3 days
       - service: input_number.set_value
         data_template:
           entity_id: input_number.temp_high_5days
           value: >
-            {{ ((states('input_number.temp_minus0') | float +
-                 states('input_number.temp_minus1') | float +
-                 states('input_number.temp_minus2') | float + 
-                 states('input_number.temp_minus3') | float + 
-                 states('input_number.temp_minus4') | float) / 5) | round(1) }}
+            {{ ((states('input_number.temp_minus0') | float(0) +
+                 states('input_number.temp_minus1') | float(0) +
+                 states('input_number.temp_minus2') | float(0) + 
+                 states('input_number.temp_minus3') | float(0) + 
+                 states('input_number.temp_minus4') | float(0)) / 5) | round(1) }}
 
       #=== Calculate Temperature Multiplyer
       #===
@@ -158,18 +158,18 @@ script:
         data_template:
           entity_id: input_number.temp_2days_multiplyer
           value: >
-              {{ ((states('input_number.temp_high_2days') | float - 
-                   states('input_number.temperature_baseline') | float) / 
-                   states('input_number.temperature_baseline') | float + 1) | round(2) }}      
+              {{ ((states('input_number.temp_high_2days') | float(0) - 
+                   states('input_number.temperature_baseline') | float(0)) / 
+                   states('input_number.temperature_baseline') | float(0) + 1) | round(2) }}      
 
       #=== Calculate 5 day Temperature multiplyer
       - service: input_number.set_value
         data_template:
           entity_id: input_number.temp_5days_multiplyer
           value: >
-              {{ ((states('input_number.temp_high_5days') | float - 
-                   states('input_number.temperature_baseline') | float) / 
-                   states('input_number.temperature_baseline') | float + 1) | round(2) }}      
+              {{ ((states('input_number.temp_high_5days') | float(0) - 
+                   states('input_number.temperature_baseline') | float(0)) / 
+                   states('input_number.temperature_baseline') | float(0) + 1) | round(2) }}      
 
 
       #=============
