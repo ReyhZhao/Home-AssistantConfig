@@ -172,13 +172,13 @@ spotify:
   client_secret: !secret spotify_client_secret
 
 media_player:
-  - platform: braviatv
-    host: !secret bravia_tv_host
+  #  - platform: braviatv
+  # host: !secret bravia_tv_host
     
     
-  - platform: androidtv
-    name: Android TV Woonkamer
-    host: !secret bravia_tv_host
+  #- platform: androidtv
+  #  name: Android TV Woonkamer
+  #  host: !secret bravia_tv_host
 
     #  - platform: kodi
     #host: !secret kodi_host
