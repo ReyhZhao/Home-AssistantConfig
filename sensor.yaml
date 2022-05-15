@@ -27,54 +27,42 @@
 
 
 ################################################################
-    - platform: mqtt
-      state_topic: espweerstation/Accu/Voltage
-      name: "Weerstation Accu Spanning"
-      unit_of_measurement: "V"
-
-    - platform: mqtt
-      state_topic: espweerstation/BME280/Temperature
-      name: "Weerstation Temperatuur"
-      unit_of_measurement: "C"      
-
-    - platform: mqtt
-      state_topic: espweerstation/BME280/Humidity 
-      name: "Weerstation Humidity "
-      unit_of_measurement: "%"      
-      
-    - platform: mqtt
-      state_topic: espweerstation/BME280/Pressure 
-      name: "Weerstation Pressure"
-      unit_of_measurement: "mb"            
-
-
-    - platform: mqtt
-      state_topic: espweerstation/Dust/pm10
-      name: "pm10"
-      unit_of_measurement: "ug/m3"
-
-    - platform: mqtt
-      state_topic: espweerstation/Dust/pm1.0
-      name: "pm1.0"
-      unit_of_measurement: "ug/m3"
-
-    - platform: mqtt
-      state_topic: espweerstation/Dust/pm2.5
-      name: "pm2.5"
-      unit_of_measurement: "ug/m3"      
-
-    - platform: filter
-      name: "PM10 Dust partices"
-      entity_id: sensor.pm1_0
-      filters:
-        - filter: outlier
-          window_size: 4
-          radius: 2.0
-        - filter: lowpass
-          time_constant: 10
-        - filter: time_simple_moving_average
-          window_size: "00:03"
-          precision: 2
+#    - platform: mqtt
+#      state_topic: espweerstation/Accu/Voltage
+#      name: "Weerstation Accu Spanning"
+#      unit_of_measurement: "V"
+#
+#    - platform: mqtt
+#      state_topic: espweerstation/BME280/Temperature
+#      name: "Weerstation Temperatuur"
+#      unit_of_measurement: "C"      
+#
+#    - platform: mqtt
+#      state_topic: espweerstation/BME280/Humidity 
+#      name: "Weerstation Humidity "
+#      unit_of_measurement: "%"      
+#      
+#    - platform: mqtt
+#      state_topic: espweerstation/BME280/Pressure 
+#      name: "Weerstation Pressure"
+#      unit_of_measurement: "mb"            
+#
+#
+#    - platform: mqtt
+#      state_topic: espweerstation/Dust/pm10
+#      name: "pm10"
+#      unit_of_measurement: "ug/m3"
+#
+#    - platform: mqtt
+#       state_topic: espweerstation/Dust/pm1.0
+#      name: "pm1.0"
+#      unit_of_measurement: "ug/m3"
+#
+#    - platform: mqtt
+#      state_topic: espweerstation/Dust/pm2.5
+#      name: "pm2.5"
+#      unit_of_measurement: "ug/m3"      
+#
 
 ###############################################################
 
