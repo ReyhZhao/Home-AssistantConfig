@@ -298,9 +298,3 @@
 
 
 
-### Sensor to combine rainfall numbers ####
-    - platform: integration
-      name: "Total Rainfall"
-      source: sensor.accuweather_precipitation
-      unit_time: d
-      unit: mm per day

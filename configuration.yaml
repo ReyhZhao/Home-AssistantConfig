@@ -99,8 +99,8 @@ mobile_app:
         
 sabnzbd:
    api_key: !secret sabnzbd_api
-   host: !secret sabnzbd_host
-   port: 8090
+   #host: !secret sabnzbd_host
+   #port: 8090
 #   sensors:
 #     - current_status
 #     - speed
@@ -180,12 +180,6 @@ media_player:
   #  name: Android TV Woonkamer
   #  host: !secret bravia_tv_host
 
-    #  - platform: kodi
-    #host: !secret kodi_host
-    #port: 8080
-    #tcp_port: 9090
-    #username: !secret kodi_username
-    #password: !secret kodi_password
     
   - platform: yamaha
     host: !secret yamaha_host
@@ -304,11 +298,6 @@ switch:
     payload_off: 0
     optimistic: false
     retain: true
-
-  - platform: wake_on_lan
-    name: Kodi aanzetten
-    host: !secret kodi_host
-    mac: F4:4D:30:68:9E:9D
 
   - platform: wake_on_lan
     name: TV aanzetten
