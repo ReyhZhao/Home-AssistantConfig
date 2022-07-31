@@ -6,7 +6,21 @@
 
 
 
-
+- id: '1656000309266'
+  alias: push HA configuration to GitHub repo
+  description: ''
+  
+  trigger:
+  # Everyday at 23:23:23 time
+  - at: '15:10:00'
+    platform: time
+  action:
+  - data:
+      #addon: a0d7b954_ssh
+      addon: core_ssh
+      input: /config/ha_gitpush.sh
+      
+    service: hassio.addon_stdin
 
 
 
