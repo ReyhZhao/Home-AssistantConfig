@@ -12,7 +12,8 @@
     - service: homeassistant.turn_off
       entity_id: group.allelampen
 
-    - service: shell_command.enable_recording
+    - service: homeassistant.turn_on
+      entity_id: switch.unifi_video_recording
 
 
 
@@ -26,7 +27,8 @@
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm 
 
-    - service: shell_command.disable_recording
+    - service: homeassistant.turn_off
+      entity_id: switch.unifi_video_recording
 
 
 
@@ -96,7 +98,8 @@
         - automation.trigger_woonkamer_lamp_on
 
 
-    - service: shell_command.disable_recording
+    - service: homeassistant.turn_off
+      entity_id: switch.unifi_video_recording
 
     - service: notify.mobile_app_reyhzhao
       data_template:
@@ -252,7 +255,8 @@
     state: home
 
   action:
-    - service: shell_command.disable_recording    
+    - service: homeassistant.turn_off
+      entity_id: switch.unifi_video_recording  
 
 
 
@@ -272,5 +276,5 @@
     - service: alarm_control_panel.alarm_arm_home
       entity_id: alarm_control_panel.ha_alarm    
 
-    - service: shell_command.enable_recording
-
+    - service: homeassistant.turn_on
+      entity_id: switch.unifi_video_recording

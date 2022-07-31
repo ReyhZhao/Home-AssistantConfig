@@ -1,6 +1,28 @@
 
 ## Schemer logica voor het gehele huis "buiten"
+
+
+
 - alias: Trigger Het wordt licht buiten
+  description: ''
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.lux_buiten
+    above: 1700
+    
+  condition:
+    condition: state
+    entity_id: input_select.schemer_buiten
+    state: 'Schemer'     
+    
+  action:
+    - service: input_select.select_option
+      data_template:      
+        entity_id: input_select.schemer_buiten
+        option: 'Licht' 
+
+
+- alias: Trigger Het wordt lichter buiten
   description: ''
   trigger:
     platform: numeric_state
@@ -16,8 +38,10 @@
     - service: input_select.select_option
       data_template:      
         entity_id: input_select.schemer_buiten
-        option: 'Licht' 
+        option: 'Schemer' 
     
+    
+###############################################################################    
     
     
 - alias: Trigger Het wordt donker buiten
@@ -25,7 +49,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.lux_buiten
-    below: 700
+    below: 1600
     
   condition:
     condition: state
@@ -36,16 +60,43 @@
     - service: input_select.select_option
       data_template:      
         entity_id: input_select.schemer_buiten
+        option: 'Schemer'     
+    
+    
+    
+    
+- alias: Trigger Het wordt donker buiten
+  description: ''
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.lux_buiten
+    below: 800
+    
+  condition:
+    condition: state
+    entity_id: input_select.schemer_buiten
+    state: 'Schemer'      
+    
+  action:
+    - service: input_select.select_option
+      data_template:      
+        entity_id: input_select.schemer_buiten
         option: 'Donker'     
 
-    - service: homeassistant.turn_on
-      entity_id:
-        - switch.kerstverlichting_buiten
 
-    - service: homeassistant.turn_on
-      entity_id:
-        - switch.kerstverlichting_buiten
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
+################################################################################
 ## Schemer logica voor het kantoor.
 ##
 ## Licht

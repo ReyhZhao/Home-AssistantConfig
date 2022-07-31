@@ -19,3 +19,23 @@
             name: default
       message: Accu spanning weerstation buiten grenzen
     service: notify.telegram_eddie
+- id: '1656000309259'
+  alias: Start Backup NUC
+  description: ''
+  trigger:
+  - platform: time
+    at: '11:00:00'
+  condition: []
+  action: []
+  mode: single
+- id: '1656000537617'
+  alias: Start Backup NUC
+  description: ''
+  trigger:
+  - platform: time
+    at: '11:00:00'
+  condition: []
+  action:
+  - service: homeassistant.turn_on
+    entity_id: switch.kodi_aanzetten
+  mode: single

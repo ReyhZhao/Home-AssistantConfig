@@ -6,7 +6,7 @@
 
   trigger:
   - platform: state
-    entity_id: binary_sensor.motion_kantoor
+    entity_id: binary_sensor.presense_kantoor
     to: 'on'
 
   - platform: state
@@ -34,15 +34,48 @@
 
   trigger:
     - platform: state
-      entity_id: switch.schemer_kantoor
+      entity_id: input_select.schemer_kantoor
       to: 'Donker'
 
   condition:
-    condition: template
-    value_template: "{{ ((as_timestamp(now()) - as_timestamp(states.binary_sensor.motion_kantoor.last_changed))) | round(0) < 180 }}"
+    - or:
+      - condition: numeric_state
+        entity_id: sensor.espresense_kantoor_count
+        above: 1
+        
+      - condition: template
+        value_template: "{{ ((as_timestamp(now()) - as_timestamp(states.binary_sensor.motion_kantoor.last_changed))) | round(0) < 180 }}"
 
   action:
     service: homeassistant.turn_on
+    entity_id:
+       - light.kantoor
+       - switch.schakelaar_kantoor
+       - switch.kantoor_sfeerverlichting
+       
+       
+       
+######################################################################
+
+
+- alias: Trigger Kantoor Lamp Off als het licht wordt
+  description: ''
+
+  trigger:
+    - platform: state
+      entity_id: input_select.schemer_kantoor
+      to: 'Licht'
+
+#   condition:
+#     - or:
+#       - condition: template
+#         value_template: "{{ is_state('sensor.tile_eddie', 'kantoor') }}"        
+        
+#       - condition: template
+#         value_template: "{{ ((as_timestamp(now()) - as_timestamp(states.binary_sensor.motion_kantoor.last_changed))) | round(0) < 180 }}"
+
+  action:
+    service: homeassistant.turn_off
     entity_id:
        - light.kantoor
        - switch.schakelaar_kantoor
@@ -51,15 +84,8 @@
 
 ######################################################################
 
-
-- alias: Turn off Kantoor lamp, x minutes after last movement
+- alias: Turn off Kantoor lamp, schakelaar
   trigger:
-    #- platform: state
-    #  entity_id: binary_sensor.motion_kantoor
-    #  to: 'off'
-    #  for:
-    #    minutes: 5
-
     - platform: state
       entity_id: switch.schakelaar_kantoor
       to: 'off'       
@@ -70,3 +96,41 @@
        - light.kantoor
        - switch.schakelaar_kantoor
        - switch.kantoor_sfeerverlichting
+       
+######################################################################       
+
+- alias: Turn off Kantoor lamp, x minutes after last movement
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.presense_kantoor
+      to: 'off'
+      for:
+        minutes: 5
+
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.espresense_kantoor_count
+      below: 1
+      
+  action:
+    service: homeassistant.turn_off
+    entity_id: 
+       - light.kantoor
+       - switch.schakelaar_kantoor
+       - switch.kantoor_sfeerverlichting
+       
+       
+######################################################################       
+       
+- alias: Wakeup backup NUC
+  description: ''
+
+  trigger:
+    - platform: time
+      at: "09:30:00"
+
+
+  action:
+    service: homeassistant.turn_on
+    entity_id:
+       - switch.backup_nuc_wol

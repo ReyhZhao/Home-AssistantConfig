@@ -24,21 +24,18 @@ http:
    
    trusted_proxies: 
       - !secret proxy_host
+      - !secret proxy_host2
       
   
 logger: !include logger.yaml
 
-influxdb:
-  host: !secret influx_host
-  database: hass
+#influxdb:
+#  host: !secret influx_host
+#  database: hass
 
 weather:
   - platform: darksky
     api_key: !secret darksky_api_key
-
-
-#- platform: smartweather
-#    api_key: !secret darksky_api_key
 
 
   - platform: buienradar
@@ -47,9 +44,6 @@ weather:
     latitude: !secret homeassistant_latitude
     longitude: !secret homeassistant_longitude
 
-#smartweather:
-#    station_id: !secret smartweather_station
-#    api_key: !secret smartweather_api
 
 #octoprint:
 #    host: !secret octoprint_host
@@ -99,20 +93,7 @@ mobile_app:
         
 sabnzbd:
    api_key: !secret sabnzbd_api
-   #host: !secret sabnzbd_host
-   #port: 8090
-#   sensors:
-#     - current_status
-#     - speed
-#     - queue_size
-#     - queue_remaining
-#     - disk_size
-#     - disk_free
-#     - queue_count
-#     - day_size
-#     - week_size
-#     - month_size
-#     - total_size   
+
 
 discovery:
 
@@ -159,12 +140,9 @@ input_number:
     min: 0
     max: 100
     step: 1
+    
+    
 
-#tuya:    
-#  username: !secret tuya_username
-#  password: !secret tuya_password
-#  country_code: 1
-#  platform: smart_life
 
 
 spotify:
@@ -244,6 +222,18 @@ rfxtrx:
 
 switch:
 
+  - platform: rest
+    name: Unifi Video Recording
+    method: put
+    timeout: 300
+    resource: https://unifi-video.vels.online/api/2.0/camera/625d7028e4b070acfaea534b?apiKey=7OSzSgyShlfENzLaEL9eTc1BgbfWwOMM
+    body_on: '{ "name": "Camera-Tuin", "recordingSettings": { "channel": "0", "fullTimeRecordEnabled": false,  "motionRecordEnabled": true } }'
+    body_off: '{ "name": "Camera-Tuin", "recordingSettings": { "channel": "0", "fullTimeRecordEnabled": false,  "motionRecordEnabled": false } }'
+    is_on_template: "{{ value_json.data.0.recordingSettings.motionRecordEnabled }}"
+    headers:
+      Content-Type: application/json
+    verify_ssl: true
+
   - platform: flux
     lights:
       - light.woonkamer
@@ -303,6 +293,17 @@ switch:
     name: TV aanzetten
     host: !secret bravia_tv_host
     mac: 94:53:30:60:EB:SF
+    
+  - platform: wake_on_lan
+    name: Backup NUC
+    host: 192.168.232.123
+    mac: f4:4d:30:68:9e:9d
+    turn_off:
+      service: hassio.addon_stdin
+      data:
+        addon: core_rpc_shutdown
+        input: chronos
+    
 
   - platform: wake_on_lan
     name: Werk Laptop
@@ -311,9 +312,9 @@ switch:
     mac: 84:a9:3e:42:d4:72
 
 
-netatmo:
-  client_id: !secret netatmo_client
-  client_secret: !secret netatmo_secret
+# netatmo:
+#   client_id: !secret netatmo_client
+#   client_secret: !secret netatmo_secret
 
 plant:
   areca:
@@ -328,8 +329,6 @@ wake_on_lan:
 
 binary_sensor:
 
-#  - platform: uptimerobot
-#    api_key: !secret uptimerobot
 
   - platform: template
     sensors:
@@ -364,12 +363,6 @@ light:
            name: Milight 4
            fade: true
 
-#zwave:
-#  usb_path: /dev/ttyUSB12
-#  device_config: !include zwave_device_config.yaml
-#  network_key: !secret zwave_network_key
-#  autoheal: true
-
 
 mqtt:
     #broker: 127.0.0.1
@@ -383,10 +376,6 @@ panel_custom:
     url_path: zwave
 
 python_script:
-
-shell_command:
-  disable_recording: '/usr/bin/python3.9 /home/homeassistant/.homeassistant/toggle_motion_recording.py disable'
-  enable_recording: '/usr/bin/python3.9 /home/homeassistant/.homeassistant/toggle_motion_recording.py enable'
 
 
 group: !include groups.yaml

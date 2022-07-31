@@ -1,176 +1,37 @@
-#sensor:
-#    - platform: mqtt
-#      state_topic: espwoonkamer/BME280/Temperature
-#      name: "Temperatuur Woonkamer"
-#      unit_of_measurement: "°C"
 
-#   - platform: mqtt
-#      state_topic: espwoonkamer/BME280/Pressure
-#      name: "Luchtdruk Woonkamer"
-#      unit_of_measurement: "mb"
-
-#   - platform: mqtt
-#      state_topic: espwoonkamer/BME280/Humidity
-#      name: "Vochtigheid Woonkamer"
-#      unit_of_measurement: "%"
-
-#   - platform: mqtt
-#      state_topic: espwoonkamer/CCS811/TVOC
-#      name: "TVOC Woonkamer"
-#      unit_of_measurement: "ppm"
-
-
-#   - platform: mqtt
-#      state_topic: espwoonkamer/CCS811/CO2
-#      name: "CO2 Woonkamer"
-#      unit_of_measurement: "ppm"
-
-
-################################################################
-#    - platform: mqtt
-#      state_topic: espweerstation/Accu/Voltage
-#      name: "Weerstation Accu Spanning"
-#      unit_of_measurement: "V"
-#
-#    - platform: mqtt
-#      state_topic: espweerstation/BME280/Temperature
-#      name: "Weerstation Temperatuur"
-#      unit_of_measurement: "C"      
-#
-#    - platform: mqtt
-#      state_topic: espweerstation/BME280/Humidity 
-#      name: "Weerstation Humidity "
-#      unit_of_measurement: "%"      
-#      
-#    - platform: mqtt
-#      state_topic: espweerstation/BME280/Pressure 
-#      name: "Weerstation Pressure"
-#      unit_of_measurement: "mb"            
-#
-#
-#    - platform: mqtt
-#      state_topic: espweerstation/Dust/pm10
-#      name: "pm10"
-#      unit_of_measurement: "ug/m3"
-#
-#    - platform: mqtt
-#       state_topic: espweerstation/Dust/pm1.0
-#      name: "pm1.0"
-#      unit_of_measurement: "ug/m3"
-#
-#    - platform: mqtt
-#      state_topic: espweerstation/Dust/pm2.5
-#      name: "pm2.5"
-#      unit_of_measurement: "ug/m3"      
-#
 
 ###############################################################
 
 
+    - platform: mqtt_room
+      #device_id: "roomAssistant:c814e89f-fc07-4a9f-9202-f812da82f39a"
+      device_id: "apple:1006:10-7"
+      #device_id: "apple:iphone14-2"
+      name: 'iPhone Eddie'
+      state_topic: 'espresense/rooms'
+      timeout: 5
+      away_timeout: 120 # number of seconds after which the enitity will get status not_home
 
-    # - platform: mqtt
-      # state_topic: espslaapkamer/CCS811/TVOC
-      # name: "TVOC Slaapkamer"
-      # unit_of_measurement: "ppm"
+    - platform: mqtt_room
+      device_id: "tile:f52f25ee711a"
+      name: 'Tile Eddie'
+      state_topic: 'espresense/rooms'
+      timeout: 5
+      away_timeout: 120 # number of seconds after which the enitity will get status not_home
 
-    # - platform: mqtt
-      # state_topic: espslaapkamer/CCS811/CO2
-      # name: "CO2 Slaapkamer"
-      # unit_of_measurement: "ppm"
 
-    # - platform: mqtt
-      # state_topic: espslaapkamer/BME280/Temperature
-      # name: "Temperatuur Slaapkamer"
-      # unit_of_measurement: "°C"
-      # device_class: temperature
 
-    # - platform: mqtt
-      # state_topic: espslaapkamer/BME280/Pressure
-      # name: "Luchtdruk Slaapkamer"
-      # unit_of_measurement: "mb"
-      # device_class: pressure
 
-    # - platform: mqtt
-      # state_topic: espslaapkamer/BME280/Humidity
-      # name: "Vochtigheid Slaapkamer"
-      # unit_of_measurement: "%" 
-      # device_class: humidity
+    - platform: mqtt_room
+      device_id: "apple:1005:9-12"
+      name: 'MacBook Eddie'
+      state_topic: 'espresense/rooms'
+      timeout: 5
+      away_timeout: 120 # number of seconds after which the enitity will get status not_home
 
-    # - platform: mqtt
-      # state_topic: espslaapkamer/Lux/Lux
-      # name: "Lux Buiten"
-      # unit_of_measurement: "Lux" 
-      # device_class: illuminance
 
-    # - platform: filter
-      # name: "filtered lux_buiten"
-      # entity_id: sensor.lux_buiten
-      # filters:
-        # - filter: outlier
-          # window_size: 4
-          # radius: 4.0
-        # - filter: lowpass
-          # time_constant: 10
-          # precision: 2
-        # - filter: time_simple_moving_average
-          # window_size: "00:05"
-          # precision: 2        
-
-    # - platform: mqtt
-      # state_topic: espslaapkamer/Lux/Infrared
-      # name: "Infrarood Buiten"
-      # unit_of_measurement: "Lux" 
-      # device_class: illuminance
 
 ###############################################################
-
-#    - platform: mqtt
-#      state_topic: espkantoor/BME280/Temperature
-#      name: "Temperatuur Kantoor"
-#      unit_of_measurement: "°C"
-#      device_class: temperature
-
-#    - platform: mqtt
-#      state_topic: espkantoor/BME280/Pressure
-#      name: "Luchtdruk Kantoor"
-#      unit_of_measurement: "mb"
-#      device_class: pressure
-
-#    - platform: mqtt
-#      state_topic: espkantoor/BME280/Humidity
-#      name: "Vochtigheid Kantoor"
-#      unit_of_measurement: "%"
-#      device_class: humidity
-
-#    - platform: mqtt
-#      state_topic: espkantoor/Lux/Lux
-#      name: "Lux Kantoor"
-#      unit_of_measurement: "Lux"
-#      device_class: illuminance
-
-#    - platform: mqtt
-#      state_topic: espkantoor/Lux/Infrared
-#      name: "Infrarood Kantoor"
-#      unit_of_measurement: "Lux"
-#      device_class: illuminance
-
-#    - platform: mqtt
-#      state_topic: espkantoor/Dust/pm10
-#      name: "Kantoor pm10"
-#      unit_of_measurement: "ug/m3"
-
-#    - platform: mqtt
-#      state_topic: espkantoor/Dust/pm1.0
-#      name: "Kantoor pm1.0"
-#      unit_of_measurement: "ug/m3"
-
-#    - platform: mqtt
-#      state_topic: espkantoor/Dust/pm2.5
-#      name: "Kantoor pm2.5"
-#      unit_of_measurement: "ug/m3"
-
-###############################################################
-
     - platform: mqtt
       state_topic: esptuin/Soil/Analog
       name: "Bodemvochtigheid"

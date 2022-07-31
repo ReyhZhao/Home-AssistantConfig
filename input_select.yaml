@@ -17,6 +17,7 @@
       icon: mdi:weather-sunset
       options:
          - Licht
+         - Schemer
          - Donker
 
    schemer_kantoor:

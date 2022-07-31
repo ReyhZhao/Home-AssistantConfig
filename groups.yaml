@@ -1,5 +1,11 @@
 Presence: person.eddie, person.esther
 
+Presense_Eddie:
+  entities:
+    - sensor.iphone_eddie
+    - sensor.tile_eddie
+
+
 Ramen:
   entities:
     - binary_sensor.raam_badkamer
