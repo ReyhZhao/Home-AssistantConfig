@@ -15,12 +15,7 @@
   - at: '15:10:00'
     platform: time
   action:
-  - data:
-      #addon: a0d7b954_ssh
-      addon: core_ssh
-      input: /config/ha_gitpush.sh
-      
-    service: hassio.addon_stdin
+    service: shell_command.push_to_github
 
 
 

@@ -1,13 +1,12 @@
-
 homeassistant:
-   customize: !include customize.yaml
-   latitude: !secret homeassistant_latitude
-   longitude: !secret homeassistant_longitude
-   elevation: !secret homeassistant_elevation   
-   time_zone: Europe/Amsterdam
-   packages: !include_dir_named packages
-   external_url: !secret external_url
-   internal_url: !secret internal_url
+  customize: !include customize.yaml
+  latitude: !secret homeassistant_latitude
+  longitude: !secret homeassistant_longitude
+  elevation: !secret homeassistant_elevation
+  time_zone: Europe/Amsterdam
+  packages: !include_dir_named packages
+  external_url: !secret external_url
+  internal_url: !secret internal_url
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
@@ -20,13 +19,12 @@ frontend:
 #   base_url: example.duckdns.org:8123
 
 http:
-   use_x_forwarded_for: true      
-   
-   trusted_proxies: 
-      - !secret proxy_host
-      - !secret proxy_host2
-      
-  
+  use_x_forwarded_for: true
+
+  trusted_proxies:
+    - !secret proxy_host
+    - !secret proxy_host2
+
 logger: !include logger.yaml
 
 #influxdb:
@@ -37,13 +35,11 @@ weather:
   - platform: darksky
     api_key: !secret darksky_api_key
 
-
   - platform: buienradar
     forecast: true
     name: arnhem
     latitude: !secret homeassistant_latitude
     longitude: !secret homeassistant_longitude
-
 
 #octoprint:
 #    host: !secret octoprint_host
@@ -58,14 +54,12 @@ matrix:
   rooms:
     - !secret matrix_room
 
-
-
 telegram_bot:
   - platform: polling
-    api_key: !secret telegram_api_key 
-    allowed_chat_ids: 
-       - !secret telegram_groupid
-       - !secret telegram_eddie
+    api_key: !secret telegram_api_key
+    allowed_chat_ids:
+      - !secret telegram_groupid
+      - !secret telegram_eddie
 
 notify:
   - name: matrix_notify
@@ -87,17 +81,14 @@ notify:
       - service: telegram_eddie
       - service: mobile_app_esther_s_oneplus_a6003
 
-
 mobile_app:
 
-        
 sabnzbd:
-   api_key: !secret sabnzbd_api
-
+  api_key: !secret sabnzbd_api
 
 discovery:
 
-ios:        
+ios:
 
 # Text to speech
 tts:
@@ -108,8 +99,7 @@ remote:
 #    name: Harmony
 #    host: !secret harmony_host
 #    activity: TV kijken
-    
-    
+
 camera:
   - platform: uvc
     nvr: !secret unifi_nvr
@@ -117,20 +107,19 @@ camera:
     password: !secret unifi_camera
 
 input_boolean:
-   spotify_shuffle:
-      name: Shuffle
-      icon: mdi:shuffle-variant
+  spotify_shuffle:
+    name: Shuffle
+    icon: mdi:shuffle-variant
 
-   nachtstand:
-     name: Nachtstand
-     initial: off
-     icon: mdi:weather-night
+  nachtstand:
+    name: Nachtstand
+    initial: off
+    icon: mdi:weather-night
 
 input_text:
-   light_to_switch:
-     name: Lights to switch
-     initial: off
-
+  light_to_switch:
+    name: Lights to switch
+    initial: off
 
 input_number:
   spotify_volume:
@@ -140,36 +129,22 @@ input_number:
     min: 0
     max: 100
     step: 1
-    
-    
 
-
-
-spotify:
-  client_id: !secret spotify_client_id
-  client_secret: !secret spotify_client_secret
+shell_command:
+  push_to_github: /root/config/gitupdate.sh
 
 media_player:
-  #  - platform: braviatv
-  # host: !secret bravia_tv_host
-    
-    
-  #- platform: androidtv
-  #  name: Android TV Woonkamer
-  #  host: !secret bravia_tv_host
-
-    
   - platform: yamaha
     host: !secret yamaha_host
     source_names:
-            HDMI5: Kodi
+      HDMI5: Kodi
 
 zone:
   - name: Home
     radius: 200
     latitude: !secret home_lat
     longitude: !secret home_lon
-    
+
   - name: Werk Eddie
     latitude: !secret work_eddie_lat
     longitude: !secret work_eddie_lon
@@ -188,7 +163,6 @@ alarm_control_panel:
       arming_time: 0
       delay_time: 0
 
-
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1BFB4H-if00-port0
   #debug: True
@@ -203,7 +177,7 @@ rfxtrx:
     # Raam Badkamer
     0b11000001966e6a0a010f60:
 
-    # PIR Zolder        
+    # PIR Zolder
     0b11000900bfffc60a010f50:
 
     # Voordeur
@@ -211,17 +185,14 @@ rfxtrx:
 
     # Achterdeur
     0b1100000196772e0a010f70:
-    
+
     # Lamp Trapkast
     0b0710012744090170020f70:
 
     # Kerstboom
-    0b11000482bc0cfe04020f70:   
-    
-
+    0b11000482bc0cfe04020f70:
 
 switch:
-
   - platform: rest
     name: Unifi Video Recording
     method: put
@@ -247,7 +218,7 @@ switch:
     disable_brightness_adjust: false
     mode: xy
     transition: 30
-    interval: 60        
+    interval: 60
 
   - platform: mqtt
     name: zone1_valve
@@ -266,8 +237,7 @@ switch:
     payload_on: 1
     payload_off: 0
     optimistic: false
-    retain: true    
-
+    retain: true
 
   - platform: mqtt
     name: Kantoor Dust Sensor sleep
@@ -282,7 +252,7 @@ switch:
 
   - platform: mqtt
     name: Buitenverlichting
-    state_topic: espbuitenverlichting/Relay01/RL01    
+    state_topic: espbuitenverlichting/Relay01/RL01
     command_topic: espbuitenverlichting/gpio/14
     payload_on: 1
     payload_off: 0
@@ -293,7 +263,7 @@ switch:
     name: TV aanzetten
     host: !secret bravia_tv_host
     mac: 94:53:30:60:EB:SF
-    
+
   - platform: wake_on_lan
     name: Backup NUC
     host: 192.168.232.123
@@ -303,14 +273,12 @@ switch:
       data:
         addon: core_rpc_shutdown
         input: chronos
-    
 
   - platform: wake_on_lan
     name: Werk Laptop
     host: !secret werklaptop
     broadcast_address: 192.168.190.255
     mac: 84:a9:3e:42:d4:72
-
 
 # netatmo:
 #   client_id: !secret netatmo_client
@@ -326,10 +294,7 @@ plant:
 
 wake_on_lan:
 
-
 binary_sensor:
-
-
   - platform: template
     sensors:
       person_eddie_url:
@@ -341,31 +306,41 @@ binary_sensor:
             {% set zoom = 3 %}
             https://embed.waze.com/nl/iframe?zoom={{ zoom }}&lat={{ lat }}&lon={{ lon }}&pin=1&desc=1
 
-
 light:
-
   - platform: limitlessled
-    bridges:           
-       - host: !secret limitless_host
-         version: 5
-         port: 8899
-         groups:
-         - number: 1           
-           name: Milight 1
-           fade: true            
-         - number: 2
-           name: Milight 2
-           fade: true
-         - number: 3
-           name: Milight 3
-           fade: true
-         - number: 4
-           name: Milight 4
-           fade: true
-
+    bridges:
+      - host: !secret limitless_host
+        version: 5
+        port: 8899
+        groups:
+          - number: 1
+            name: Milight 1
+            fade: true
+          - number: 2
+            name: Milight 2
+            fade: true
+          - number: 3
+            name: Milight 3
+            fade: true
+          - number: 4
+            name: Milight 4
+            fade: true
 
 mqtt:
-    #broker: 127.0.0.1
+  sensor:
+    - name: "Eddie"
+      icon: mdi:account
+      state_topic: "double-take/matches/eddie"
+      json_attributes_topic: "double-take/matches/eddie"
+      value_template: "{{ value_json.camera }}"
+      availability_topic: "double-take/available"
+
+    - name: "Esther"
+      icon: mdi:account
+      state_topic: "double-take/matches/esther"
+      json_attributes_topic: "double-take/matches/esther"
+      value_template: "{{ value_json.camera }}"
+      availability_topic: "double-take/available"
 
 sensor: !include sensor.yaml
 
@@ -376,7 +351,6 @@ panel_custom:
     url_path: zwave
 
 python_script:
-
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automation/

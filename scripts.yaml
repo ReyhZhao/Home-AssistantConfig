@@ -20,23 +20,23 @@ netflix_activity_on:
        activity: Netflix   
 
 
-spotify_music:
-  alias: "Play selected spotify playlist"
-  sequence:
-    - service: media_player.select_source
-      data_template: 
-        entity_id: media_player.spotify
-        source: >
-          {% if is_state("input_select.spotify_source", "EDDIE-PC") %} EDDIE-PC
-          {% elif is_state("input_select.spotify_source", "woonkamer") %} woonkamer
-          {% endif %}
-    - service: media_player.play_media
-      data_template:
-        entity_id: media_player.spotify
-        media_content_type: playlist
-        media_content_id: >
-          {% if is_state("input_select.spotify_playlist", "Q top500 foute uur") %} spotify:playlist:6eRx17VXu6V5LjAk1K3kb7
-          {% elif is_state("input_select.spotify_playlist", "Songs to sing in the car") %} spotify:playlist:37i9dQZF1DWWMOmoXKqHTD
-          {% elif is_state("input_select.spotify_playlist", "Daily Mix 1") %} spotify:playlist:37i9dQZF1E39vLOBII5ZX9          
-          {% elif is_state("input_select.spotify_playlist", "Kerst hits") %} spotify:playlist:37i9dQZF1DX0Yxoavh5qJV
-          {% endif %}    
+# spotify_music:
+#   alias: "Play selected spotify playlist"
+#   sequence:
+#     - service: media_player.select_source
+#       data_template: 
+#         entity_id: media_player.spotify
+#         source: >
+#           {% if is_state("input_select.spotify_source", "EDDIE-PC") %} EDDIE-PC
+#           {% elif is_state("input_select.spotify_source", "woonkamer") %} woonkamer
+#           {% endif %}
+#     - service: media_player.play_media
+#       data_template:
+#         entity_id: media_player.spotify
+#         media_content_type: playlist
+#         media_content_id: >
+#           {% if is_state("input_select.spotify_playlist", "Q top500 foute uur") %} spotify:playlist:6eRx17VXu6V5LjAk1K3kb7
+#           {% elif is_state("input_select.spotify_playlist", "Songs to sing in the car") %} spotify:playlist:37i9dQZF1DWWMOmoXKqHTD
+#           {% elif is_state("input_select.spotify_playlist", "Daily Mix 1") %} spotify:playlist:37i9dQZF1E39vLOBII5ZX9          
+#           {% elif is_state("input_select.spotify_playlist", "Kerst hits") %} spotify:playlist:37i9dQZF1DX0Yxoavh5qJV
+#           {% endif %}    

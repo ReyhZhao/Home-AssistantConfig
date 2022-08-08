@@ -105,7 +105,7 @@
       entity_id: binary_sensor.presense_kantoor
       to: 'off'
       for:
-        minutes: 5
+        minutes: 2
 
   condition:
     - condition: numeric_state
