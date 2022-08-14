@@ -1,49 +1,32 @@
-- id: '1597588973825'
-  alias: Accu weerstation
+- id: '1660306042772'
+  alias: Frigate Notifications - Tuin
+  description: ''
+  use_blueprint:
+    path: hunterjm/frigate_notification.yaml
+    input:
+      camera: tuin
+      notify_device: ea07a2d0f491470fbdfbc90cbbf97f4f
+      base_url: https://ha.vels.online
+      labels:
+      - person
+      presence_filter: person.eddie
+- id: '1656000309266'
+  alias: push HA configuration to GitHub repo
   description: ''
   trigger:
-  - above: '4.2'
-    entity_id: sensor.weerstation_accu_spanning
-    for: '1'
-    platform: numeric_state
-  - below: '3'
-    entity_id: sensor.weerstation_accu_spanning
-    for: '1'
-    platform: numeric_state
-  condition: []
+  - at: '15:10:00'
+    platform: time
   action:
-  - data:
-      data:
-        push:
-          sound:
-            name: default
-      message: Accu spanning weerstation buiten grenzen
-    service: notify.telegram_eddie
-    
-    
-    
-    
-- id: '1656000309259'
-  alias: Start Backup NUC
+    service: shell_command.push_to_github
+- id: '1660308585857'
+  alias: Frigate Notifications - Voordeur
   description: ''
-  trigger:
-  - platform: time
-    at: '11:00:00'
-  condition: []
-  action: []
-  mode: single
-- id: '1656000537617'
-  alias: Start Backup NUC
-  description: ''
-  trigger:
-  - platform: time
-    at: '11:00:00'
-  condition: []
-  action:
-  - service: homeassistant.turn_on
-    entity_id: switch.kodi_aanzetten
-  mode: single
-
-
-
-
+  use_blueprint:
+    path: hunterjm/frigate_notification.yaml
+    input:
+      camera: voordeur
+      notify_device: ea07a2d0f491470fbdfbc90cbbf97f4f
+      base_url: https://ha.vels.online
+      labels:
+      - person
+      presence_filter: person.eddie

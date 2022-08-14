@@ -328,19 +328,24 @@ light:
 
 mqtt:
   sensor:
-    - name: "Eddie"
+    - name: "FaceID Eddie"
       icon: mdi:account
       state_topic: "double-take/matches/eddie"
       json_attributes_topic: "double-take/matches/eddie"
       value_template: "{{ value_json.camera }}"
       availability_topic: "double-take/available"
 
-    - name: "Esther"
+    - name: "FaceID Esther"
       icon: mdi:account
       state_topic: "double-take/matches/esther"
       json_attributes_topic: "double-take/matches/esther"
       value_template: "{{ value_json.camera }}"
       availability_topic: "double-take/available"
+
+    - name: "Bodemvochtigheid"
+      state_topic: esptuin/Soil/Analog
+      unit_of_measurement: "%"
+      device_class: humidity
 
 sensor: !include sensor.yaml
 
@@ -353,9 +358,13 @@ panel_custom:
 python_script:
 
 group: !include groups.yaml
-automation: !include_dir_merge_list automation/
+
 script: !include scripts.yaml
 scene: !include scenes.yaml
 recorder: !include recorder.yaml
 input_select: !include input_select.yaml
 timer: !include timers.yaml
+
+automation ui: !include automations.yaml
+
+automation: !include_dir_merge_list automation/

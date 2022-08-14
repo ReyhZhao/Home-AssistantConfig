@@ -21,23 +21,17 @@
   timeout: 5
   away_timeout: 120 # number of seconds after which the enitity will get status not_home
 
-- platform: mqtt_room
-  device_id: "iBeacon:50765cb7-d9ea-4e21-99a4-fa879613a492-25880-19325"
-  name: "Android Esther"
-  state_topic: "espresense/rooms"
-  timeout: 5
-  away_timeout: 120 # number of seconds after which the enitity will get status not_home
+# - platform: mqtt_room
+#   device_id: "iBeacon:50765cb7-d9ea-4e21-99a4-fa879613a492-25880-19325"
+#   name: "Android Esther"
+#   state_topic: "espresense/rooms"
+#   timeout: 5
+#   away_timeout: 120 # number of seconds after which the enitity will get status not_home
 
 ###############################################################
-- platform: mqtt
-  state_topic: esptuin/Soil/Analog
-  name: "Bodemvochtigheid"
-  unit_of_measurement: "%"
-  device_class: humidity
-
-- platform: mqtt
-  name: "Unifi Camera Gifs"
-  state_topic: "cameras/gifs/Camera Tuin"
+# - platform: mqtt
+#   name: "Unifi Camera Gifs"
+#   state_topic: "cameras/gifs/Camera Tuin"
 
 - platform: filter
   name: "filterd bodemvochtigheid"
@@ -50,11 +44,11 @@
       time_constant: 10
       precision: 2
 
-- platform: mqtt
-  state_topic: "monitor/beneden/iphone_eddie"
-  value_template: "{{ value_json.confidence }}"
-  unit_of_measurement: "%"
-  name: "Beneden"
+# - platform: mqtt
+#   state_topic: "monitor/beneden/iphone_eddie"
+#   value_template: "{{ value_json.confidence }}"
+#   unit_of_measurement: "%"
+#   name: "Beneden"
 
 - platform: sonarr
   api_key: !secret sonarr_api
