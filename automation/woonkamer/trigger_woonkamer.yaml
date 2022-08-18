@@ -1,191 +1,181 @@
-
-
 - alias: Trigger Woonkamer Lamp On als het donker wordt
-  description: ''
+  description: ""
 
   trigger:
     - platform: state
       entity_id: input_select.schemer_buiten
-      to: 'Schemer'
+      to: "Schemer"
 
   condition:
     - condition: numeric_state
       entity_id: sensor.espresense_woonkamer_count
       above: 1
-    
+
     - condition: state
       entity_id: alarm_control_panel.ha_alarm
       state: disarmed
-      
+
     # - or:
     #   - condition: template
-    #     value_template: "{{ sensor.espresense_woonkamer_count.state > 1}}"   
+    #     value_template: "{{ sensor.espresense_woonkamer_count.state > 1}}"
 
   action:
     service: homeassistant.turn_on
     entity_id:
-       - light.woonkamer
+      - light.woonkamer
 
 ######################################################################
 
-
-
 - alias: Trigger Woonkamer Lamp Off als het licht wordt
-  description: ''
+  description: ""
 
   trigger:
     - platform: state
       entity_id: input_select.schemer_buiten
-      to: 'Licht'
+      to: "Licht"
 
   action:
     service: homeassistant.turn_off
     entity_id:
-       - light.woonkamer
-
+      - light.woonkamer
 
 ######################################################################
-
 
 - alias: Trigger Woonkamer Lamp motion
-  description: ''
-  
+  description: ""
+
   trigger:
-  - platform: state
-    entity_id: 
-      - binary_sensor.achterdeur
-      - binary_sensor.motion_woonkamer1 
-      - binary_sensor.motion_woonkamer2
-    to: 'on'  
-      
-  condition:      
-    condition: or
-    conditions:  
+    - platform: state
+      entity_id:
+        - binary_sensor.achterdeur
+        - binary_sensor.motion_woonkamer1
+        - binary_sensor.motion_woonkamer2
+      to: "on"
+
+  condition:
+    and:
       - condition: state
-        entity_id: input_select.schemer_buiten
-        state: 'Schemer'  
-      
-      - condition: state
-        entity_id: input_select.schemer_buiten
-        state: 'Donker'  
-  
+        entity_id: light.woonkamer
+        state: "off"
+
+      - or:
+          - condition: state
+            entity_id: input_select.schemer_buiten
+            state: "Schemer"
+
+          - condition: state
+            entity_id: input_select.schemer_buiten
+            state: "Donker"
 
   action:
-  - service: homeassistant.turn_on
-    entity_id:
-       - switch.schakelaar_woonkamer
+    - service: homeassistant.turn_on
+      entity_id:
+        - switch.schakelaar_woonkamer
 
-  - service: homeassistant.turn_on
-    data_template:
-      entity_id: light.woonkamer
-      brightness: >
-        {% if states.media_player.nvidia_shield == 'playing' %}
-        75
-        {% elif now().strftime('%H')| int >= 22 %}
-        120
-        {% elif now().strftime('%H')| int < 7 %}
-        120
-        {% elif now().strftime('%H')| int >= 7 %}
-        255
-        {% endif %}
-       
-  - service: timer.start
-    data:
-      entity_id: timer.woonkamer       
+    - service: homeassistant.turn_on
+      data_template:
+        entity_id: light.woonkamer
+        brightness: >
+          {% if states.media_player.nvidia_shield == 'playing' %}
+          75
+          {% elif now().strftime('%H')| int >= 22 %}
+          120
+          {% elif now().strftime('%H')| int < 7 %}
+          120
+          {% elif now().strftime('%H')| int >= 7 %}
+          255
+          {% endif %}
 
-
+    - service: timer.start
+      data:
+        entity_id: timer.woonkamer
 
 ######################################################################
-
 
 - alias: Trigger Woonkamer Lamp dim playing content.
-  description: ''
-  
+  description: ""
+
   trigger:
-  - platform: state
-    entity_id: 
-      - media_player.nvidia_shield
-    to: 'playing'  
-      
+    - platform: state
+      entity_id:
+        - media_player.nvidia_shield
+      to: "playing"
+      for: "00:00:20"
+
   condition:
     condition: state
     entity_id: light.woonkamer
-    state: 'on'  
+    state: "on"
 
   action:
-  - service: homeassistant.turn_on
-    data_template:
-      entity_id: light.woonkamer
-      brightness: 75
-      
-      
+    - service: homeassistant.turn_on
+      data_template:
+        entity_id: light.woonkamer
+        brightness: 75
+
 ######################################################################
 
-
-      
 - alias: Trigger Woonkamer Lamp un-dim stopped playing content.
-  description: ''
-  
+  description: ""
+
   trigger:
-  
-  - platform: state
-    entity_id: 
-      - media_player.nvidia_shield
-    to: 'idle'  
-      
+    - platform: state
+      entity_id:
+        - media_player.nvidia_shield
+      to: "idle"
+      for: "00:00:20"
+
   condition:
     condition: state
     entity_id: light.woonkamer
-    state: 'on'  
+    state: "on"
 
   action:
-  - service: homeassistant.turn_on
-    data_template:
-      entity_id: light.woonkamer
-      brightness: >
-        {% if now().strftime('%H')| int >= 22 %}
-        120
-        {% elif now().strftime('%H')| int < 7 %}
-        120
-        {% elif now().strftime('%H')| int >= 7 %}
-        255
-        {% endif %}
-  
+    - service: homeassistant.turn_on
+      data_template:
+        entity_id: light.woonkamer
+        brightness: >
+          {% if now().strftime('%H')| int >= 22 %}
+          120
+          {% elif now().strftime('%H')| int < 7 %}
+          120
+          {% elif now().strftime('%H')| int >= 7 %}
+          255
+          {% endif %}
 
 ######################################################################
 
 - alias: Trigger Woonkamer Lamp schakelaar
-  description: ''
+  description: ""
 
   trigger:
-  - platform: state
-    entity_id:
-      - switch.schakelaar_woonkamer
-    to: 'on'
+    - platform: state
+      entity_id:
+        - switch.schakelaar_woonkamer
+      to: "on"
 
   action:
-  - service: homeassistant.turn_on
-    entity_id:
-       - switch.schakelaar_woonkamer
+    - service: homeassistant.turn_on
+      entity_id:
+        - switch.schakelaar_woonkamer
 
-  - service: homeassistant.turn_on
-    data_template:
-      entity_id: light.woonkamer
-      brightness: >
-        {% if states.media_player.nvidia_shield == 'playing' %}
-        75
-        {% elif now().strftime('%H')| int >= 22 %}
-        120
-        {% elif now().strftime('%H')| int < 7 %}
-        120
-        {% elif now().strftime('%H')| int >= 7 %}
-        255
-        {% endif %}
+    - service: homeassistant.turn_on
+      data_template:
+        entity_id: light.woonkamer
+        brightness: >
+          {% if states.media_player.nvidia_shield == 'playing' %}
+          75
+          {% elif now().strftime('%H')| int >= 22 %}
+          120
+          {% elif now().strftime('%H')| int < 7 %}
+          120
+          {% elif now().strftime('%H')| int >= 7 %}
+          255
+          {% endif %}
 
-  - service: timer.start
-    data:
-      entity_id: timer.woonkamer
-
+    - service: timer.start
+      data:
+        entity_id: timer.woonkamer
 
 ######################################################################
 
@@ -193,15 +183,15 @@
   trigger:
     - platform: state
       entity_id: switch.schakelaar_woonkamer
-      to: 'off'     
-      
+      to: "off"
+
   action:
-  - service: homeassistant.turn_off
-    entity_id: light.woonkamer
-    
-  - service: timer.stop
-    data:
-      entity_id: timer.woonkamer  
+    - service: homeassistant.turn_off
+      entity_id: light.woonkamer
+
+    - service: timer.stop
+      data:
+        entity_id: timer.woonkamer
 
 ######################################################################
 
@@ -210,19 +200,18 @@
     platform: event
     event_type: timer.finished
     event_data:
-      entity_id: timer.woonkamer     
-      
+      entity_id: timer.woonkamer
+
   condition:
     condition: numeric_state
     entity_id: sensor.espresense_woonkamer_count
-    below: 1      
-      
+    below: 1
+
   action:
     service: homeassistant.turn_off
-    entity_id: 
-       - light.woonkamer
-       - switch.schakelaar_woonkamer
-      
+    entity_id:
+      - light.woonkamer
+      - switch.schakelaar_woonkamer
 
 #############
 
@@ -230,12 +219,11 @@
   trigger:
     - platform: state
       entity_id: light.woonkamer
-      to: 'off'
+      to: "off"
 
   action:
     - service: homeassistant.turn_off
       entity_id: switch.schakelaar_woonkamer
-
 
 #############
 
@@ -243,8 +231,8 @@
   trigger:
     - platform: state
       entity_id: light.woonkamer
-      to: 'on'
+      to: "on"
 
   action:
     - service: homeassistant.turn_on
-      entity_id: switch.schakelaar_woonkamer 
+      entity_id: switch.schakelaar_woonkamer
