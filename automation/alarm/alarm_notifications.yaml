@@ -1,210 +1,201 @@
-
-
 # Notify when brand alarm
 - alias: Send notification when brand alarm triggered
   trigger:
-  - platform: state
-    entity_id: binary_sensor.smokedetector_woonkamer
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.smokedetector_woonkamer
+      to: "on"
 
   action:
-  - service: notify.ALL_CONTACTS
-    data:
-      message: Brand ALARM! Rook gedetecteerd!!!!
+    - service: notify.ALL_CONTACTS
       data:
-         push:
+        message: Brand ALARM! Rook gedetecteerd!!!!
+        data:
+          push:
             sound:
-               name: default
-               critical: 1
-               volume: 1.0
+              name: default
+              critical: 1
+              volume: 1.0
 
 ######################################################################
 -
 # Notify when alarm triggerd
 - alias: Send notification when alarm triggered
   trigger:
-  - platform: state
-    entity_id: alarm_control_panel.ha_alarm
-    to: triggered
-
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: triggered
 
   action:
-
-  - service: notify.ALL_CONTACTS
-    data:
-      message: ALARM! The alarm has been triggered
-
-    data_template:
-      # Alarm ingeschakeld in away mode om: {{ now().strftime('%H:%M %A %d %B %Y') }}
-      message: >-
-        ALARM! The alarm has been triggered
-
-        {% if is_state('group.motion', 'on') %}
-        Zones met beweging:
-          {%- for entity in states.group.motion.attributes.entity_id -%}
-            {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
-              - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
-            {%- endif %}
-          {%- endfor -%}
-        {% endif %}
-
-        {% if is_state('group.ramen', 'on') %}
-        Open ramen:
-          {%- for entity in states.group.ramen.attributes.entity_id -%}
-            {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
-              - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
-            {%- endif %}
-          {%- endfor -%}
-        {% endif %}
-
-        {% if is_state('group.deuren', 'on') %}
-        Open deuren:
-
-        {%- for entity in states.group.deuren.attributes.entity_id -%}
-          {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
-            - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
-          {%- endif %}
-        {%- endfor -%}
-        {% endif %}
+    - service: notify.ALL_CONTACTS
       data:
-         push:
+        message: ALARM! The alarm has been triggered
+
+      data_template:
+        # Alarm ingeschakeld in away mode om: {{ now().strftime('%H:%M %A %d %B %Y') }}
+        message: >-
+          ALARM! The alarm has been triggered
+
+          {% if is_state('group.motion', 'on') %}
+          Zones met beweging:
+            {%- for entity in states.group.motion.attributes.entity_id -%}
+              {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+                - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+              {%- endif %}
+            {%- endfor -%}
+          {% endif %}
+
+          {% if is_state('group.ramen', 'on') %}
+          Open ramen:
+            {%- for entity in states.group.ramen.attributes.entity_id -%}
+              {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+                - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+              {%- endif %}
+            {%- endfor -%}
+          {% endif %}
+
+          {% if is_state('group.deuren', 'on') %}
+          Open deuren:
+
+          {%- for entity in states.group.deuren.attributes.entity_id -%}
+            {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+              - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+            {%- endif %}
+          {%- endfor -%}
+          {% endif %}
+        data:
+          push:
             sound:
-               name: default
-               critical: 1
-               volume: 0.7
-               
+              name: default
+              critical: 1
+              volume: 0.7
 
 ######################################################################
 
 # Notify on door open
 - alias: Stuur notificatie als deur geopend wordt en alarm aan staat.
   trigger:
-  - platform: state
-    entity_id: binary_sensor.achterdeur
-    to: 'on'
-    
+    - platform: state
+      entity_id: binary_sensor.achterdeur
+      to: "on"
+
   condition:
-     condition: or
-     conditions:
-        - condition: state
-          entity_id: alarm_control_panel.ha_alarm
-          state: armed_home
-        - condition: state
-          entity_id: alarm_control_panel.ha_alarm
-          state: armed_away                
-    
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: armed_home
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: armed_away
+
   action:
-  - service: notify.mobile_app_reyhzhao
-    data:
-      message: ALARM! Achterdeur geopend.
+    - service: notify.mobile_app_reyhzhao
       data:
-         push:
+        message: ALARM! Achterdeur geopend.
+        data:
+          push:
             sound:
-               name: US-EN-Morgan-Freeman-Back-Door-Opened.wav
+              name: US-EN-Morgan-Freeman-Back-Door-Opened.wav
 
 ######################################################################
 
 # Notify door close
 - alias: Stuur notificatie als deur gesloten wordt en alarm aan staat.
   trigger:
-  - platform: state
-    entity_id: binary_sensor.achterdeur
-    to: 'off'
-    
+    - platform: state
+      entity_id: binary_sensor.achterdeur
+      to: "off"
+
   condition:
-     condition: or
-     conditions:
-        - condition: state
-          entity_id: alarm_control_panel.ha_alarm
-          state: armed_home
-        - condition: state
-          entity_id: alarm_control_panel.ha_alarm
-          state: armed_away     
-    
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: armed_home
+      - condition: state
+        entity_id: alarm_control_panel.ha_alarm
+        state: armed_away
+
   action:
-  - service: notify.mobile_app_reyhzhao
-    data:
-      message: ALARM! Achterdeur gesloten.
+    - service: notify.mobile_app_reyhzhao
       data:
-         push:
+        message: ALARM! Achterdeur gesloten.
+        data:
+          push:
             sound:
-               name: US-EN-Morgan-Freeman-Back-Door-Closed.wav
+              name: US-EN-Morgan-Freeman-Back-Door-Closed.wav
 
 ######################################################################
-
 
 # Send notification when alarm is Armed in Home mode
 - alias: Send notification when alarm is Armed in Home mode
   trigger:
-  - platform: state
-    entity_id: alarm_control_panel.ha_alarm
-    from: disarmed
-    to: armed_home
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      from: disarmed
+      to: armed_home
   action:
-  - service: notify.mobile_app_reyhzhao
-    data_template:
-      message: "ALARM! The alarm is armed in Home mode {{ states('sensor.date_time') }} \n"
-      data:
-         push:
+    - service: notify.mobile_app_reyhzhao
+      data_template:
+        message: "ALARM! The alarm is armed in Home mode {{ states('sensor.date_time') }} \n"
+        data:
+          push:
             sound:
-               name: default
+              name: default
 
 ######################################################################
 
 # Send notification when alarm is Armed in Away mode
 - alias: Send notification when alarm is Armed in Away mode
   trigger:
-  - platform: state
-    entity_id: alarm_control_panel.ha_alarm
-    from: disarmed
-    to: armed_away
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      from: disarmed
+      to: armed_away
   action:
-  - service: notify.matrix_notify
-    data_template:
-      # Alarm ingeschakeld in away mode om: {{ now().strftime('%H:%M %A %d %B %Y') }}
-      message: >-
-        Alarm ingeschakeld in "away mode" om:
-        {{ now().strftime('%H:%M') }}
+    - service: notify.matrix_notify
+      data_template:
+        # Alarm ingeschakeld in away mode om: {{ now().strftime('%H:%M %A %d %B %Y') }}
+        message: >-
+          Alarm ingeschakeld in "away mode" om:
+          {{ now().strftime('%H:%M') }}
 
-        {% if is_state('group.ramen', 'on') %}
-        Open ramen:
-          {%- for entity in states.group.ramen.attributes.entity_id -%}
+          {% if is_state('group.ramen', 'on') %}
+          Open ramen:
+            {%- for entity in states.group.ramen.attributes.entity_id -%}
+              {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+                - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+              {%- endif %}
+            {%- endfor -%}
+          {% endif %}
+
+          {% if is_state('group.deuren', 'on') %}
+          Open deuren:
+
+          {%- for entity in states.group.deuren.attributes.entity_id -%}
             {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
               - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
             {%- endif %}
           {%- endfor -%}
-        {% endif %}
-
-        {% if is_state('group.deuren', 'on') %}
-        Open deuren:
-
-        {%- for entity in states.group.deuren.attributes.entity_id -%}
-          {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
-            - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
-          {%- endif %}
-        {%- endfor -%}
-        {% endif %}
-
+          {% endif %}
 
 ######################################################################
 -
 # Send notification when alarm is Disarmed
-- alias: 'Send notification when alarm is Disarmed'
+- alias: "Send notification when alarm is Disarmed"
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
-      to: 'disarmed'
+      to: "disarmed"
 
   action:
-  - service: notify.ALL_CONTACTS
-    data_template:
+    - service: notify.ALL_CONTACTS
+      data_template:
+        message: >-
+          Alarm uitgeschakeld om: {{ now().strftime('%H:%M') }}
 
-      message: >-
-        Alarm uitgeschakeld om: {{ now().strftime('%H:%M') }}
 #      data:
 #         push:
 #            sound:
 #               name: default
-
-
 
