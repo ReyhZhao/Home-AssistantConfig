@@ -1,56 +1,60 @@
-- alias: Trigger iedereen van huis
-  description: ''
+- alias: "Disarm the alarm"
   trigger:
-  - entity_id: group.presence
-    platform: state
-    to: 'not_home'
-  
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: "ALARM_DISARM"
+  action:
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.ha_alarm
+
+- alias: Trigger iedereen van huis
+  description: ""
+  trigger:
+    - entity_id: group.presence
+      platform: state
+      to: "not_home"
+
   action:
     - service: alarm_control_panel.alarm_arm_away
       entity_id: alarm_control_panel.ha_alarm
-    
+
     - service: homeassistant.turn_off
       entity_id: group.allelampen
 
     - service: homeassistant.turn_on
       entity_id: switch.unifi_video_recording
 
-
-
 - alias: Trigger iemand huis
-  description: 'Disarm alarm als er iemand thuis komt.'
+  description: "Disarm alarm als er iemand thuis komt."
   trigger:
-  - entity_id: group.presence
-    platform: state
-    to: 'home'  
+    - entity_id: group.presence
+      platform: state
+      to: "home"
   action:
     - service: alarm_control_panel.alarm_disarm
-      entity_id: alarm_control_panel.ha_alarm 
+      entity_id: alarm_control_panel.ha_alarm
 
     - service: homeassistant.turn_off
       entity_id: switch.unifi_video_recording
-
-
-
 
 - alias: Trigger depart if door open
   trigger:
     - platform: state
       entity_id: binary_sensor.achterdeur, binary_sensor.voordeur
-      to: 'on'
+      to: "on"
   action:
-    service: 'mqtt.publish'
-    data: 
+    service: "mqtt.publish"
+    data:
       topic: monitor/scan/depart
-
 
 ############################
 
 - alias: Schakel alarm uit als de eerste wakker wordt
   trigger:
-  - platform: state
-    entity_id: binary_sensor.motion_trap
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.motion_trap
+      to: "on"
 
   condition:
     condition: and
@@ -63,27 +67,27 @@
       # Schakel alarm enkel uit als iemand van boven komt.
       - condition: state
         entity_id: binary_sensor.motion_overloop
-        state: 'on'
+        state: "on"
 
       - condition: or
         conditions:
-        # Maandag schema
-        - condition: time
-          after: '5:00:00'
-          before: '8:30:00'
-          weekday:
-            - mon
-        # Rest van de week schema
-        - condition: time
-          after: '7:00:00'
-          before: '10:00:00'
-          weekday:
-            - tue
-            - wed
-            - thu
-            - fri
-            - sat
-            - sun
+          # Maandag schema
+          - condition: time
+            after: "5:00:00"
+            before: "8:30:00"
+            weekday:
+              - mon
+          # Rest van de week schema
+          - condition: time
+            after: "7:00:00"
+            before: "10:00:00"
+            weekday:
+              - tue
+              - wed
+              - thu
+              - fri
+              - sat
+              - sun
 
   action:
     - service: alarm_control_panel.alarm_disarm
@@ -92,11 +96,10 @@
     - service: homeassistant.turn_off
       entity_id:
         - input_boolean.nachtstand
-        
+
     - service: homeassistant.turn_on
       entity_id:
         - automation.trigger_woonkamer_lamp_on
-
 
     - service: homeassistant.turn_off
       entity_id: switch.unifi_video_recording
@@ -105,176 +108,166 @@
       data_template:
         message: "Goeie morgen."
         data:
-           push:
-              sound:
-                 name: default
+          push:
+            sound:
+              name: default
 
 ##############################
 
-    
-  
 - alias: Trigger alarm while armed home
   trigger:
-  - platform: state
-    entity_id: binary_sensor.achterdeur
-    to: 'on'
-  - platform: state    
-    entity_id: binary_sensor.voordeur
-    to: 'on'
-  - platform: state    
-    entity_id: binary_sensor.raam_badkamer
-    to: 'on'      
-  - platform: state    
-    entity_id: binary_sensor.window_kantoor
-    to: 'on'  
-  - platform: state    
-    entity_id: binary_sensor.window_logeerkamer
-    to: 'on'  
-  - platform: state    
-    entity_id: binary_sensor.window_slaapkamer
-    to: 'on'  
-  - platform: state    
-    entity_id: binary_sensor.window_woonkamer
-    to: 'on'      
-  
+    - platform: state
+      entity_id: binary_sensor.achterdeur
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.voordeur
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.raam_badkamer
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.window_kantoor
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.window_logeerkamer
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.window_slaapkamer
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.window_woonkamer
+      to: "on"
+
   condition:
-  - condition: state
-    entity_id: alarm_control_panel.ha_alarm
-    state: armed_home
-        
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: armed_home
+
   action:
     service: alarm_control_panel.alarm_trigger
     entity_id: alarm_control_panel.ha_alarm
-    
-    
 
 - alias: Trigger alarm while armed night
   trigger:
-  - platform: state
-    entity_id: binary_sensor.achterdeur
-    to: 'on'
-  - platform: state    
-    entity_id: binary_sensor.voordeur
-    to: 'on'    
-  - platform: state    
-    entity_id: binary_sensor.raam_badkamer
-    to: 'on'      
-  - platform: state    
-    entity_id: binary_sensor.window_kantoor
-    to: 'on'  
-  - platform: state    
-    entity_id: binary_sensor.window_logeerkamer
-    to: 'on'  
-  - platform: state    
-    entity_id: binary_sensor.window_slaapkamer
-    to: 'on'  
-  - platform: state    
-    entity_id: binary_sensor.window_woonkamer
-    to: 'on'          
-  - platform: state    
-    entity_id: binary_sensor.pir_zolder
-    to: 'on'      
-  - platform: state    
-    entity_id: binary_sensor.motion_kantoor
-    to: 'on'      
-  
+    - platform: state
+      entity_id: binary_sensor.achterdeur
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.voordeur
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.raam_badkamer
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.window_kantoor
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.window_logeerkamer
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.window_slaapkamer
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.window_woonkamer
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.pir_zolder
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.motion_kantoor
+      to: "on"
+
   condition:
-  - condition: state
-    entity_id: alarm_control_panel.ha_alarm
-    state: armed_night
-        
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: armed_night
+
   action:
     service: alarm_control_panel.alarm_trigger
     entity_id: alarm_control_panel.ha_alarm
-   
-    
-    
-    
+
 - alias: Trigger alarm while armed away
   trigger:
-  - platform: state
-    entity_id: binary_sensor.achterdeur
-    to: 'on'
-  - platform: state    
-    entity_id: binary_sensor.voordeur
-    to: 'on'
-  - platform: state    
-    entity_id: binary_sensor.window_kantoor
-    to: 'on'  
-  - platform: state    
-    entity_id: binary_sensor.window_logeerkamer
-    to: 'on'  
-  - platform: state    
-    entity_id: binary_sensor.window_slaapkamer
-    to: 'on'  
-  - platform: state    
-    entity_id: binary_sensor.window_woonkamer
-    to: 'on'  
-  - platform: state  
-    entity_id: binary_sensor.raam_badkamer
-    to: 'on'         
-  - platform: state    
-    entity_id: binary_sensor.pir_zolder
-    to: 'on'   
-  - platform: state  
-    entity_id: binary_sensor.motion_gang
-    to: 'on'
-  - platform: state
-    entity_id: binary_sensor.motion_gang_2
-    to: 'on'
-  - platform: state  
-    entity_id: binary_sensor.motion_trap
-    to: 'on'     
-  - platform: state  
-    entity_id: binary_sensor.motion_overloop
-    to: 'on'     
-  - platform: state  
-    entity_id: binary_sensor.motion_slaapkamer
-    to: 'on' 
-  - platform: state  
-    entity_id: binary_sensor.motion_logeerkamer 
-    to: 'on'     
+    - platform: state
+      entity_id: binary_sensor.achterdeur
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.voordeur
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.window_kantoor
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.window_logeerkamer
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.window_slaapkamer
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.window_woonkamer
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.raam_badkamer
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.pir_zolder
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.motion_gang
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.motion_gang_2
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.motion_trap
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.motion_overloop
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.motion_slaapkamer
+      to: "on"
+    - platform: state
+      entity_id: binary_sensor.motion_logeerkamer
+      to: "on"
 
   condition:
-  - condition: state
-    entity_id: alarm_control_panel.ha_alarm
-    state: armed_away
-    
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: armed_away
+
   action:
     service: alarm_control_panel.alarm_trigger
     entity_id: alarm_control_panel.ha_alarm
-
 
 - alias: Disable camera recording at 08:00 if someone's home
   trigger:
     platform: time
     at: "08:00:00"
   condition:
-  - condition: state
-    entity_id: group.presence
-    state: home
+    - condition: state
+      entity_id: group.presence
+      state: home
 
   action:
     - service: homeassistant.turn_off
-      entity_id: switch.unifi_video_recording  
-
-
+      entity_id: switch.unifi_video_recording
 
 - alias: ARM Alarm at 22:00 if someone's home
   trigger:
     platform: time
     at: "22:00:00"
   condition:
-  - condition: state
-    entity_id: group.presence
-    state: home
-  - condition: state
-    entity_id: alarm_control_panel.ha_alarm
-    state: disarmed
+    - condition: state
+      entity_id: group.presence
+      state: home
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: disarmed
 
   action:
     - service: alarm_control_panel.alarm_arm_home
-      entity_id: alarm_control_panel.ha_alarm    
+      entity_id: alarm_control_panel.ha_alarm
 
     - service: homeassistant.turn_on
       entity_id: switch.unifi_video_recording

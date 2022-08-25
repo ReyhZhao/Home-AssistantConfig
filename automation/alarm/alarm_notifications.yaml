@@ -63,67 +63,14 @@
           {%- endfor -%}
           {% endif %}
         data:
+          actions:
+            - action: "ALARM_DISARM"
+              title: "Disarm" # The button title
           push:
             sound:
               name: default
               critical: 1
               volume: 0.7
-
-######################################################################
-
-# Notify on door open
-- alias: Stuur notificatie als deur geopend wordt en alarm aan staat.
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.achterdeur
-      to: "on"
-
-  condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: alarm_control_panel.ha_alarm
-        state: armed_home
-      - condition: state
-        entity_id: alarm_control_panel.ha_alarm
-        state: armed_away
-
-  action:
-    - service: notify.mobile_app_reyhzhao
-      data:
-        message: ALARM! Achterdeur geopend.
-        data:
-          push:
-            sound:
-              name: US-EN-Morgan-Freeman-Back-Door-Opened.wav
-
-######################################################################
-
-# Notify door close
-- alias: Stuur notificatie als deur gesloten wordt en alarm aan staat.
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.achterdeur
-      to: "off"
-
-  condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: alarm_control_panel.ha_alarm
-        state: armed_home
-      - condition: state
-        entity_id: alarm_control_panel.ha_alarm
-        state: armed_away
-
-  action:
-    - service: notify.mobile_app_reyhzhao
-      data:
-        message: ALARM! Achterdeur gesloten.
-        data:
-          push:
-            sound:
-              name: US-EN-Morgan-Freeman-Back-Door-Closed.wav
 
 ######################################################################
 
@@ -193,9 +140,3 @@
       data_template:
         message: >-
           Alarm uitgeschakeld om: {{ now().strftime('%H:%M') }}
-
-#      data:
-#         push:
-#            sound:
-#               name: default
-

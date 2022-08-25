@@ -274,11 +274,11 @@ switch:
         addon: core_rpc_shutdown
         input: chronos
 
-  - platform: wake_on_lan
-    name: Werk Laptop
-    host: !secret werklaptop
-    broadcast_address: 192.168.190.255
-    mac: 84:a9:3e:42:d4:72
+  # - platform: wake_on_lan
+  #   name: Werk Laptop
+  #   host: !secret werklaptop
+  #   broadcast_address: 192.168.190.255
+  #   mac: 84:a9:3e:42:d4:72
 
 # netatmo:
 #   client_id: !secret netatmo_client
