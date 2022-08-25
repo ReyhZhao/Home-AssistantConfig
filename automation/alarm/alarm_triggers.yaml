@@ -38,16 +38,7 @@
     - service: homeassistant.turn_off
       entity_id: switch.unifi_video_recording
 
-- alias: Trigger depart if door open
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.achterdeur, binary_sensor.voordeur
-      to: "on"
-  action:
-    service: "mqtt.publish"
-    data:
-      topic: monitor/scan/depart
-
+      
 ############################
 
 - alias: Schakel alarm uit als de eerste wakker wordt

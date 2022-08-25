@@ -100,7 +100,7 @@
       from: disarmed
       to: armed_away
   action:
-    - service: notify.matrix_notify
+    - service: notify.ALL_CONTACTS
       data_template:
         # Alarm ingeschakeld in away mode om: {{ now().strftime('%H:%M %A %d %B %Y') }}
         message: >-

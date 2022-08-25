@@ -58,6 +58,10 @@
         entity_id: light.woonkamer
         state: "off"
 
+      - condition: state
+        entity_id: input_boolean.nachtstand
+        state: "Off"
+
       - or:
           - condition: state
             entity_id: input_select.schemer_buiten

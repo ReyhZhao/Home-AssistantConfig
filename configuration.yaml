@@ -14,10 +14,6 @@ default_config:
 frontend:
   #javascript_version: latest
 
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
-
 http:
   use_x_forwarded_for: true
 
@@ -54,32 +50,16 @@ matrix:
   rooms:
     - !secret matrix_room
 
-telegram_bot:
-  - platform: polling
-    api_key: !secret telegram_api_key
-    allowed_chat_ids:
-      - !secret telegram_groupid
-      - !secret telegram_eddie
-
 notify:
   - name: matrix_notify
     platform: matrix
     default_room: !secret matrix_room
 
-  - name: telegram_group
-    platform: telegram
-    chat_id: !secret telegram_groupid
-
-  - name: telegram_eddie
-    platform: telegram
-    chat_id: !secret telegram_eddie
-
   - platform: group
     name: all_contacts
     services:
       - service: mobile_app_reyhzhao
-      - service: telegram_eddie
-      - service: mobile_app_esther_s_oneplus_a6003
+      - service: mobile_app_in2013
 
 mobile_app:
 
@@ -95,16 +75,6 @@ tts:
   - platform: google_translate
 
 remote:
-#  - platform: harmony
-#    name: Harmony
-#    host: !secret harmony_host
-#    activity: TV kijken
-
-camera:
-  - platform: uvc
-    nvr: !secret unifi_nvr
-    key: !secret unifi_key
-    password: !secret unifi_camera
 
 input_boolean:
   spotify_shuffle:
@@ -119,7 +89,7 @@ input_boolean:
 input_text:
   light_to_switch:
     name: Lights to switch
-    initial: off
+    initial: "off"
 
 input_number:
   spotify_volume:
@@ -193,17 +163,17 @@ rfxtrx:
     0b11000482bc0cfe04020f70:
 
 switch:
-  - platform: rest
-    name: Unifi Video Recording
-    method: put
-    timeout: 300
-    resource: https://unifi-video.vels.online/api/2.0/camera/625d7028e4b070acfaea534b?apiKey=7OSzSgyShlfENzLaEL9eTc1BgbfWwOMM
-    body_on: '{ "name": "Camera-Tuin", "recordingSettings": { "channel": "0", "fullTimeRecordEnabled": false,  "motionRecordEnabled": true } }'
-    body_off: '{ "name": "Camera-Tuin", "recordingSettings": { "channel": "0", "fullTimeRecordEnabled": false,  "motionRecordEnabled": false } }'
-    is_on_template: "{{ value_json.data.0.recordingSettings.motionRecordEnabled }}"
-    headers:
-      Content-Type: application/json
-    verify_ssl: true
+  # - platform: rest
+  #   name: Unifi Video Recording
+  #   method: put
+  #   timeout: 300
+  #   resource: https://unifi-video.vels.online/api/2.0/camera/625d7028e4b070acfaea534b?apiKey=7OSzSgyShlfENzLaEL9eTc1BgbfWwOMM
+  #   body_on: '{ "name": "Camera-Tuin", "recordingSettings": { "channel": "0", "fullTimeRecordEnabled": false,  "motionRecordEnabled": true } }'
+  #   body_off: '{ "name": "Camera-Tuin", "recordingSettings": { "channel": "0", "fullTimeRecordEnabled": false,  "motionRecordEnabled": false } }'
+  #   is_on_template: "{{ value_json.data.0.recordingSettings.motionRecordEnabled }}"
+  #   headers:
+  #     Content-Type: application/json
+  #   verify_ssl: true
 
   - platform: flux
     lights:
@@ -263,26 +233,6 @@ switch:
     name: TV aanzetten
     host: !secret bravia_tv_host
     mac: 94:53:30:60:EB:SF
-
-  - platform: wake_on_lan
-    name: Backup NUC
-    host: 192.168.232.123
-    mac: f4:4d:30:68:9e:9d
-    turn_off:
-      service: hassio.addon_stdin
-      data:
-        addon: core_rpc_shutdown
-        input: chronos
-
-  # - platform: wake_on_lan
-  #   name: Werk Laptop
-  #   host: !secret werklaptop
-  #   broadcast_address: 192.168.190.255
-  #   mac: 84:a9:3e:42:d4:72
-
-# netatmo:
-#   client_id: !secret netatmo_client
-#   client_secret: !secret netatmo_secret
 
 plant:
   areca:
