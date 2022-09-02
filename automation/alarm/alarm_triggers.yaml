@@ -8,6 +8,12 @@
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm
 
+    - service: alarmo.disarm
+      data:
+        entity_id: alarm_control_panel.alarmo
+
+##############################
+
 - alias: Trigger iedereen van huis
   description: ""
   trigger:
@@ -22,10 +28,18 @@
     - service: homeassistant.turn_off
       entity_id: group.allelampen
 
-    - service: homeassistant.turn_on
-      entity_id: switch.unifi_video_recording
+    # - service: homeassistant.turn_on
+    #   entity_id: switch.unifi_video_recording
 
-- alias: Trigger iemand huis
+    - service: alarmo.arm
+      data:
+        entity_id: alarm_control_panel.alarmo
+        mode: away
+        skip_delay: true
+
+##############################
+
+- alias: Trigger iemand thuis
   description: "Disarm alarm als er iemand thuis komt."
   trigger:
     - entity_id: group.presence
@@ -35,10 +49,13 @@
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm
 
-    - service: homeassistant.turn_off
-      entity_id: switch.unifi_video_recording
+    # - service: homeassistant.turn_off
+    #   entity_id: switch.unifi_video_recording
 
-      
+    - service: alarmo.disarm
+      data:
+        entity_id: alarm_control_panel.alarmo
+
 ############################
 
 - alias: Schakel alarm uit als de eerste wakker wordt
@@ -79,7 +96,6 @@
               - fri
               - sat
               - sun
-
   action:
     - service: alarm_control_panel.alarm_disarm
       entity_id: alarm_control_panel.ha_alarm
@@ -92,8 +108,12 @@
       entity_id:
         - automation.trigger_woonkamer_lamp_on
 
-    - service: homeassistant.turn_off
-      entity_id: switch.unifi_video_recording
+    # - service: homeassistant.turn_off
+    #   entity_id: switch.unifi_video_recording
+
+    - service: alarmo.disarm
+      data:
+        entity_id: alarm_control_panel.alarmo
 
     - service: notify.mobile_app_reyhzhao
       data_template:
@@ -231,18 +251,7 @@
     service: alarm_control_panel.alarm_trigger
     entity_id: alarm_control_panel.ha_alarm
 
-- alias: Disable camera recording at 08:00 if someone's home
-  trigger:
-    platform: time
-    at: "08:00:00"
-  condition:
-    - condition: state
-      entity_id: group.presence
-      state: home
-
-  action:
-    - service: homeassistant.turn_off
-      entity_id: switch.unifi_video_recording
+##############################
 
 - alias: ARM Alarm at 22:00 if someone's home
   trigger:
@@ -260,5 +269,11 @@
     - service: alarm_control_panel.alarm_arm_home
       entity_id: alarm_control_panel.ha_alarm
 
-    - service: homeassistant.turn_on
-      entity_id: switch.unifi_video_recording
+    # - service: homeassistant.turn_on
+    #   entity_id: switch.unifi_video_recording
+
+    - service: alarmo.arm
+      data:
+        entity_id: alarm_control_panel.alarmo
+        mode: night
+        skip_delay: true

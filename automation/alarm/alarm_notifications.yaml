@@ -75,68 +75,68 @@
 ######################################################################
 
 # Send notification when alarm is Armed in Home mode
-- alias: Send notification when alarm is Armed in Home mode
-  trigger:
-    - platform: state
-      entity_id: alarm_control_panel.ha_alarm
-      from: disarmed
-      to: armed_home
-  action:
-    - service: notify.mobile_app_reyhzhao
-      data_template:
-        message: "ALARM! The alarm is armed in Home mode {{ states('sensor.date_time') }} \n"
-        data:
-          push:
-            sound:
-              name: default
+# - alias: Send notification when alarm is Armed in Home mode
+#   trigger:
+#     - platform: state
+#       entity_id: alarm_control_panel.ha_alarm
+#       from: disarmed
+#       to: armed_home
+#   action:
+#     - service: notify.mobile_app_reyhzhao
+#       data_template:
+#         message: "ALARM! The alarm is armed in Home mode {{ states('sensor.date_time') }} \n"
+#         data:
+#           push:
+#             sound:
+#               name: default
 
 ######################################################################
 
 # Send notification when alarm is Armed in Away mode
-- alias: Send notification when alarm is Armed in Away mode
-  trigger:
-    - platform: state
-      entity_id: alarm_control_panel.ha_alarm
-      from: disarmed
-      to: armed_away
-  action:
-    - service: notify.ALL_CONTACTS
-      data_template:
-        # Alarm ingeschakeld in away mode om: {{ now().strftime('%H:%M %A %d %B %Y') }}
-        message: >-
-          Alarm ingeschakeld in "away mode" om:
-          {{ now().strftime('%H:%M') }}
+# - alias: Send notification when alarm is Armed in Away mode
+#   trigger:
+#     - platform: state
+#       entity_id: alarm_control_panel.ha_alarm
+#       from: disarmed
+#       to: armed_away
+#   action:
+#     - service: notify.ALL_CONTACTS
+#       data_template:
+#         # Alarm ingeschakeld in away mode om: {{ now().strftime('%H:%M %A %d %B %Y') }}
+#         message: >-
+#           Alarm ingeschakeld in "away mode" om:
+#           {{ now().strftime('%H:%M') }}
 
-          {% if is_state('group.ramen', 'on') %}
-          Open ramen:
-            {%- for entity in states.group.ramen.attributes.entity_id -%}
-              {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
-                - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
-              {%- endif %}
-            {%- endfor -%}
-          {% endif %}
+#           {% if is_state('group.ramen', 'on') %}
+#           Open ramen:
+#             {%- for entity in states.group.ramen.attributes.entity_id -%}
+#               {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+#                 - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+#               {%- endif %}
+#             {%- endfor -%}
+#           {% endif %}
 
-          {% if is_state('group.deuren', 'on') %}
-          Open deuren:
+#           {% if is_state('group.deuren', 'on') %}
+#           Open deuren:
 
-          {%- for entity in states.group.deuren.attributes.entity_id -%}
-            {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
-              - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
-            {%- endif %}
-          {%- endfor -%}
-          {% endif %}
+#           {%- for entity in states.group.deuren.attributes.entity_id -%}
+#             {%- if states[entity.split('.')[0]][entity.split('.')[1]].state == 'on' %}
+#               - {{ states[entity.split('.')[0]][entity.split('.')[1]].attributes.friendly_name }}
+#             {%- endif %}
+#           {%- endfor -%}
+#           {% endif %}
 
 ######################################################################
 -
 # Send notification when alarm is Disarmed
-- alias: "Send notification when alarm is Disarmed"
-  trigger:
-    - platform: state
-      entity_id: alarm_control_panel.ha_alarm
-      to: "disarmed"
+# - alias: "Send notification when alarm is Disarmed"
+#   trigger:
+#     - platform: state
+#       entity_id: alarm_control_panel.ha_alarm
+#       to: "disarmed"
 
-  action:
-    - service: notify.ALL_CONTACTS
-      data_template:
-        message: >-
-          Alarm uitgeschakeld om: {{ now().strftime('%H:%M') }}
+#   action:
+#     - service: notify.ALL_CONTACTS
+#       data_template:
+#         message: >-
+#           Alarm uitgeschakeld om: {{ now().strftime('%H:%M') }}

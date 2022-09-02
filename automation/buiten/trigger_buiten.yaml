@@ -1,39 +1,39 @@
 - alias: Trigger Buiten Lamp On
-  description: ''
-  
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.achterdeur
-    to: 'on'
+  description: ""
 
-  - platform: state
-    entity_id: person.eddie, person.esther
-    to: 'home'
-    
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.achterdeur
+      to: "on"
+
+    - platform: state
+      entity_id: person.eddie, person.esther
+      to: "home"
+
   condition:
     condition: state
     entity_id: input_select.schemer_buiten
     state: Donker
-    
+
   action:
     - service: homeassistant.turn_on
       entity_id:
+        - light.tuin
+        - switch.tuin_verlichting_switch
         - light.buiten
-        - switch.bf31c151c7d7ac0d24qahx
 
     - service: timer.start
       data:
         entity_id: timer.buiten
 
-
 ######################################################################
 
 - alias: Trigger iemand huis - Buiten verlichting
-  description: 'Buitenverlichting aan als iemand thuis komt.'
+  description: "Buitenverlichting aan als iemand thuis komt."
   trigger:
-  - entity_id: group.presence
-    platform: state
-    to: 'home'
+    - entity_id: group.presence
+      platform: state
+      to: "home"
 
   condition:
     condition: state
@@ -43,8 +43,9 @@
   action:
     - service: homeassistant.turn_on
       entity_id:
+        - light.tuin
+        - switch.tuin_verlichting_switch
         - light.buiten
-        - switch.bf31c151c7d7ac0d24qahx
 
     - service: timer.start
       data:
@@ -62,24 +63,27 @@
   action:
     service: homeassistant.turn_off
     entity_id:
+      - light.tuin
+      - switch.tuin_verlichting_switch
       - light.buiten
-      - switch.bf31c151c7d7ac0d24qahx
 
 #################################################################
 
 - alias: Trigger donker buiten en iemand in tuin
-  description: ''
+  description: ""
   trigger:
     - platform: state
       entity_id: switch.schemer_buiten
-      to: 'Donker'
+      to: "Donker"
 
   condition:
     condition: state
     entity_id: binary_sensor.achterdeur
-    state: 'on'
+    state: "on"
 
   action:
     - service: homeassistant.turn_on
       entity_id:
         - light.tuin
+        - switch.tuin_verlichting_switch
+        - light.buiten
