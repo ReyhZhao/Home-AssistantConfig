@@ -1,24 +1,26 @@
 #############################################################################
 ## Turn on/off indoor lights randomly
 #############################################################################
-- id: 'Automatic light toggle'
+- id: "Automatic light toggle"
   alias: Random Away Lights
   initial_state: True
   #hide_entity: False
 
   trigger:
     - platform: time_pattern
-      minutes: '/15'
+      minutes: "/15"
 
   condition:
     - condition: state
       entity_id: group.presence
-      state: 'not_home'
+      state: "not_home"
+
     - condition: sun
       after: sunset
-      after_offset: '-00:30:00'
+      after_offset: "-00:30:00"
+
     - condition: time
-      before: '22:00:00'
+      before: "22:30:00"
 
   action:
     - delay: "00:{{ '{:02}'.format(range(0,30) | random | int) }}:00"
@@ -37,21 +39,21 @@
 ################################################################
 ## Stopping presence simulation randomly 22:30
 ################################################################
-- id: 'Turning off all toggled lights'
+- id: "Turning off all toggled lights"
   alias: Turn off all lights
   initial_state: True
   #hide_entity: False
 
   trigger:
     - platform: time
-      at: '22:30:00'
+      at: "22:30:00"
 
   condition:
     - condition: state
       entity_id: group.presence
-      state: 'not_home'
+      state: "not_home"
 
   action:
-    - delay: '00:{{ range(15,59) | random | int }}:00'
+    - delay: "00:{{ range(15,59) | random | int }}:00"
     - service: homeassistant.turn_off
       entity_id: group.simulation_lights

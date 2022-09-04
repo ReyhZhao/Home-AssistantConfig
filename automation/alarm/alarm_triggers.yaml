@@ -275,5 +275,5 @@
     - service: alarmo.arm
       data:
         entity_id: alarm_control_panel.alarmo
-        mode: night
+        mode: home
         skip_delay: true
