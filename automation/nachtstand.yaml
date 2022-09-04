@@ -2,7 +2,7 @@
 
 # Trigger iemand gaat slapen
 - alias: Trigger iemand gaat slapen
-  description: 'Trigger als iemand gaat slapen, check of nachtstand aan moet.'
+  description: "Trigger als iemand gaat slapen, check of nachtstand aan moet."
 
   trigger:
     platform: state
@@ -13,52 +13,49 @@
   condition:
     condition: or
     conditions:
-
       # Iedereen thuis en iedereen slaapt
       - condition: and
         conditions:
-        - condition: state
-          entity_id: person.eddie
-          state: 'home'
-        - condition: state
-          entity_id: person.esther
-          state: 'home'
-        - condition: state
-          entity_id: input_select.status_eddie
-          state: 'Slaapt'
-        - condition: state
-          entity_id: input_select.status_esther
-          state: 'Slaapt'
-
+          - condition: state
+            entity_id: person.eddie
+            state: "home"
+          - condition: state
+            entity_id: person.esther
+            state: "home"
+          - condition: state
+            entity_id: input_select.status_eddie
+            state: "Slaapt"
+          - condition: state
+            entity_id: input_select.status_esther
+            state: "Slaapt"
 
       # Alleen Eddie thuis en Eddie slaapt
       - condition: and
         conditions:
-        - condition: state
-          entity_id: person.eddie
-          state: 'home'
-        - condition: state
-          entity_id: person.esther
-          state: 'not_home'
+          - condition: state
+            entity_id: person.eddie
+            state: "home"
+          - condition: state
+            entity_id: person.esther
+            state: "not_home"
 
-        - condition: state
-          entity_id: input_select.status_eddie
-          state: 'Slaapt'
-
+          - condition: state
+            entity_id: input_select.status_eddie
+            state: "Slaapt"
 
       # Alleen Esther thuis en Esther slaapt
       - condition: and
         conditions:
-        - condition: state
-          entity_id: person.eddie
-          state: 'not_home'
-        - condition: state
-          entity_id: person.esther
-          state: 'home'
+          - condition: state
+            entity_id: person.eddie
+            state: "not_home"
+          - condition: state
+            entity_id: person.esther
+            state: "home"
 
-        - condition: state
-          entity_id: input_select.status_eddie
-          state: 'Slaapt'
+          - condition: state
+            entity_id: input_select.status_eddie
+            state: "Slaapt"
 
   action:
     - service: homeassistant.turn_on
@@ -69,31 +66,30 @@
 
 # Trigger iemand wordt wakker
 - alias: Trigger iemand wordt wakker
-  description: 'Trigger als iemand wakker wordt, check of nachtstand uit moet.'
+  description: "Trigger als iemand wakker wordt, check of nachtstand uit moet."
 
   trigger:
     platform: state
     entity_id:
       - input_select.status_eddie
       - input_select.status_esther
-    to: 'Wakker'
+    to: "Wakker"
 
   action:
     - service: homeassistant.turn_off
       entity_id:
         - input_boolean.nachtstand
 
-
 ######################################################################
 
 # Nachtstand ingeschakeld
 - alias: Nachtstand ingeschakeld
-  description: ''
+  description: ""
 
   trigger:
     platform: state
     entity_id: input_boolean.nachtstand
-    to: 'on'
+    to: "on"
 
   action:
     - service: homeassistant.turn_off
@@ -104,48 +100,55 @@
         - automation.trigger_woonkamer_lamp_motion
         - switch.kerstverlichting_buiten
 
-    - service: alarm_control_panel.alarm_arm_night
-      entity_id: alarm_control_panel.ha_alarm
+    # - service: alarm_control_panel.alarm_arm_night
+    #   entity_id: alarm_control_panel.ha_alarm
+
+    - service: alarmo.arm
+      data:
+        entity_id: alarm_control_panel.alarmo
+        mode: night
 
 ######################################################################
 
 # Nachtstand uitgeschakeld
 - alias: Nachtstand uitgeschakeld
-  description: 'Nachtstand uitgeschakeld'
+  description: "Nachtstand uitgeschakeld"
 
   trigger:
     platform: state
     entity_id: input_boolean.nachtstand
-    to: 'off'
+    to: "off"
 
   action:
     - service: homeassistant.turn_on
       entity_id:
         - automation.trigger_woonkamer_lamp_motion
 
-    - service: alarm_control_panel.alarm_disarm
-      entity_id: alarm_control_panel.ha_alarm
-
+    # - service: alarm_control_panel.alarm_disarm
+    #   entity_id: alarm_control_panel.ha_alarm
+    - service: alarmo.disarm
+      data:
+        entity_id: alarm_control_panel.alarmo
 
 ######################################################################
 
 # Reset slaap states smiddags.
 - alias: Reset nachtstand overdag.
-  description: 'Reset nachtstand overdag.'
+  description: "Reset nachtstand overdag."
 
   trigger:
     platform: time
-    at: '08:00:00'
+    at: "08:00:00"
   action:
     - service: homeassistant.turn_off
       entity_id: switch.schakelaar_nachtstand
 
     - service: input_select.select_option
       data_template:
-         entity_id: input_select.status_eddie
-         option: 'Wakker'
+        entity_id: input_select.status_eddie
+        option: "Wakker"
 
     - service: input_select.select_option
       data_template:
-         entity_id: input_select.status_esther
-         option: 'Wakker'
+        entity_id: input_select.status_esther
+        option: "Wakker"
