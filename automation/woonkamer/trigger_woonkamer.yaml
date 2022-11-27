@@ -193,7 +193,7 @@
     - service: homeassistant.turn_off
       entity_id: light.woonkamer
 
-    - service: timer.stop
+    - service: timer.cancel
       data:
         entity_id: timer.woonkamer
 
@@ -240,3 +240,27 @@
   action:
     - service: homeassistant.turn_on
       entity_id: switch.schakelaar_woonkamer
+
+#############
+
+- alias: Sync eetkamer schakelaar met lamp.
+  trigger:
+    - platform: state
+      entity_id: light.eetkamer
+      to: "off"
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id: switch.schakelaar_eetkamer
+
+#############
+
+- alias: Sync eetkamer schakelaar met lamp -off.
+  trigger:
+    - platform: state
+      entity_id: light.eetkamer
+      to: "on"
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id: switch.schakelaar_eetkamer

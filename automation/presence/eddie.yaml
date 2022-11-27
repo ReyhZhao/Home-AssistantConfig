@@ -1,65 +1,61 @@
-
-
 - alias: Trigger Eddie Thuis
-  description: ''
+  description: ""
   trigger:
-  - entity_id: person.eddie
-    platform: state
-    to: 'home'
-  
-  action:
-  - service: notify.mobile_app_reyhzhao
-    data_template:
-      message: "Welkom thuis"
-      data:
-         push:
-            sound:
-               name: US-EN-Morgan-Freeman-Welcome-Home.wav
-               
+    - entity_id: person.eddie
+      platform: state
+      to: "home"
 
-- alias: Trigger NFC tag nachtkastje Eddie
-  description: ''
+  action:
+    - service: notify.mobile_app_reyhzhao
+      data_template:
+        message: "Welkom thuis"
+        data:
+          push:
+            sound:
+              name: US-EN-Morgan-Freeman-Welcome-Home.wav
+
+# - alias: Trigger NFC tag nachtkastje Eddie
+#   description: ''
+#   trigger:
+#   - platform: event
+#     event_type: tag_scanned
+#     event_data:
+#       tag_id: df4528b8-acaf-4d57-8f15-0792803eefc7
+
+#   action:
+#     - service: input_select.select_option
+#       data_template:
+#         entity_id: input_select.status_eddie
+#         option: 'Slaapt'
+
+#     - service: homeassistant.turn_on
+#       entity_id:
+#         - switch.schakelaar_nachtstand
+
+- alias: Trigger Eddie Slaapt
+  description: ""
   trigger:
-  - platform: event
-    event_type: tag_scanned
-    event_data:
-      tag_id: df4528b8-acaf-4d57-8f15-0792803eefc7
+    - platform: state
+      entity_id: switch.schakelaar_nachtstand
+      to: "on"
 
   action:
     - service: input_select.select_option
       data_template:
         entity_id: input_select.status_eddie
-        option: 'Slaapt'      
+        option: "Slaapt"
 
-    - service: homeassistant.turn_on
-      entity_id:
-        - switch.schakelaar_nachtstand
+############################################################
 
-
-- alias: Trigger Eddie Slaapt
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: switch.schakelaar_nachtstand
-    to: 'on'
-
-  action:
-    - service: input_select.select_option
-      data_template:      
-         entity_id: input_select.status_eddie
-         option: 'Slaapt' 
-         
-         
-         
 - alias: Trigger Eddie Wakker
-  description: ''
+  description: ""
   trigger:
-  - platform: state
-    entity_id: switch.schakelaar_nachtstand
-    to: 'off'
-    
+    - platform: state
+      entity_id: switch.schakelaar_nachtstand
+      to: "off"
+
   action:
     - service: input_select.select_option
-      data_template:      
-         entity_id: input_select.status_eddie
-         option: 'Wakker'          
+      data_template:
+        entity_id: input_select.status_eddie
+        option: "Wakker"

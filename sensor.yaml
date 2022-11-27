@@ -5,30 +5,43 @@
   #state_topic: "espresense/rooms"
   #state_topic: "espresense/devices/apple:1006:10-7"
   state_topic: "espresense/devices/iPhone_Eddie"
-
-  timeout: 20
-  away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  timeout: 30
+  away_timeout: 360 # number of seconds after which the enitity will get status not_home
 
 - platform: mqtt_room
   device_id: "tile:f52f25ee711a"
   name: "Tile Eddie"
   state_topic: "espresense/rooms"
-  timeout: 5
+  timeout: 30
+  away_timeout: 360 # number of seconds after which the enitity will get status not_home
+
+- platform: mqtt_room
+  device_id: "tile:e790d3c72a19"
+  name: "Tile Black"
+  state_topic: "espresense/rooms"
+  timeout: 30
   away_timeout: 120 # number of seconds after which the enitity will get status not_home
 
 - platform: mqtt_room
-  device_id: "apple:1005:9-12"
-  name: "MacBook Eddie"
+  device_id: "tile:dc5772428e45"
+  name: "Tile White"
   state_topic: "espresense/rooms"
-  timeout: 5
-  away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  timeout: 30
+  away_timeout: 360 # number of seconds after which the enitity will get status not_home
+
+# - platform: mqtt_room
+#   device_id: "apple:1005:9-12"
+#   name: "MacBook Eddie"
+#   state_topic: "espresense/rooms"
+#   timeout: 5
+#   away_timeout: 120 # number of seconds after which the enitity will get status not_home
 
 - platform: mqtt_room
   device_id: "iBeacon:4ad6bd5c-e916-4616-9a3f-ec49e3bdfaf9-100-1"
   name: "Android Esther"
   state_topic: "espresense/rooms"
-  timeout: 5
-  away_timeout: 120 # number of seconds after which the enitity will get status not_home
+  timeout: 30
+  away_timeout: 360 # number of seconds after which the enitity will get status not_home
 
 ###############################################################
 # - platform: mqtt

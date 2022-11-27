@@ -190,45 +190,6 @@ switch:
     transition: 30
     interval: 60
 
-  - platform: mqtt
-    name: zone1_valve
-    state_topic: esptuin/Relay02/RL02
-    command_topic: esptuin/gpio/14
-    payload_on: 1
-    payload_off: 0
-    optimistic: false
-    retain: true
-    icon: mdi:valve
-
-  - platform: mqtt
-    name: Dust Sensor sleep
-    state_topic: espweerstation/gpio/14
-    command_topic: espweerstation/gpio/14
-    payload_on: 1
-    payload_off: 0
-    optimistic: false
-    retain: true
-
-  - platform: mqtt
-    name: Kantoor Dust Sensor sleep
-    state_topic: espkantoor/DustSensor/State
-    command_topic: espkantoor/gpioo/14/
-    payload_on: 1
-    payload_off: 0
-    optimistic: false
-    retain: false
-
-    #####################
-
-  - platform: mqtt
-    name: Buitenverlichting
-    state_topic: espbuitenverlichting/Relay01/RL01
-    command_topic: espbuitenverlichting/gpio/14
-    payload_on: 1
-    payload_off: 0
-    optimistic: false
-    retain: true
-
   - platform: wake_on_lan
     name: TV aanzetten
     host: !secret bravia_tv_host
@@ -296,6 +257,42 @@ mqtt:
       state_topic: esptuin/Soil/Analog
       unit_of_measurement: "%"
       device_class: humidity
+
+  switch:
+    - name: zone1_valve
+      state_topic: esptuin/Relay02/RL02
+      command_topic: esptuin/gpio/14
+      payload_on: 1
+      payload_off: 0
+      optimistic: false
+      retain: true
+      icon: mdi:valve
+
+    - name: Dust Sensor sleep
+      state_topic: espweerstation/gpio/14
+      command_topic: espweerstation/gpio/14
+      payload_on: 1
+      payload_off: 0
+      optimistic: false
+      retain: true
+
+    - name: Kantoor Dust Sensor sleep
+      state_topic: espkantoor/DustSensor/State
+      command_topic: espkantoor/gpioo/14/
+      payload_on: 1
+      payload_off: 0
+      optimistic: false
+      retain: false
+
+    #####################
+
+    - name: Buitenverlichting
+      state_topic: espbuitenverlichting/Relay01/RL01
+      command_topic: espbuitenverlichting/gpio/14
+      payload_on: 1
+      payload_off: 0
+      optimistic: false
+      retain: true
 
 sensor: !include sensor.yaml
 

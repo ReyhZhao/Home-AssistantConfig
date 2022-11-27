@@ -262,12 +262,12 @@
       entity_id: group.presence
       state: home
     - condition: state
-      entity_id: alarm_control_panel.ha_alarm
+      entity_id: alarm_control_panel.alarmo
       state: disarmed
 
   action:
-    - service: alarm_control_panel.alarm_arm_home
-      entity_id: alarm_control_panel.ha_alarm
+    # - service: alarm_control_panel.alarm_arm_home
+    #   entity_id: alarm_control_panel.ha_alarm
 
     # - service: homeassistant.turn_on
     #   entity_id: switch.unifi_video_recording

@@ -1,80 +1,79 @@
 - alias: Trigger Overloop Lamp On - Iedereen wakker
-  description: ''
-  
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.motion_overloop, binary_sensor.motion_trap
-    to: 'on'
-    
-  condition:
-     - condition: state
-       entity_id: light.overloop
-       state: 'off'   
+  description: ""
 
-     - condition: or
-       conditions:
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_overloop, binary_sensor.motion_trap
+      to: "on"
+
+  condition:
+    - condition: state
+      entity_id: light.overloop
+      state: "off"
+
+    - condition: or
+      conditions:
         - condition: state
           entity_id: input_select.status_eddie
           state: Wakker
         - condition: state
           entity_id: input_select.status_esther
           state: Wakker
-    
+
   action:
-  - service: homeassistant.turn_on
-    entity_id: light.overloop
-    data:
-       brightness: 254
+    - service: homeassistant.turn_on
+      entity_id: light.overloop
+      data:
+        brightness: 254
 
-  - service: timer.cancel
-    entity_id: timer.overloop
+    - service: timer.cancel
+      entity_id: timer.overloop
 
-  - service: timer.start
-    entity_id: timer.overloop
-        
+    - service: timer.start
+      entity_id: timer.overloop
+
 #####################################################################################
-        
+
 - alias: Trigger Overloop Lamp On - Iemand slaapt
-  description: ''
-  
+  description: ""
+
   trigger:
-  - platform: state
-    entity_id: binary_sensor.motion_overloop, binary_sensor.motion_trap
-    to: 'on'
-    
+    - platform: state
+      entity_id: binary_sensor.motion_overloop, binary_sensor.motion_trap
+      to: "on"
+
   condition:
-     - condition: state
-       entity_id: light.overloop
-       state: 'off'   
-       
-     - condition: or
-       conditions:
+    - condition: state
+      entity_id: light.overloop
+      state: "off"
+
+    - condition: or
+      conditions:
         - condition: state
           entity_id: input_select.status_eddie
           state: Slaapt
         - condition: state
           entity_id: input_select.status_esther
           state: Slaapt
-    
+
   action:
-  - service: homeassistant.turn_on
-    entity_id: light.overloop
-    data:
-       brightness: 50        
-       
-  - service: timer.start
-    entity_id: timer.overloop
+    - service: homeassistant.turn_on
+      entity_id: light.overloop
+      data:
+        brightness: 50
+
+    - service: timer.start
+      entity_id: timer.overloop
 
 #######################################################################################
-
 
 - alias: Turn off overloop lamp, x minutes after last movement
   trigger:
     platform: event
     event_type: timer.finished
     event_data:
-      entity_id: timer.overloop  
-      
+      entity_id: timer.overloop
+
   action:
     service: homeassistant.turn_off
     entity_id: light.overloop
