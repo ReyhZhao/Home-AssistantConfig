@@ -107,9 +107,14 @@
       for: "00:00:20"
 
   condition:
-    condition: state
-    entity_id: light.woonkamer
-    state: "on"
+
+
+    - condition: state
+      entity_id: light.woonkamer
+      state: "on"
+
+    - condition: time
+      after: "19:00:00"
 
   action:
     - service: homeassistant.turn_on

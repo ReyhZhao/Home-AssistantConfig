@@ -4,6 +4,7 @@ homeassistant:
   longitude: !secret homeassistant_longitude
   elevation: !secret homeassistant_elevation
   time_zone: Europe/Amsterdam
+  country: "NL"
   packages: !include_dir_named packages
   external_url: !secret external_url
   internal_url: !secret internal_url
@@ -133,34 +134,38 @@ alarm_control_panel:
       arming_time: 0
       delay_time: 0
 
-rfxtrx:
-  device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1BFB4H-if00-port0
-  #debug: True
-  automatic_add: true
-  devices:
-    # Schakelaar Nachtkastje L
-    0b11002f014ee78a0b010f60:
+# rfxtrx:
+#   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1BFB4H-if00-port0
+#   #debug: True
+#   automatic_add: true
+#   devices:
+#     # Schakelaar Nachtkastje L
+#     0b11002f014ee78a0b010f60:
 
-    # Schakelaar Nachtkastje R
-    0b110035014ee78a0c010f60:
+#     # Schakelaar Nachtkastje R
+#     0b110035014ee78a0c010f60:
 
-    # Raam Badkamer
-    0b11000001966e6a0a010f60:
+#     # Raam Badkamer
+#     0b11000001966e6a0a010f60:
 
-    # PIR Zolder
-    0b11000900bfffc60a010f50:
+#     # PIR Zolder
+#     0b11000900bfffc60a010f50:
 
-    # Voordeur
-    0b11000701966e6e0a010f70:
+#     # Voordeur
+#     0b11000701966e6e0a010f70:
 
-    # Achterdeur
-    0b1100000196772e0a010f70:
+#     # Achterdeur
+#     0b1100000196772e0a010f70:
 
-    # Lamp Trapkast
-    0b0710012744090170020f70:
+#     # Lamp Trapkast
+#     0b0710012744090170020f70:
 
-    # Kerstboom
-    0b11000482bc0cfe04020f70:
+#     # Kerstboom
+#     #0b11000482bc0cfe04020f70:
+#     #  name: Kerstboom
+
+#     0A140F0900020201010000:
+#       name: Kerstboom
 
 switch:
   # - platform: rest
@@ -313,5 +318,4 @@ input_select: !include input_select.yaml
 timer: !include timers.yaml
 
 automation ui: !include automations.yaml
-
 automation: !include_dir_merge_list automation/
