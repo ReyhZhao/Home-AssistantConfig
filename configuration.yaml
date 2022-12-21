@@ -32,11 +32,11 @@ weather:
   - platform: darksky
     api_key: !secret darksky_api_key
 
-  - platform: buienradar
-    forecast: true
-    name: arnhem
-    latitude: !secret homeassistant_latitude
-    longitude: !secret homeassistant_longitude
+  # - platform: buienradar
+  #   forecast: true
+  #   name: arnhem
+  #   latitude: !secret homeassistant_latitude
+  #   longitude: !secret homeassistant_longitude
 
 #octoprint:
 #    host: !secret octoprint_host
@@ -301,11 +301,11 @@ mqtt:
 
 sensor: !include sensor.yaml
 
-panel_custom:
-  - name: zwavegraph2
-    sidebar_title: Z-Wave Graph
-    sidebar_icon: mdi:access-point-network
-    url_path: zwave
+# panel_custom:
+# - name: zwavegraph2
+#   sidebar_title: Z-Wave Graph
+#   sidebar_icon: mdi:access-point-network
+#   url_path: zwave
 
 python_script:
 

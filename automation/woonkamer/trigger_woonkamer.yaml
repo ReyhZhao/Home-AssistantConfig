@@ -23,6 +23,7 @@
     service: homeassistant.turn_on
     entity_id:
       - light.woonkamer
+      - light.kerstboom
 
 ######################################################################
 
@@ -38,6 +39,7 @@
     service: homeassistant.turn_off
     entity_id:
       - light.woonkamer
+      - light.kerstboom
 
 ######################################################################
 
@@ -107,8 +109,6 @@
       for: "00:00:20"
 
   condition:
-
-
     - condition: state
       entity_id: light.woonkamer
       state: "on"
