@@ -21,6 +21,7 @@ http:
   trusted_proxies:
     - !secret proxy_host
     - !secret proxy_host2
+    - !secret proxy_host3
 
 logger: !include logger.yaml
 

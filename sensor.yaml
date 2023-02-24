@@ -15,7 +15,7 @@
 
 - platform: mqtt_room
   device_id: "tile:e790d3c72a19"
-  name: "Tile Black"
+  name: "Tile Cor"
   state_topic: "espresense/rooms"
   timeout: 30
   away_timeout: 120 # number of seconds after which the enitity will get status not_home

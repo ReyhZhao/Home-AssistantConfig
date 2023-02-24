@@ -114,7 +114,7 @@
       state: "on"
 
     - condition: time
-      after: "19:00:00"
+      after: "20:30:00"
 
   action:
     - service: homeassistant.turn_on

@@ -8,6 +8,9 @@
     - platform: state
       entity_id: binary_sensor.motion_zolder
       to: "on"
+    - platform: state
+      entity_id: binary_sensor.schakelaar_trap_links
+      to: "on"      
 
   action:
     service: homeassistant.turn_on
@@ -24,6 +27,9 @@
       to: "off"
       for:
         minutes: 5
+    - platform: state
+      entity_id: binary_sensor.schakelaar_trap_links
+      to: "off" 
 
   action:
     service: homeassistant.turn_off
