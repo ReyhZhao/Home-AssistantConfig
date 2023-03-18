@@ -99,6 +99,9 @@
         - light.overloop
         - automation.trigger_woonkamer_lamp_motion
         - switch.kerstverlichting_buiten
+        - switch.mmwave_sensor
+        - binary_sensor.motion_woonkamer_mmwaveradar
+    - delay: 00:00:30
 
     # - service: alarm_control_panel.alarm_arm_night
     #   entity_id: alarm_control_panel.ha_alarm
@@ -123,6 +126,7 @@
     - service: homeassistant.turn_on
       entity_id:
         - automation.trigger_woonkamer_lamp_motion
+        - switch.mmwave_sensor
 
     # - service: alarm_control_panel.alarm_disarm
     #   entity_id: alarm_control_panel.ha_alarm

@@ -7,9 +7,11 @@
       to: "Schemer"
 
   condition:
-    - condition: numeric_state
-      entity_id: sensor.espresense_woonkamer_count
-      above: 1
+    # - condition: numeric_state
+    #   entity_id: sensor.espresense_woonkamer_count
+    #   above: 1
+    - condition: template
+      value_template: "{{ ((as_timestamp(now()) - as_timestamp(states.binary_sensor.motion_woonkamer_mmwaveradar.last_changed))) | round(0) < 180 }}"
 
     - condition: state
       entity_id: alarm_control_panel.ha_alarm
@@ -20,10 +22,19 @@
     #     value_template: "{{ sensor.espresense_woonkamer_count.state > 1}}"
 
   action:
-    service: homeassistant.turn_on
-    entity_id:
-      - light.woonkamer
-      - light.kerstboom
+    - service: scene.turn_on
+      target:
+        entity_id: >
+          {% if now().strftime('%H')| int >= 20 %}
+          scene.woonkamer_rustig
+          {% elif now().strftime('%H')| int >= 7 %}
+          scene.woonkamer_helder
+          {% endif %}
+
+    - service: homeassistant.turn_on
+      entity_id:
+        - light.woonkamer
+        - light.kerstboom
 
 ######################################################################
 
@@ -78,6 +89,15 @@
       entity_id:
         - switch.schakelaar_woonkamer
 
+    - service: scene.turn_on
+      target:
+        entity_id: >
+          {% if now().strftime('%H')| int >= 20 %}
+          scene.woonkamer_rustig
+          {% elif now().strftime('%H')| int >= 7 %}
+          scene.woonkamer_helder
+          {% endif %}
+
     - service: homeassistant.turn_on
       data_template:
         entity_id: light.woonkamer
@@ -117,6 +137,15 @@
       after: "20:30:00"
 
   action:
+    # - service: scene.turn_on
+    #   target:
+    #     entity_id: >
+    #       {% if now().strftime('%H')| int >= 20 %}
+    #       scene.woonkamer_rustig
+    #       {% elif now().strftime('%H')| int >= 7 %}
+    #       scene.woonkamer_helder
+    #       {% endif %}
+
     - service: homeassistant.turn_on
       data_template:
         entity_id: light.woonkamer
@@ -168,13 +197,22 @@
       entity_id:
         - switch.schakelaar_woonkamer
 
+    - service: scene.turn_on
+      target:
+        entity_id: >
+          {% if now().strftime('%H')| int >= 20 %}
+          scene.woonkamer_rustig
+          {% elif now().strftime('%H')| int >= 7 %}
+          scene.woonkamer_helder
+          {% endif %}
+
     - service: homeassistant.turn_on
       data_template:
         entity_id: light.woonkamer
         brightness: >
           {% if states.media_player.nvidia_shield == 'playing' %}
           75
-          {% elif now().strftime('%H')| int >= 22 %}
+          {% elif now().strftime('%H')| int >= 20 %}
           120
           {% elif now().strftime('%H')| int < 7 %}
           120
@@ -212,9 +250,15 @@
       entity_id: timer.woonkamer
 
   condition:
-    condition: numeric_state
-    entity_id: sensor.espresense_woonkamer_count
-    below: 1
+    # condition: numeric_state
+    # entity_id: sensor.espresense_woonkamer_count
+    # below: 1
+    - condition: state
+      entity_id: binary_sensor.motion_woonkamer_mmwaveradar
+      state: "off"
+
+    - condition: template
+      value_template: "{{ ((as_timestamp(now()) - as_timestamp(states.binary_sensor.motion_woonkamer_mmwaveradar.last_changed))) | round(0) > 240 }}"
 
   action:
     service: homeassistant.turn_off
