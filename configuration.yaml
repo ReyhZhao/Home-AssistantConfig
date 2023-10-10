@@ -45,17 +45,17 @@ logger: !include logger.yaml
 #    bed: true
 #    number_of_tools: 1
 
-matrix:
-  homeserver: !secret matrix_server
-  username: !secret matrix_username
-  password: !secret matrix_password
-  rooms:
-    - !secret matrix_room
+# matrix:
+#   homeserver: !secret matrix_server
+#   username: !secret matrix_username
+#   password: !secret matrix_password
+#   rooms:
+#     - !secret matrix_room
 
 notify:
-  - name: matrix_notify
-    platform: matrix
-    default_room: !secret matrix_room
+  # - name: matrix_notify
+  #   platform: matrix
+  #   default_room: !secret matrix_room
 
   - platform: group
     name: all_contacts
@@ -67,8 +67,6 @@ mobile_app:
 
 sabnzbd:
   api_key: !secret sabnzbd_api
-
-discovery:
 
 ios:
 
