@@ -2,16 +2,19 @@
 - alias: Trigger WC
   description: ""
   trigger:
-    - type: motion
-      platform: device
-      device_id: fdc83703b36ceac582deb39d27395dd5
-      entity_id: binary_sensor.motion_wc
-      domain: binary_sensor
+    - platform: state
+      entity_id:
+        - binary_sensor.motion_wc
+      from: "off"
+      to: "on"
   condition: []
+
   action:
     - service: homeassistant.turn_on
-      entity_id:
-        - switch.schakelaar_wc
+      data: {}
+      target:
+        entity_id: switch.schakelaar_wc
+
     - wait_for_trigger:
         - platform: state
           entity_id:
@@ -20,6 +23,12 @@
           to: "off"
           for:
             hours: 0
-            minutes: 0
-            seconds: 30
+            minutes: 2
+            seconds: 0
+
+    - service: homeassistant.turn_off
+      data: {}
+      target:
+        entity_id: switch.schakelaar_wc
+
   mode: single

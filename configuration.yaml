@@ -29,15 +29,15 @@ logger: !include logger.yaml
 #  host: !secret influx_host
 #  database: hass
 
-weather:
-  - platform: darksky
-    api_key: !secret darksky_api_key
+# weather:
+# - platform: darksky
+#   api_key: !secret darksky_api_key
 
-  # - platform: buienradar
-  #   forecast: true
-  #   name: arnhem
-  #   latitude: !secret homeassistant_latitude
-  #   longitude: !secret homeassistant_longitude
+# - platform: buienradar
+#   forecast: true
+#   name: arnhem
+#   latitude: !secret homeassistant_latitude
+#   longitude: !secret homeassistant_longitude
 
 #octoprint:
 #    host: !secret octoprint_host
