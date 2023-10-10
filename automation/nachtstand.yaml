@@ -8,26 +8,26 @@
     platform: state
     entity_id:
       - input_select.status_eddie
-      - input_select.status_esther
+      # - input_select.status_esther
 
   condition:
     condition: or
     conditions:
-      # Iedereen thuis en iedereen slaapt
-      - condition: and
-        conditions:
-          - condition: state
-            entity_id: person.eddie
-            state: "home"
-          - condition: state
-            entity_id: person.esther
-            state: "home"
-          - condition: state
-            entity_id: input_select.status_eddie
-            state: "Slaapt"
-          - condition: state
-            entity_id: input_select.status_esther
-            state: "Slaapt"
+      # # Iedereen thuis en iedereen slaapt
+      # - condition: and
+      #   conditions:
+      #     - condition: state
+      #       entity_id: person.eddie
+      #       state: "home"
+      #     - condition: state
+      #       entity_id: person.esther
+      #       state: "home"
+      #     - condition: state
+      #       entity_id: input_select.status_eddie
+      #       state: "Slaapt"
+      #     - condition: state
+      #       entity_id: input_select.status_esther
+      #       state: "Slaapt"
 
       # Alleen Eddie thuis en Eddie slaapt
       - condition: and
@@ -35,27 +35,27 @@
           - condition: state
             entity_id: person.eddie
             state: "home"
-          - condition: state
-            entity_id: person.esther
-            state: "not_home"
+          # - condition: state
+          #   entity_id: person.esther
+          #   state: "not_home"
 
           - condition: state
             entity_id: input_select.status_eddie
             state: "Slaapt"
 
-      # Alleen Esther thuis en Esther slaapt
-      - condition: and
-        conditions:
-          - condition: state
-            entity_id: person.eddie
-            state: "not_home"
-          - condition: state
-            entity_id: person.esther
-            state: "home"
+      # # Alleen Esther thuis en Esther slaapt
+      # - condition: and
+      #   conditions:
+      #     - condition: state
+      #       entity_id: person.eddie
+      #       state: "not_home"
+      #     - condition: state
+      #       entity_id: person.esther
+      #       state: "home"
 
-          - condition: state
-            entity_id: input_select.status_eddie
-            state: "Slaapt"
+      #     - condition: state
+      #       entity_id: input_select.status_eddie
+      #       state: "Slaapt"
 
   action:
     - service: homeassistant.turn_on
@@ -72,7 +72,7 @@
     platform: state
     entity_id:
       - input_select.status_eddie
-      - input_select.status_esther
+      # - input_select.status_esther
     to: "Wakker"
 
   action:
@@ -150,7 +150,7 @@
         entity_id: input_select.status_eddie
         option: "Wakker"
 
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.status_esther
-        option: "Wakker"
+    # - service: input_select.select_option
+    #   data_template:
+    #     entity_id: input_select.status_esther
+    #     option: "Wakker"
