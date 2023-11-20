@@ -1,10 +1,12 @@
-Presence: person.eddie, person.esther
+Presence:
+  entities:
+    - person.eddie
+    # - person.esther
 
 Presense_Eddie:
   entities:
     - sensor.iphone_eddie
     - sensor.tile_eddie
-
 
 Ramen:
   entities:
@@ -14,7 +16,6 @@ Ramen:
     - binary_sensor.window_slaapkamer
     - binary_sensor.window_woonkamer
     - binary_sensor.window_zolder
-
 
 Deuren:
   entities:
@@ -50,29 +51,29 @@ Kantoor: light.kantoor
 
 Zolder: switch.fibaro_system_fgs222_double_relay_switch_2x1_5kw_switch_2
 
-Alarm: 
-   entities:
-      - alarm_control_panel.ha_alarm
-      - group.deuren 
-      - group.ramen 
-      - group.motion
+Alarm:
+  entities:
+    - alarm_control_panel.ha_alarm
+    - group.deuren
+    - group.ramen
+    - group.motion
 
 Home Test:
-   entities:        
-      - group.entertainment
-      - group.buiten
-      - group.woonkamer
-      - group.keuken
-      - group.kantoor
-      - group.slaapkamer
-      - zone.home
-      - group.presence
+  entities:
+    - group.entertainment
+    - group.buiten
+    - group.woonkamer
+    - group.keuken
+    - group.kantoor
+    - group.slaapkamer
+    - zone.home
+    - group.presence
 
 home_spotify_player:
   name: Spotify Player
   entities:
     - media_player.spotify
-  
+
 home_spotify_controls:
   name: Spotify Controls
   entities:
@@ -82,9 +83,8 @@ home_spotify_controls:
     - input_number.spotify_volume
     - input_boolean.spotify_shuffle
 
-
 meter_readings:
-  name: Meter readings   
+  name: Meter readings
   entities:
     - sensor.power_consumption_low
     - sensor.power_consumption_normal
@@ -99,13 +99,13 @@ AlleLampen:
     - switch.lamp_gang
     - switch.lamp_zolder
     - switch.lamp_keuken
-
+    - light.woonkamer
 
 simulation_lights:
-   name: simulation_lights
-   entities:
-     - switch.lamp_gang
-     - switch.lamp_keuken
-     - light.woonkamer
-     - light.overloop_2
-     - light.kantoor
+  name: simulation_lights
+  entities:
+    - switch.lamp_gang
+    - switch.lamp_keuken
+    - light.woonkamer
+    - light.overloop_2
+    - light.kantoor

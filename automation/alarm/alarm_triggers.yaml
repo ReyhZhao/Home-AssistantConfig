@@ -28,14 +28,12 @@
     - service: homeassistant.turn_off
       entity_id: group.allelampen
 
-    # - service: homeassistant.turn_on
-    #   entity_id: switch.unifi_video_recording
-
     - service: alarmo.arm
       data:
         entity_id: alarm_control_panel.alarmo
         mode: away
         skip_delay: true
+        force: true
 
 ##############################
 

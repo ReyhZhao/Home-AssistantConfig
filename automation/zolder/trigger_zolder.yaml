@@ -3,14 +3,14 @@
 
   trigger:
     - platform: state
-      entity_id: binary_sensor.pir_zolder
+      entity_id: binary_sensor.motion_zolder_espresense
       to: "on"
     - platform: state
       entity_id: binary_sensor.motion_zolder
       to: "on"
     - platform: state
       entity_id: binary_sensor.schakelaar_trap_links
-      to: "on"      
+      to: "on"
 
   action:
     service: homeassistant.turn_on
@@ -23,13 +23,13 @@
   trigger:
     - platform: state
       #entity_id: binary_sensor.motion_zolder
-      entity_id: binary_sensor.pir_zolder
+      entity_id: binary_sensor.motion_zolder_espresense
       to: "off"
       for:
         minutes: 5
     - platform: state
       entity_id: binary_sensor.schakelaar_trap_links
-      to: "off" 
+      to: "off"
 
   action:
     service: homeassistant.turn_off
