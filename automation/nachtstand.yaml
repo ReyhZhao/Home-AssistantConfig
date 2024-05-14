@@ -101,6 +101,7 @@
         - switch.kerstverlichting_buiten
         - switch.mmwave_sensor
         - binary_sensor.motion_woonkamer_mmwaveradar
+        - switch.kerstverlichting
 
     - service: alarmo.arm
       data:

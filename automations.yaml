@@ -1,15 +1,3 @@
-- id: '1660306042772'
-  alias: Frigate Notifications - Tuin
-  description: ''
-  use_blueprint:
-    path: hunterjm/frigate_notification.yaml
-    input:
-      camera: tuin
-      notify_device: ea07a2d0f491470fbdfbc90cbbf97f4f
-      base_url: https://ha.vels.online
-      labels:
-      - person
-      presence_filter: person.eddie
 - id: '1656000309266'
   alias: push HA configuration to GitHub repo
   description: ''
@@ -18,15 +6,103 @@
     platform: time
   action:
     service: shell_command.push_to_github
-- id: '1660308585857'
-  alias: Frigate Notifications - Voordeur
+- id: '1702651345928'
+  alias: Kertverlichting aan in het donker
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_select.schemer_buiten
+    from: Licht
+    to: Donker
+  condition:
+  - condition: state
+    entity_id: person.eddie
+    state: home
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.kerstverlichting
+    data: {}
+  mode: single
+- id: '1705342815614'
+  alias: Frigate Notifications Tuin
   description: ''
   use_blueprint:
-    path: hunterjm/frigate_notification.yaml
+    path: SgtBatten/Stable.yaml
     input:
-      camera: voordeur
+      camera: camera.tuin
       notify_device: ea07a2d0f491470fbdfbc90cbbf97f4f
       base_url: https://ha.vels.online
+      alert_once: true
+      ios_live_view: true
       labels:
       - person
       presence_filter: person.eddie
+- id: '1705342898510'
+  alias: Frigate Notifications Voordeur
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      camera: camera.voordeur
+      notify_device: ea07a2d0f491470fbdfbc90cbbf97f4f
+      base_url: https://ha.vels.online
+      alert_once: true
+      ios_live_view: true
+      presence_filter: person.eddie
+- id: '1705343514704'
+  alias: Overloop Motion
+  description: ''
+  use_blueprint:
+    path: freakshock88/motion_illuminance_activated_entity.yaml
+    input:
+      motion_sensor: binary_sensor.motion_sensors_overloop
+      target_entity: light.overloop_2
+      no_motion_wait: input_number.overloop_turnoff_waittime
+- id: '1705860970036'
+  alias: Low battery level detection & notification for all battery sensors
+  description: ''
+  use_blueprint:
+    path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+    input:
+      threshold: 35
+      time: '20:00:00'
+      actions:
+      - service: notify.mobile_app_reyhzhao
+        metadata: {}
+        data:
+          title: Low battery
+          message: 'Sensors: {{sensors}}'
+- id: '1706960896709'
+  alias: IOS-Action - Alarm Arm Away
+  description: ''
+  trigger:
+  - platform: event
+    event_type: ios.action_fired
+    event_data:
+      actionName: Alarm - Arm Away
+  action:
+  - service: alarmo.arm
+    metadata: {}
+    data:
+      mode: away
+      skip_delay: true
+      force: true
+      entity_id: alarm_control_panel.alarmo
+  initial_state: true
+  mode: single
+- id: '1706961147636'
+  alias: IOS-Action - Alarm Disarm
+  description: ''
+  trigger:
+  - platform: event
+    event_type: ios.action_fired
+    event_data:
+      actionName: Alarm - Disarm
+  action:
+  - service: alarm_control_panel.alarm_disarm
+    data:
+      entity_id: alarm_control_panel.alarmo
+  initial_state: true
+  mode: single

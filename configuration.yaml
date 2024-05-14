@@ -61,7 +61,6 @@ notify:
     name: all_contacts
     services:
       - service: mobile_app_reyhzhao
-      - service: mobile_app_in2013
 
 mobile_app:
 
@@ -250,10 +249,10 @@ mqtt:
       value_template: "{{ value_json.camera }}"
       availability_topic: "double-take/available"
 
-    - name: "FaceID Esther"
+    - name: "FaceID Simone"
       icon: mdi:account
-      state_topic: "double-take/matches/esther"
-      json_attributes_topic: "double-take/matches/esther"
+      state_topic: "double-take/matches/simone"
+      json_attributes_topic: "double-take/matches/simone"
       value_template: "{{ value_json.camera }}"
       availability_topic: "double-take/available"
 
