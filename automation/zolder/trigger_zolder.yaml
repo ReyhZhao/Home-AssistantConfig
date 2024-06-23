@@ -3,11 +3,11 @@
 
   trigger:
     - platform: state
-      entity_id: binary_sensor.motion_zolder_espresense
+      entity_id: binary_sensor.zolder_occupancy
       to: "on"
-    - platform: state
-      entity_id: binary_sensor.motion_zolder
-      to: "on"
+    # - platform: state
+    #   entity_id: binary_sensor.motion_zolder
+    #   to: "on"
     - platform: state
       entity_id: binary_sensor.schakelaar_trap_links
       to: "on"
@@ -23,7 +23,7 @@
   trigger:
     - platform: state
       #entity_id: binary_sensor.motion_zolder
-      entity_id: binary_sensor.motion_zolder_espresense
+      entity_id: binary_sensor.zolder_occupancy
       to: "off"
       for:
         minutes: 5
