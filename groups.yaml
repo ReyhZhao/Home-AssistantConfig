@@ -51,6 +51,22 @@ Kantoor: light.kantoor
 
 Zolder: switch.fibaro_system_fgs222_double_relay_switch_2x1_5kw_switch_2
 
+lampen_beneden:
+  name: Lampen Beneden
+  entities:
+    - light.woonkamer
+    - switch.lamp_keuken
+    - switch.lamp_gang
+    - switch.schakelaar_wc
+    - light.eetkamer
+
+lampen_boven:
+  name: Lampen Boven
+  entities:
+    - light.kantoor
+    - light.overloop
+    - switch.lamp_zolder
+
 Alarm:
   entities:
     - alarm_control_panel.ha_alarm
