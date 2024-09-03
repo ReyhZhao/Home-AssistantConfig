@@ -1,29 +1,28 @@
 - alias: Trigger Gang Lamp On
-  description: ''
-  
-  trigger:
-  - platform: state
-    entity_id:
-      - binary_sensor.voordeur
-      - binary_sensor.motion_gang
-      - binary_sensor.motion_trap
-      - binary_sensor.motion_gang_2
+  description: ""
 
-    to: 'on'  
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.voordeur
+        - binary_sensor.motion_gang
+        - binary_sensor.motion_trap
+        - binary_sensor.motion_gang_2
+        - binary_sensor.pir_gang_sensor_state_aux
+
+      to: "on"
 
   action:
-  - service: homeassistant.turn_on
-    entity_id: switch.lamp_gang
+    - service: homeassistant.turn_on
+      entity_id: switch.lamp_gang
 
-  - service: timer.cancel
-    entity_id: timer.gang
+    - service: timer.cancel
+      entity_id: timer.gang
 
-  - service: timer.start
-    entity_id: timer.gang
-
+    - service: timer.start
+      entity_id: timer.gang
 
 ######################################################################
-
 
 - alias: Turn off gang lamp, x minutes after last movement
   trigger:
@@ -32,7 +31,7 @@
     event_type: timer.finished
     event_data:
       entity_id: timer.gang
-      
+
   action:
     service: homeassistant.turn_off
     entity_id: switch.lamp_gang

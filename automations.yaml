@@ -57,7 +57,7 @@
   use_blueprint:
     path: freakshock88/motion_illuminance_activated_entity.yaml
     input:
-      motion_sensor: binary_sensor.motion_sensors_overloop
+      motion_sensor: light.pir_overloop_basic
       target_entity: light.overloop_2
       no_motion_wait: input_number.overloop_turnoff_waittime
 - id: '1705860970036'

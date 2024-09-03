@@ -25,38 +25,7 @@ http:
 
 logger: !include logger.yaml
 
-#influxdb:
-#  host: !secret influx_host
-#  database: hass
-
-# weather:
-# - platform: darksky
-#   api_key: !secret darksky_api_key
-
-# - platform: buienradar
-#   forecast: true
-#   name: arnhem
-#   latitude: !secret homeassistant_latitude
-#   longitude: !secret homeassistant_longitude
-
-#octoprint:
-#    host: !secret octoprint_host
-#    api_key: !secret octoprint_api
-#    bed: true
-#    number_of_tools: 1
-
-# matrix:
-#   homeserver: !secret matrix_server
-#   username: !secret matrix_username
-#   password: !secret matrix_password
-#   rooms:
-#     - !secret matrix_room
-
 notify:
-  # - name: matrix_notify
-  #   platform: matrix
-  #   default_room: !secret matrix_room
-
   - platform: group
     name: all_contacts
     services:
@@ -121,6 +90,7 @@ zone:
 
 alarm_control_panel:
   - platform: manual
+    code_arm_required: false
     #delay_time: 10
     delay_time: 0
     #pending_time: 10
@@ -132,52 +102,7 @@ alarm_control_panel:
       arming_time: 0
       delay_time: 0
 
-# rfxtrx:
-#   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1BFB4H-if00-port0
-#   #debug: True
-#   automatic_add: true
-#   devices:
-#     # Schakelaar Nachtkastje L
-#     0b11002f014ee78a0b010f60:
-
-#     # Schakelaar Nachtkastje R
-#     0b110035014ee78a0c010f60:
-
-#     # Raam Badkamer
-#     0b11000001966e6a0a010f60:
-
-#     # PIR Zolder
-#     0b11000900bfffc60a010f50:
-
-#     # Voordeur
-#     0b11000701966e6e0a010f70:
-
-#     # Achterdeur
-#     0b1100000196772e0a010f70:
-
-#     # Lamp Trapkast
-#     0b0710012744090170020f70:
-
-#     # Kerstboom
-#     #0b11000482bc0cfe04020f70:
-#     #  name: Kerstboom
-
-#     0A140F0900020201010000:
-#       name: Kerstboom
-
 switch:
-  # - platform: rest
-  #   name: Unifi Video Recording
-  #   method: put
-  #   timeout: 300
-  #   resource: https://unifi-video.vels.online/api/2.0/camera/625d7028e4b070acfaea534b?apiKey=7OSzSgyShlfENzLaEL9eTc1BgbfWwOMM
-  #   body_on: '{ "name": "Camera-Tuin", "recordingSettings": { "channel": "0", "fullTimeRecordEnabled": false,  "motionRecordEnabled": true } }'
-  #   body_off: '{ "name": "Camera-Tuin", "recordingSettings": { "channel": "0", "fullTimeRecordEnabled": false,  "motionRecordEnabled": false } }'
-  #   is_on_template: "{{ value_json.data.0.recordingSettings.motionRecordEnabled }}"
-  #   headers:
-  #     Content-Type: application/json
-  #   verify_ssl: true
-
   - platform: flux
     lights:
       - light.woonkamer
@@ -207,6 +132,9 @@ plant:
       brightness: sensor.xiaomi_hhccjcy01_illuminance
 
 wake_on_lan:
+
+device_tracker:
+  - platform: bluetooth_le_tracker
 
 binary_sensor:
   - platform: template
@@ -298,12 +226,6 @@ mqtt:
       retain: true
 
 sensor: !include sensor.yaml
-
-# panel_custom:
-# - name: zwavegraph2
-#   sidebar_title: Z-Wave Graph
-#   sidebar_icon: mdi:access-point-network
-#   url_path: zwave
 
 python_script:
 
