@@ -106,3 +106,53 @@
       entity_id: alarm_control_panel.alarmo
   initial_state: true
   mode: single
+- id: '1726247369020'
+  alias: Spotify - Move Audio to Kantoor
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.motion_kantoor
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: media_player.spotify
+    state: playing
+  action:
+  - action: media_player.select_source
+    metadata: {}
+    data:
+      source: raspotify (raspotify)
+    target:
+      entity_id: media_player.spotify
+  mode: single
+- id: '1726247506740'
+  alias: Spotify - Move Audio to Woonkamer
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.pir_woonkamer2_home_security_motion_detection
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: media_player.spotify
+    state: playing
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.motion_overloop
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.motion_gang
+      state: 'on'
+  action:
+  - action: media_player.select_source
+    metadata: {}
+    data:
+      source: woonkamer
+    target:
+      entity_id: media_player.spotify
+  mode: single

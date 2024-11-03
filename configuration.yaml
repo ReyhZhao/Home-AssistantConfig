@@ -124,12 +124,12 @@ switch:
     mac: 94:53:30:60:EB:SF
 
 plant:
-  areca:
+  chamaedorea:
     sensors:
-      moisture: sensor.xiaomi_hhccjcy01_moisture
-      temperature: sensor.xiaomi_hhccjcy01_temperature
-      conductivity: sensor.xiaomi_hhccjcy01_soil_conductivity
-      brightness: sensor.xiaomi_hhccjcy01_illuminance
+      moisture: sensor.plant_sensor_0414_moisture
+      temperature: sensor.plant_sensor_0414_temperature
+      conductivity: sensor.plant_sensor_0414_conductivity
+      brightness: sensor.plant_sensor_0414_illuminance
 
 wake_on_lan:
 

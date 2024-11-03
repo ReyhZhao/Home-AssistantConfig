@@ -1,0 +1,23 @@
+- alias: Trigger Slaapkamer Schakelaar Links on
+  description: ""
+  trigger:
+    - entity_id: switch.nachtkastje_links
+      platform: state
+      to: "on"
+  condition: []
+  action:
+    - service: homeassistant.turn_on
+      entity_id: group.lampen_boven
+
+- alias: Trigger Slaapkamer Schakelaar Links off
+  description: ""
+  trigger:
+    - entity_id: switch.nachtkastje_links
+      platform: state
+      to: "off"
+  condition: []
+  action:
+    - service: homeassistant.turn_off
+      entity_id: group.lampen_boven
+    - service: homeassistant.turn_on
+      entity_id: group.lampen_beneden

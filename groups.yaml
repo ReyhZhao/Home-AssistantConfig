@@ -1,7 +1,7 @@
 Presence:
   entities:
     - person.eddie
-    #- person.simone
+    - person.simone
 
 Presense_Eddie:
   entities:
