@@ -4,8 +4,8 @@
 - alias: Trigger iemand gaat slapen
   description: "Trigger als iemand gaat slapen, check of nachtstand aan moet."
 
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id:
       - input_select.status_eddie
       # - input_select.status_esther
@@ -20,13 +20,13 @@
       #       entity_id: person.eddie
       #       state: "home"
       #     - condition: state
-      #       entity_id: person.esther
+      #       entity_id: person.simone
       #       state: "home"
       #     - condition: state
       #       entity_id: input_select.status_eddie
       #       state: "Slaapt"
       #     - condition: state
-      #       entity_id: input_select.status_esther
+      #       entity_id: input_select.status_simone
       #       state: "Slaapt"
 
       # Alleen Eddie thuis en Eddie slaapt
@@ -36,21 +36,21 @@
             entity_id: person.eddie
             state: "home"
           # - condition: state
-          #   entity_id: person.esther
+          #   entity_id: person.simone
           #   state: "not_home"
 
           - condition: state
             entity_id: input_select.status_eddie
             state: "Slaapt"
 
-      # # Alleen Esther thuis en Esther slaapt
+      # # Alleen simone thuis en simone slaapt
       # - condition: and
       #   conditions:
       #     - condition: state
       #       entity_id: person.eddie
       #       state: "not_home"
       #     - condition: state
-      #       entity_id: person.esther
+      #       entity_id: person.simone
       #       state: "home"
 
       #     - condition: state
@@ -58,7 +58,7 @@
       #       state: "Slaapt"
 
   action:
-    - service: homeassistant.turn_on
+    - action: homeassistant.turn_on
       entity_id:
         - input_boolean.nachtstand
 
@@ -68,15 +68,15 @@
 - alias: Trigger iemand wordt wakker
   description: "Trigger als iemand wakker wordt, check of nachtstand uit moet."
 
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id:
       - input_select.status_eddie
-      # - input_select.status_esther
+      # - input_select.status_simone
     to: "Wakker"
 
   action:
-    - service: homeassistant.turn_off
+    - action: homeassistant.turn_off
       entity_id:
         - input_boolean.nachtstand
 
@@ -87,12 +87,12 @@
   description: ""
 
   trigger:
-    platform: state
+    trigger: state
     entity_id: input_boolean.nachtstand
     to: "on"
 
-  action:
-    - service: homeassistant.turn_off
+  actions:
+    - action: homeassistant.turn_off
       entity_id:
         - group.all_lights
         - switch.lamp_gang
@@ -103,7 +103,7 @@
         - binary_sensor.motion_woonkamer_mmwaveradar
         - switch.kerstverlichting
 
-    - service: alarmo.arm
+    - action: alarmo.arm
       data:
         entity_id: alarm_control_panel.alarmo
         mode: night
@@ -116,20 +116,18 @@
 - alias: Nachtstand uitgeschakeld
   description: "Nachtstand uitgeschakeld"
 
-  trigger:
-    platform: state
+  triggers:
+    trigger: state
     entity_id: input_boolean.nachtstand
     to: "off"
 
-  action:
-    - service: homeassistant.turn_on
+  actions:
+    - action: homeassistant.turn_on
       entity_id:
         - automation.trigger_woonkamer_lamp_motion
         - switch.mmwave_sensor
 
-    # - service: alarm_control_panel.alarm_disarm
-    #   entity_id: alarm_control_panel.ha_alarm
-    - service: alarmo.disarm
+    - action: alarmo.disarm
       data:
         entity_id: alarm_control_panel.alarmo
 
@@ -139,19 +137,19 @@
 - alias: Reset nachtstand overdag.
   description: "Reset nachtstand overdag."
 
-  trigger:
-    platform: time
+  triggers:
+    trigger: time
     at: "08:00:00"
-  action:
-    - service: homeassistant.turn_off
+  actions:
+    - action: homeassistant.turn_off
       entity_id: switch.schakelaar_nachtstand
 
-    - service: input_select.select_option
+    - action: input_select.select_option
       data_template:
         entity_id: input_select.status_eddie
         option: "Wakker"
 
     # - service: input_select.select_option
     #   data_template:
-    #     entity_id: input_select.status_esther
+    #     entity_id: input_select.status_simone
     #     option: "Wakker"

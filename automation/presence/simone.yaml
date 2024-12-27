@@ -1,4 +1,4 @@
-# - alias: Trigger Esther Slaapt
+# - alias: Trigger Simone Slaapt
 #   description: ""
 #   trigger:
 #     #platform: numeric_state
@@ -15,18 +15,18 @@
 #       before: "05:00:00"
 
 #     - condition: state
-#       entity_id: input_select.status_esther
+#       entity_id: input_select.status_simone
 #       state: "Wakker"
 
 #   action:
 #     - service: input_select.select_option
 #       data_template:
-#         entity_id: input_select.status_esther
+#         entity_id: input_select.status_simone
 #         option: "Slaapt"
 
 #     - service: notify.mobile_app_in2013
 #       data_template:
-#         message: "Slaap lekker Esther."
+#         message: "Slaap lekker Simone."
 #         data:
 #           push:
 #             sound:
@@ -34,7 +34,7 @@
 
 # ###############################################################
 
-# - alias: Trigger Esther Wakker
+# - alias: Trigger Simone Wakker
 #   description: ""
 #   trigger:
 #     platform: numeric_state
@@ -47,25 +47,25 @@
 #       before: "12:00:00"
 
 #     - condition: state
-#       entity_id: input_select.status_esther
+#       entity_id: input_select.status_simone
 #       state: "Slaapt"
 
 #   action:
 #     - service: input_select.select_option
 #       data_template:
-#         entity_id: input_select.status_esther
+#         entity_id: input_select.status_simone
 #         option: "Wakker"
 
 #     - service: notify.mobile_app_in2013
 #       data_template:
-#         message: "Goeie morgen Esther."
+#         message: "Goeie morgen Simone."
 #         data:
 #           push:
 #             sound:
 #               name: default
 ###############################################################
 
-#- alias: Trigger Eddie/Esther Wakker
+#- alias: Trigger Eddie/Simone Wakker
 #  description: ''
 #  trigger:
 #    platform: sun
@@ -75,7 +75,7 @@
 #  action:
 #    - service: input_select.select_option
 #      data_template:
-#         entity_id: input_select.status_esther
+#         entity_id: input_select.status_simone
 #         option: 'Wakker'
 #    - service: input_select.select_option
 #      data_template:

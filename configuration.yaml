@@ -33,8 +33,8 @@ notify:
 
 mobile_app:
 
-sabnzbd:
-  api_key: !secret sabnzbd_api
+# sabnzbd:
+#   api_key: !secret sabnzbd_api
 
 ios:
 

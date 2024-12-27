@@ -46,6 +46,7 @@
         - light.tuin
         - switch.tuin_verlichting_switch
         - light.buiten
+        - switch.kerstverlichting
 
     - service: timer.start
       data:

@@ -38,7 +38,7 @@
       ios_live_view: true
       labels:
       - person
-      presence_filter: person.eddie
+      presence_filter: group.presence
 - id: '1705342898510'
   alias: Frigate Notifications Voordeur
   description: ''
@@ -50,7 +50,7 @@
       base_url: https://ha.vels.online
       alert_once: true
       ios_live_view: true
-      presence_filter: person.eddie
+      presence_filter: group.presence
 - id: '1705343514704'
   alias: Overloop Motion
   description: ''
