@@ -1,0 +1,134 @@
+# MQTT Connection, if empty will query and use hassio provided mqtt
+mqtt:
+  host: 192.168.232.109
+  port: 1883
+  ssl: false
+  username: mqtt2
+  password: mqtt
+
+# How long before device considered stale
+timeout: 30
+# How long before device is considered away
+away_timeout: 120
+
+optimization:
+  enabled: true
+  interval_secs: 60
+  limits:
+    absorption_min: 2.5
+    absorption_max: 3.5
+    tx_ref_rssi_min: -70
+    tx_ref_rssi_max: -50
+    rx_adj_rssi_min: -15
+    rx_adj_rssi_max: 20
+
+weighting:
+  algorithm: gaussian
+  props:
+    sigma: 0.10
+
+gps:
+  latitude: 52.241558
+  longitude: 6.001372
+  elevation: 20
+
+# Floors w/ the points to draw it in meters
+floors:
+  - id: first
+    name: First Floor
+    z: 0
+    # Bounds (x,y,z) of map in meters
+    bounds: [[0, 0, 0], [18.5, 19.2, 2.8]]
+    rooms:
+      - name: Woonkamer
+        points:
+          - [0, 0]
+          - [0, 5]
+          - [5.2, 5]
+          - [5.2, 0]
+      - name: Gang
+        points:
+          - [0, 5]
+          - [0, 10]
+          - [2.5, 10]
+          - [2.5, 5]
+      - name: Keuken
+        points:
+          - [2.5, 5]
+          - [5.2, 5]
+          - [5.2, 10]
+          - [2.5, 10]
+
+  - id: second
+    name: Second Floor
+    z: 3
+    bounds: [[0, 0, 3.1], [18.5, 19.2, 4.6]]
+    rooms:
+      - name: Slaapkamer
+        points:
+          - [2, 0]
+          - [5, 0]
+          - [5, 5]
+          - [2, 5]
+      - name: Kantoor
+        points:
+          - [2, 5]
+          - [5, 5]
+          - [5, 10]
+          - [2, 10]
+
+      - name: Logeerkamer
+        points:
+          - [0, 0]
+          - [2, 0]
+          - [2, 3]
+          - [0, 3]
+
+  # - id: outside
+  #   name: Outside
+  #   bounds: [[-10, -10, -10], [28, 30, 20]]
+
+# Locations of espresense nodes in meters
+# Lengte, breedte, hoogte
+nodes:
+  - name: woonkamer
+    point: [0.1, 0.4, 2.6]
+    floors: ["first", "second"]
+
+  - name: gang
+    point: [2.4, 9.8, 2.6]
+    floors: ["first", "second"]
+
+  - name: trap
+    point: [0.1, 6.7, 2.2]
+    floors: ["first", "second"]
+
+  - name: keuken
+    point: [5.15, 9.95, 1]
+    floors: ["first", "second"]
+
+  - name: kantoor
+    point: [4, 5.1, 5]
+    floors: ["first", "second"]
+
+  - name: slaapkamer
+    point: [4.5, 0.2, 5]
+    floors: ["first", "second"]
+
+  - name: logeerkamer
+    point: [0.1, 2, 5]
+    floors: ["first", "second"]
+
+# Devices to track
+devices:
+  - id: iPhone_Eddie
+    name: iPhone Eddie
+
+  - id: tile:e790d3c72a19
+    name: Cor
+
+  - id: tile:f52f25ee711a
+    name: Tile Eddie
+
+  - id: tile:dc5772428e45
+    name: Tile White

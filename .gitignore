@@ -10,6 +10,10 @@
 !automation/
 !automation/*
 
+!espresense
+!espresense/
+!espresense/*
+
 !packages
 !packages/
 !packages/*

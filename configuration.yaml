@@ -30,6 +30,7 @@ notify:
     name: all_contacts
     services:
       - service: mobile_app_reyhzhao
+      - service: notify.mobile_app_telefoon_simone
 
 mobile_app:
 
