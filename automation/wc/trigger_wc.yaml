@@ -13,7 +13,7 @@
     - service: homeassistant.turn_on
       data: {}
       target:
-        entity_id: switch.schakelaar_wc
+        entity_id: switch.dual_paddle_wall_switch
 
     - wait_for_trigger:
         - platform: state
@@ -29,6 +29,6 @@
     - service: homeassistant.turn_off
       data: {}
       target:
-        entity_id: switch.schakelaar_wc
+        entity_id: switch.dual_paddle_wall_switch
 
   mode: single

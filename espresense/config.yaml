@@ -13,7 +13,7 @@ away_timeout: 120
 
 optimization:
   enabled: true
-  interval_secs: 60
+  interval_secs: 360
   limits:
     absorption_min: 2.5
     absorption_max: 3.5
@@ -32,37 +32,73 @@ gps:
   longitude: 6.001372
   elevation: 20
 
+map:
+  flip_x: false # Set to true to flip X coordinates (default: false)
+  flip_y: true # Set to true to use bottom-left origin, false for top-left origin (default: true)
+  wall_thickness: 0.1 # Wall thickness in meters
+  wall_color: "#ddd" # Optional wall color, if not set uses room color
+  wall_opacity: 0.35 # Optional wall opacity, if not set defaults to 0.35
+
+history:
+  enabled: true # Enable to log history to db (Beta)
+  expire_after: 24h # Expire after 24 hours
+
+locators:
+  nadaraya_watson:
+    enabled: true
+    floors: ["first", "second"]
+    bandwidth: 0.5
+    kernel: gaussian
+
+  nealder_mead:
+    enabled: false
+    floors: ["first", "second"]
+    weighting:
+      algorithm: gaussian
+      props:
+        sigma: 0.10
+
+  nearest_node:
+    enabled: true
+    max_distance: 10
+
 # Floors w/ the points to draw it in meters
 floors:
   - id: first
     name: First Floor
-    z: 0
+    #z: 0
     # Bounds (x,y,z) of map in meters
-    bounds: [[0, 0, 0], [18.5, 19.2, 2.8]]
+    bounds: [[0, 0, 0], [18.5, 19.2, 2.65]]
+
     rooms:
       - name: Woonkamer
         points:
           - [0, 0]
-          - [0, 5]
+          - [0, 3.5]
+          - [1.6, 3.5]
+          - [1.6, 5]
           - [5.2, 5]
           - [5.2, 0]
+          - [0, 0]
       - name: Gang
         points:
           - [0, 5]
           - [0, 10]
           - [2.5, 10]
           - [2.5, 5]
+          - [0, 5]
       - name: Keuken
         points:
           - [2.5, 5]
           - [5.2, 5]
           - [5.2, 10]
           - [2.5, 10]
+          - [2.5, 5]
 
   - id: second
     name: Second Floor
-    z: 3
-    bounds: [[0, 0, 3.1], [18.5, 19.2, 4.6]]
+    #z: 3
+    bounds: [[0, 0, 3.1], [18.5, 19.2, 5.7]]
     rooms:
       - name: Slaapkamer
         points:
@@ -70,19 +106,29 @@ floors:
           - [5, 0]
           - [5, 5]
           - [2, 5]
+          - [2, 0]
       - name: Kantoor
         points:
           - [2, 5]
           - [5, 5]
           - [5, 10]
           - [2, 10]
-
+          - [2, 5]
       - name: Logeerkamer
         points:
           - [0, 0]
           - [2, 0]
           - [2, 3]
           - [0, 3]
+          - [0, 0]
+
+      - name: Badkamer
+        points:
+          - [0, 5]
+          - [2, 5]
+          - [2, 10]
+          - [0, 10]
+          - [0, 5]
 
   # - id: outside
   #   name: Outside
@@ -92,32 +138,37 @@ floors:
 # Lengte, breedte, hoogte
 nodes:
   - name: woonkamer
-    point: [0.1, 0.4, 2.6]
-    floors: ["first", "second"]
+    point: [0.1, 0.2, 2.6]
+    room: Woonkamer
+    floors: ["first"]
 
   - name: gang
     point: [2.4, 9.8, 2.6]
-    floors: ["first", "second"]
+    room: Gang
+    floors: ["first"]
 
   - name: trap
-    point: [0.1, 6.7, 2.2]
-    floors: ["first", "second"]
+    point: [5, 0.20, 2]
+    room: Woonkamer
+    floors: ["first"]
 
   - name: keuken
-    point: [5.15, 9.95, 1]
-    floors: ["first", "second"]
+    point: [5.15, 6, 0.85]
+    room: Keuken
+    floors: ["first"]
 
   - name: kantoor
+    room: Kantoor
     point: [4, 5.1, 5]
-    floors: ["first", "second"]
+    floors: ["second"]
 
-  - name: slaapkamer
-    point: [4.5, 0.2, 5]
-    floors: ["first", "second"]
+  # - name: slaapkamer
+  #   point: [4.5, 0.2, 5]
+  #   floors: ["first", "second"]
 
-  - name: logeerkamer
-    point: [0.1, 2, 5]
-    floors: ["first", "second"]
+  # - name: logeerkamer
+  #   point: [0.1, 2, 5]
+  #   floors: ["first", "second"]
 
 # Devices to track
 devices:
@@ -132,3 +183,6 @@ devices:
 
   - id: tile:dc5772428e45
     name: Tile White
+
+  - id: flora:c47c8d6c0414
+    name: Plant Woonkamer
