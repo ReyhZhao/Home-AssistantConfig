@@ -142,6 +142,11 @@ nodes:
     room: Woonkamer
     floors: ["first"]
 
+  - name: trapkast
+    point: [1.16, 4.96, 1.34]
+    room: Woonkamer
+    floors: ["first"]
+
   - name: gang
     point: [2.4, 9.8, 2.6]
     room: Gang

@@ -156,3 +156,29 @@
     target:
       entity_id: media_player.spotify
   mode: single
+- id: '1736180505596'
+  alias: Random Away Lights
+  description: ''
+  triggers:
+  - minutes: /15
+    trigger: time_pattern
+  conditions:
+  - condition: state
+    entity_id: group.presence
+    state: not_home
+  - condition: sun
+    after: sunset
+    after_offset: -00:30:00
+  - condition: time
+    before: '22:30:00'
+  actions:
+  - delay: 00:{{ '{:02}'.format(range(0,30) | random | int) }}:00
+  - data_template:
+      entity_id: input_text.light_to_switch
+      value: '{{ state_attr(''group.simulation_lights'',''entity_id'') | random }}'
+    action: input_text.set_value
+  - data_template:
+      entity_id: '{{states(''input_text.light_to_switch'')}}'
+    action: homeassistant.toggle
+  mode: single
+  initial_state: true
