@@ -13,12 +13,16 @@ away_timeout: 120
 
 optimization:
   enabled: true
-  interval_secs: 360
+  interval_secs: 120
+  max_snapshots: 300
+
   limits:
-    absorption_min: 2.5
-    absorption_max: 3.5
+    absorption_min: 1
+    absorption_max: 5
+
     tx_ref_rssi_min: -70
-    tx_ref_rssi_max: -50
+    tx_ref_rssi_max: -30
+
     rx_adj_rssi_min: -15
     rx_adj_rssi_max: 20
 
@@ -45,13 +49,13 @@ history:
 
 locators:
   nadaraya_watson:
-    enabled: true
+    enabled: false
     floors: ["first", "second"]
     bandwidth: 0.5
     kernel: gaussian
 
   nealder_mead:
-    enabled: false
+    enabled: true
     floors: ["first", "second"]
     weighting:
       algorithm: gaussian
@@ -60,7 +64,7 @@ locators:
 
   nearest_node:
     enabled: true
-    max_distance: 10
+    max_distance: 15
 
 # Floors w/ the points to draw it in meters
 floors:

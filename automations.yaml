@@ -182,3 +182,84 @@
     action: homeassistant.toggle
   mode: single
   initial_state: true
+- id: '1739122459288'
+  alias: Notification of camera events
+  triggers:
+  - topic: frigate/events
+    trigger: mqtt
+  conditions:
+  - condition: template
+    value_template: '{{ trigger.payload_json[''type''] == ''end'' }}'
+  - condition: template
+    value_template: '{{ trigger.payload_json[''after''][''entered_zones''] | length
+      > 0 }}'
+  actions:
+  - variables:
+      event_id: '{{ trigger.payload_json[''after''][''id''] }}'
+      camera: '{{ trigger.payload_json[''after''][''camera''] }}'
+      label: '{{ trigger.payload_json[''after''][''label''] }}'
+  - wait_for_trigger:
+    - topic: frigate/tracked_object_update
+      value_template: '{{ value_json[''type''] == ''description'' and value_json[''id'']
+        == event_id }}
+
+        '
+      variables:
+        event_id: '{{ event_id }}'
+      trigger: mqtt
+    timeout: '15'
+    continue_on_timeout: true
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger is not none }}'
+      sequence:
+      - variables:
+          description: '{{ wait.trigger.payload_json[''description''] }}'
+      - data:
+          message: '{{ description }} - View Snapshot: https://pub.domain.com/api/frigate/notifications/{{
+            event_id }}/snapshot.jpg - View clip: https://pub.domain.com/api/frigate/notifications/{{
+            event_id }}/clip.mp4
+
+            '
+          data:
+            verify_ssl: false
+            urls:
+            - http://10.0.1.11:8123/api/frigate/notifications/{{ event_id }}/thumbnail.jpg
+        action: notify.signal
+      - data:
+          url: http://10.0.1.11:8123/api/frigate/notifications/{{ event_id }}/thumbnail.jpg
+          caption: "<b>Camera Alert</b> \U0001F6A8\n├ <i>Camera:</i> {{ camera }}
+            \n└ <i>Event:</i> ┐\n{{ description }}\n\n<a href=\"https://pub.domain.com/api/frigate/notifications/{{
+            event_id }}/snapshot.jpg\">\U0001F4F7 View Snapshot \U0001F4F7</a>\n\n<a
+            href=\"https://pub.domain.com/api/frigate/notifications/{{ event_id }}/clip.mp4\">\U0001F3A5
+            View Clip \U0001F3A5</a>\n"
+          parse_mode: html
+          disable_web_page_preview: true
+        action: telegram_bot.send_photo
+    default:
+    - data:
+        message: 'A {{ label }} was detected on the {{ camera }} camera. - View Snapshot:
+          https://pub.domain.com/api/frigate/notifications/{{ event_id }}/snapshot.jpg
+          - View clip: https://pub.domain.com/api/frigate/notifications/{{ event_id
+          }}/clip.mp4
+
+          '
+        data:
+          verify_ssl: false
+          urls:
+          - http://10.0.1.11:8123/api/frigate/notifications/{{ event_id }}/thumbnail.jpg
+      action: notify.signal
+    - data:
+        target: -123456789
+        url: http://10.0.1.11:8123/api/frigate/notifications/{{ event_id }}/thumbnail.jpg
+        caption: "<b>Camera Alert</b> \U0001F6A8\n├ <i>Camera:</i> {{ camera }}\n└
+          <i>Event:</i> {{ label }} detected\n\n<a href=\"https://pub.domain.com/api/frigate/notifications/{{
+          event_id }}/snapshot.jpg\">\U0001F4F7 View Snapshot \U0001F4F7</a>\n\n<a
+          href=\"https://pub.domain.com/api/frigate/notifications/{{ event_id }}/clip.mp4\">\U0001F3A5
+          View Clip \U0001F3A5</a>\n"
+        parse_mode: html
+        disable_web_page_preview: true
+      action: telegram_bot.send_photo
+  - delay: '00:00:01.2'
+  mode: queued
