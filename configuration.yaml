@@ -30,7 +30,7 @@ notify:
     name: all_contacts
     services:
       - service: mobile_app_reyhzhao
-      - service: notify.mobile_app_telefoon_simone
+      - service: mobile_app_telefoon_simone
 
 mobile_app:
 
@@ -72,11 +72,11 @@ input_number:
 shell_command:
   push_to_github: /root/config/gitupdate.sh
 
-media_player:
-  - platform: yamaha
-    host: !secret yamaha_host
-    source_names:
-      HDMI5: Kodi
+# media_player:
+#   - platform: yamaha
+#     host: !secret yamaha_host
+#     source_names:
+#       HDMI5: Kodi
 
 zone:
   - name: Home

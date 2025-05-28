@@ -238,18 +238,9 @@
           disable_web_page_preview: true
         action: telegram_bot.send_photo
     default:
-    - data:
-        message: 'A {{ label }} was detected on the {{ camera }} camera. - View Snapshot:
-          https://pub.domain.com/api/frigate/notifications/{{ event_id }}/snapshot.jpg
-          - View clip: https://pub.domain.com/api/frigate/notifications/{{ event_id
-          }}/clip.mp4
-
-          '
-        data:
-          verify_ssl: false
-          urls:
-          - http://10.0.1.11:8123/api/frigate/notifications/{{ event_id }}/thumbnail.jpg
-      action: notify.signal
+    - action: notify.notify
+      data:
+        message: Camera triggerd
     - data:
         target: -123456789
         url: http://10.0.1.11:8123/api/frigate/notifications/{{ event_id }}/thumbnail.jpg

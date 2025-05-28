@@ -1,0 +1,34 @@
+- alias: Smart Irrigation
+  description: "Start Smart Irrigation based on event and run it only if the `sensor.smart_irrigation_[zone_name]` is >0 and run it for precisely that many seconds"
+  trigger:
+    - trigger: event
+      event_type: smart_irrigation_start_irrigation_all_zones
+
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.smart_irrigation_tuin
+      above: 0
+
+  action:
+    # - action: notify.mobile_app_reyhzhao
+    #   data_template:
+    #     message: "Sprinkers worden aangezet conform schema."
+
+    # - service: switch.turn_on
+    #   data: {}
+    #   entity_id: switch.irrigation_tap1
+
+    - delay:
+        seconds: '{{states("sensor.smart_irrigation_tuin")}}'
+
+    # - service: switch.turn_off
+    #   data: {}
+    #   entity_id: switch.irrigation_tap1
+
+    # - action: notify.mobile_app_reyhzhao
+    #   data_template:
+    #     message: "Sprinkers uitgeschakeld."
+
+    - action: smart_irrigation.reset_bucket
+      data: {}
+      entity_id: sensor.smart_irrigation_tuin

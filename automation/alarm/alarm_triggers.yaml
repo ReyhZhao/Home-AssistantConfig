@@ -85,7 +85,7 @@
               - mon
           # Rest van de week schema
           - condition: time
-            after: "7:00:00"
+            after: "6:00:00"
             before: "10:00:00"
             weekday:
               - tue

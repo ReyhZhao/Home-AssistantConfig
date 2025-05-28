@@ -49,7 +49,7 @@ history:
 
 locators:
   nadaraya_watson:
-    enabled: false
+    enabled: true
     floors: ["first", "second"]
     bandwidth: 0.5
     kernel: gaussian
@@ -151,6 +151,11 @@ nodes:
     room: Woonkamer
     floors: ["first"]
 
+  - name: meterkast
+    point: [1.2, 6.65, 2.25]
+    room: Gang
+    floors: ["first"]
+
   - name: gang
     point: [2.4, 9.8, 2.6]
     room: Gang
@@ -181,7 +186,7 @@ nodes:
 
 # Devices to track
 devices:
-  - id: iPhone_Eddie
+  - id: phone:iphone-eddie
     name: iPhone Eddie
 
   - id: tile:e790d3c72a19
@@ -193,5 +198,5 @@ devices:
   - id: tile:dc5772428e45
     name: Tile White
 
-  - id: flora:c47c8d6c0414
-    name: Plant Woonkamer
+ #- id: flora:c47c8d6c0414
+# name: Plant Woonkamer

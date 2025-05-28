@@ -2,6 +2,7 @@ Presence:
   entities:
     - person.eddie
     - person.simone
+    - person.judith
 
 Presense_Eddie:
   entities:
